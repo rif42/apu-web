@@ -41,6 +41,12 @@ const compatibilityColors = {
 
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,ts,tsx,vue}'],
+  safelist: [
+    {
+      pattern:
+        /(bg|text|border|decoration|ring|fill|stroke)-(apu-navy|apu-accent)(\/(5|10|15|20|25|30|35|40|45|50|55|60|65|70|75|80|85|90|95))?/,
+    },
+  ],
   theme: {
     extend: {
       colors: {
