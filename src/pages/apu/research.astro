@@ -1,0 +1,18 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import NavigationAPU from "../../components/NavigationAPU.astro";
+import Footer from "../../components/Footer.astro";
+import WireframePageHeroAPU from "../../sections/WireframePageHeroAPU.astro";
+import WireframePageSectionAPU from "../../sections/WireframePageSectionAPU.astro";
+---
+
+<MainLayout title="Riset APU" description="Ekosistem riset, kolaborasi, dan publikasi di APU.">
+  <NavigationAPU />
+  <main>
+    <WireframePageHeroAPU kicker="Riset" title="Bangun Inovasi dari Kampus" description="APU mendorong riset terapan yang berdampak bagi masyarakat dan industri." primaryHref="#fokus-riset" primaryLabel="Lihat Fokus Riset" secondaryHref="/apu/contact" secondaryLabel="Ajukan Kolaborasi" />
+    <WireframePageSectionAPU id="fokus-riset" kicker="Fokus" title="Bidang Riset Prioritas" description="Riset prioritas diarahkan untuk isu strategis kesehatan, teknologi, dan sosial." bullets={["Bioteknologi dan kesehatan komunitas.","Transformasi digital untuk layanan pendidikan.","Studi kebijakan publik dan pemberdayaan masyarakat."]} />
+    <WireframePageSectionAPU id="kolaborasi" kicker="Kolaborasi" title="Skema Kemitraan" description="Kami membuka ruang kolaborasi dengan sekolah, pemerintah, dan mitra industri." bullets={["Riset bersama berbasis kebutuhan lapangan.","Program magang riset mahasiswa di institusi mitra.","Diseminasi hasil melalui seminar dan publikasi bersama."]} ctaHref="/apu/international" ctaLabel="Lihat Jejaring Global" />
+    <WireframePageSectionAPU id="repositori" kicker="Repositori" title="Portal Publikasi" description="Repositori riset digital sedang disiapkan untuk akses publikasi dan luaran penelitian terbaru." />
+  </main>
+  <Footer />
+</MainLayout>

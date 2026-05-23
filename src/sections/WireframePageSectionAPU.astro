@@ -1,0 +1,64 @@
+---
+import SectionHeader from "../components/SectionHeader.astro";
+import CtaButton from "../components/CtaButton.astro";
+
+type Props = {
+  id: string;
+  kicker: string;
+  title: string;
+  description: string;
+  bullets?: string[];
+  ctaHref?: string;
+  ctaLabel?: string;
+};
+
+const {
+  id,
+  kicker,
+  title,
+  description,
+  bullets = [],
+  ctaHref,
+  ctaLabel,
+} = Astro.props as Props;
+
+const hasBullets = bullets.length > 0;
+---
+
+<section id={id} class="apu-section-shell px-24 py-20 sm:px-32 lg:py-24">
+  <div class="content-max">
+    <SectionHeader kicker={kicker} title={title} description={description} class="text-center mb-12" />
+
+    <div class="apu-glass-card apu-interactive-card p-20 sm:p-24 lg:p-28">
+      {
+        hasBullets ? (
+          <ul class="grid gap-12 sm:grid-cols-2" aria-label={`Poin utama ${title}`}>
+            {bullets.map((bullet) => (
+              <li class="flex gap-10 text-body text-brand-text">
+                <span class="apu-icon-chip h-28 w-28 shrink-0 text-body-s font-medium">✓</span>
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="text-center">
+            <span class="apu-pill-badge">Segera Hadir</span>
+            <p class="mt-10 text-body text-brand-text-muted">
+              Detail konten sedang disiapkan tim admisi. Pantau pembaruan berikutnya.
+            </p>
+          </div>
+        )
+      }
+
+      {
+        ctaHref && ctaLabel && (
+          <div class="mt-18 flex justify-center">
+            <CtaButton href={ctaHref} variant="primary" class="min-h-44 px-16" withArrow ariaLabel={ctaLabel}>
+              {ctaLabel}
+            </CtaButton>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

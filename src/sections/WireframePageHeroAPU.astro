@@ -1,0 +1,45 @@
+---
+import CtaButton from "../components/CtaButton.astro";
+
+type Props = {
+  kicker: string;
+  title: string;
+  description: string;
+  primaryHref: string;
+  primaryLabel: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+};
+
+const {
+  kicker,
+  title,
+  description,
+  primaryHref,
+  primaryLabel,
+  secondaryHref,
+  secondaryLabel,
+} = Astro.props as Props;
+---
+
+<section class="apu-section-shell relative overflow-hidden px-24 pt-128 pb-28 sm:px-32 sm:pt-144 lg:pt-160 lg:pb-36">
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-accent/40 to-transparent"></div>
+  <div class="content-max relative z-10 text-center">
+    <span class="apu-section-kicker mb-6">{kicker}</span>
+    <h1 class="text-h1 text-brand-navy max-w-4xl mx-auto">{title}</h1>
+    <p class="text-body text-brand-text-muted mt-10 max-w-2xl mx-auto leading-relaxed">{description}</p>
+
+    <div class="mt-16 flex flex-col items-center justify-center gap-10 sm:flex-row sm:gap-12">
+      <CtaButton href={primaryHref} variant="primary" withArrow ariaLabel={primaryLabel}>
+        {primaryLabel}
+      </CtaButton>
+      {
+        secondaryHref && secondaryLabel && (
+          <CtaButton href={secondaryHref} variant="secondary" ariaLabel={secondaryLabel}>
+            {secondaryLabel}
+          </CtaButton>
+        )
+      }
+    </div>
+  </div>
+</section>
