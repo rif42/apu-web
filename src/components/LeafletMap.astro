@@ -1,0 +1,176 @@
+---
+interface Props {
+  center: [number, number];
+  zoomStart?: number;
+  zoomEnd?: number;
+  zoomDuration?: number;
+  class?: string;
+}
+
+const {
+  center,
+  zoomStart = 10,
+  zoomEnd = 16,
+  zoomDuration = 4000,
+  class: className = "",
+} = Astro.props;
+---
+
+<div
+  id="leaflet-map"
+  class={`apu-leaflet-map ${className}`}
+  data-center={JSON.stringify(center)}
+  data-zoom-start={zoomStart}
+  data-zoom-end={zoomEnd}
+  data-zoom-duration={zoomDuration}
+>
+</div>
+
+<script>
+  import L from "leaflet";
+
+  interface MapData {
+    center: [number, number];
+    zoomStart: number;
+    zoomEnd: number;
+    zoomDuration: number;
+  }
+
+  function initMap(container: HTMLElement) {
+    const data: MapData = {
+      center: JSON.parse(container.dataset.center || "[-7.071300, 110.362306]"),
+      zoomStart: parseInt(container.dataset.zoomStart || "10"),
+      zoomEnd: parseInt(container.dataset.zoomEnd || "16"),
+      zoomDuration: parseInt(container.dataset.zoomDuration || "4000"),
+    };
+
+    // Create map with all interactions disabled
+    const map = L.map(container, {
+      center: data.center,
+      zoom: data.zoomStart,
+      zoomControl: false,
+      attributionControl: false,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      touchZoom: false,
+      boxZoom: false,
+      keyboard: false,
+
+    });
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+    }).addTo(map);
+
+    // Add custom APU pin marker
+    const customIcon = L.divIcon({
+      className: "apu-map-pin",
+      html: `
+        <div class="apu-map-pin__container">
+          <div class="apu-map-pin__pulse"></div>
+          <div class="apu-map-pin__dot"></div>
+        </div>
+      `,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12],
+    });
+
+    L.marker(data.center, { icon: customIcon }).addTo(map);
+
+    // Auto-zoom after a short delay to let tiles load
+    setTimeout(() => {
+      map.flyTo(data.center, data.zoomEnd, {
+        duration: data.zoomDuration / 1000,
+        easeLinearity: 0.25,
+      });
+    }, 800);
+
+    // Cleanup on page navigation (Astro view transitions)
+    document.addEventListener("astro:before-swap", () => {
+      map.remove();
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("leaflet-map");
+      if (container) initMap(container);
+    });
+  } else {
+    const container = document.getElementById("leaflet-map");
+    if (container) initMap(container);
+  }
+</script>
+
+<style>
+  .apu-leaflet-map {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .apu-leaflet-map :global(.leaflet-container) {
+    background: transparent;
+  }
+
+  .apu-leaflet-map :global(.leaflet-tile-pane) {
+    filter: saturate(1.05) contrast(1.02);
+  }
+
+  /* Custom APU Pin Styles */
+  .apu-map-pin {
+    background: transparent;
+    border: none;
+  }
+
+  .apu-map-pin__container {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .apu-map-pin__dot {
+    width: 12px;
+    height: 12px;
+    background: rgb(var(--color-apu-accent));
+    border: 2px solid rgb(var(--color-apu-navy));
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 0 0 4px rgb(var(--color-apu-accent) / 0.3);
+  }
+
+  .apu-map-pin__pulse {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgb(var(--color-apu-accent) / 0.4);
+    animation: apu-map-pulse 2s ease-out infinite;
+    z-index: 1;
+  }
+
+  @keyframes apu-map-pulse {
+    0% {
+      transform: scale(0.5);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .apu-map-pin__pulse {
+      animation: none;
+    }
+  }
+</style>

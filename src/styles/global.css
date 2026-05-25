@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
 
 @import "@fontsource/instrument-serif/400.css";
 @import "@fontsource/space-grotesk/300.css";
@@ -647,5 +648,18 @@
 
     .border-apu-accent {
         border-color: rgb(var(--color-apu-accent));
+    }
+
+    /* Leaflet Map Customizations */
+    .apu-leaflet-map .leaflet-container {
+        background: transparent;
+    }
+
+    .apu-leaflet-map .leaflet-tile-pane {
+        filter: saturate(1.05) contrast(1.02);
+    }
+
+    .apu-leaflet-map .leaflet-control-container {
+        display: none;
     }
 }
