@@ -1,0 +1,170 @@
+---
+import SectionHeader from "../../components/SectionHeader.astro";
+import FilterTabs from "../../components/FilterTabs.astro";
+import ScrollReveal from "../../components/ScrollReveal.astro";
+import { organization, buildTree, type OrgTreeNode } from "../../data/organization";
+
+const tabs = [
+  { id: "semua", label: "Semua" },
+  { id: "pimpinan", label: "Pimpinan" },
+  { id: "fakultas", label: "Fakultas" },
+  { id: "unit-pendukung", label: "Unit Pendukung" },
+  { id: "prodi", label: "Prodi" },
+];
+
+const treeData = buildTree(organization);
+
+// Recursive render helper
+function renderTreeNode(node: OrgTreeNode, depth: number = 0): string {
+  const hasChildren = node.children && node.children.length > 0;
+  const initialExpanded = depth < 2; // Auto-expand first two levels
+  const initials = node.name.split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
+
+  return `
+    <div class="org-node-wrapper" data-category="${node.category}" data-node-id="${node.id}">
+      <div class="org-node apu-glass-card apu-interactive-card" tabindex="0">
+        <div class="org-node-header">
+          <!-- <div class="org-node-avatar" aria-hidden="true">${initials}</div> -->
+          <div class="org-node-meta">
+            <h3 class="org-node-title">${escapeHtml(node.name)}</h3>
+            <p class="org-node-role">${escapeHtml(node.role)}</p>
+          </div>
+          ${hasChildren ? `
+            <button
+              type="button"
+              class="org-node-toggle"
+              aria-expanded="${initialExpanded ? 'true' : 'false'}"
+              aria-label="Toggle ${escapeHtml(node.name)}"
+              tabindex="-1"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          ` : ''}
+        </div>
+        ${node.description ? `
+          <div class="org-node-description">
+            <p>${escapeHtml(node.description)}</p>
+          </div>
+        ` : ''}
+      </div>
+      ${hasChildren ? `
+        <div class="org-node-children ${initialExpanded ? 'is-expanded' : ''}">
+          <div class="org-node-children-inner">
+            <div class="org-node-children-list">
+              ${node.children!.map(child => renderTreeNode(child, depth + 1)).join('')}
+            </div>
+          </div>
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+---
+
+<section id="struktur-organisasi" class="apu-section-shell">
+  <div class="py-[var(--apu-section-spacing-y)]">
+    <div class="content-max">
+      <ScrollReveal>
+        <SectionHeader
+          kicker="Struktur Organisasi"
+          title="Tata Kelola Institusi"
+          description="Struktur organisasi Universitas Agung Putra yang menunjukkan hierarki dan tata kelola institusi."
+        />
+      </ScrollReveal>
+
+      <ScrollReveal delay={100}>
+        <FilterTabs tabs={tabs} activeTab="semua" class="justify-center mb-10" />
+      </ScrollReveal>
+    </div>
+
+    <ScrollReveal delay={200}>
+      <div class="org-tree-container px-4 md:px-8 pb-32">
+        <div class="org-tree" data-filter="semua">
+          {treeData.map(node => (
+            <Fragment set:html={renderTreeNode(node)} />
+          ))}
+        </div>
+      </div>
+    </ScrollReveal>
+  </div>
+</section>
+
+<script>
+  (function() {
+    const section = document.querySelector('#struktur-organisasi');
+    if (!section) return;
+
+    const tree = section.querySelector('.org-tree');
+    if (!tree) return;
+
+    // --- Filter logic ---
+    section.addEventListener('tabchange', (e: Event) => {
+      const customEvent = e as CustomEvent;
+      const filter = customEvent.detail?.tabId;
+      if (!filter || !tree) return;
+
+      tree.setAttribute('data-filter', filter);
+
+      // When filtering, ensure ancestors of matching nodes are visible
+      // by marking them with data-filter-match
+      const allWrappers = tree.querySelectorAll('.org-node-wrapper');
+      allWrappers.forEach(wrapper => {
+        wrapper.removeAttribute('data-filter-match');
+      });
+
+      if (filter === 'semua') return;
+
+      // Find all wrappers that match the filter
+      const matching = tree.querySelectorAll(`.org-node-wrapper[data-category="${filter}"]`);
+      matching.forEach(wrapper => {
+        // Mark this node and all ancestors
+        let current: HTMLElement | null = wrapper as HTMLElement;
+        while (current) {
+          current.setAttribute('data-filter-match', 'true');
+          current = current.parentElement?.closest('.org-node-wrapper') as HTMLElement | null;
+        }
+      });
+    });
+
+    // --- Expand/collapse logic ---
+    section.querySelectorAll('.org-node-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const wrapper = btn.closest('.org-node-wrapper');
+        if (!wrapper) return;
+
+        const children = wrapper.querySelector('.org-node-children');
+        if (!children) return;
+
+        const isExpanded = children.classList.toggle('is-expanded');
+        btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      });
+    });
+
+    // Keyboard: Enter/Space on node header toggles
+    section.querySelectorAll('.org-node').forEach(node => {
+      node.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const wrapper = (node as HTMLElement).closest('.org-node-wrapper');
+          if (!wrapper) return;
+
+          const toggle = wrapper.querySelector('.org-node-toggle');
+          if (toggle) {
+            (toggle as HTMLElement).click();
+          }
+        }
+      });
+    });
+  })();
+</script>

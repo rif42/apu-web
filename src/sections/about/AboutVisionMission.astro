@@ -7,13 +7,13 @@ import SectionHeader from "../../components/SectionHeader.astro";
   id="visi-misi"
   class="apu-section-shell relative overflow-hidden bg-brand-surface-alt"
 >
-  <div id="vm-logo-3d-wrapper" class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none" style="perspective: 1000px;">
+  <div id="vm-logo-3d-wrapper" class="absolute right-40 inset-y-0 z-0 flex items-center justify-center pointer-events-none" style="perspective: 500px;">
     <div id="vm-logo-3d" class="vm-logo-3d-inner pointer-events-auto">
-      <img src="/images/apu-logo.png" alt="APU Logo" class="w-full h-full object-contain" loading="lazy" decoding="async" />
+      <img src="/images/apu-4k.webp" alt="APU Logo" class="w-full h-full object-contain" loading="lazy" decoding="async" />
     </div>
   </div>
 
-  <div class="content-max relative z-10 py-[var(--apu-section-spacing-y)]">
+  <div class="max-w-5xl pl-40 relative z-10 py-[var(--apu-section-spacing-y)]">
     <ScrollReveal>
       <SectionHeader
         kicker="VISI & MISI"
@@ -25,7 +25,7 @@ import SectionHeader from "../../components/SectionHeader.astro";
     </ScrollReveal>
 
     <ScrollReveal class="mb-16 md:mb-20">
-      <div class="max-w-4xl">
+      <div class="">
         <p class="text-mono text-brand-text-muted mb-4">VISI 2043</p>
         <blockquote
           class="text-h2 md:text-h1 text-brand-primary-deep font-normal leading-tight mb-4"
@@ -165,9 +165,7 @@ import SectionHeader from "../../components/SectionHeader.astro";
   <style>
     .vm-logo-3d-inner {
       width: 50vw;
-      max-width: 600px;
       aspect-ratio: 1;
-      opacity: 0.15;
       transition: transform 0.1s ease-out;
       transform-style: preserve-3d;
       will-change: transform;

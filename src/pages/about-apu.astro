@@ -1,25 +1,29 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import AboutHero from "../sections/about/AboutHero.astro";
 import AboutProfile from "../sections/about/AboutProfile.astro";
 import AboutHistory from "../sections/about/AboutHistory.astro";
 import AboutVisionMission from "../sections/about/AboutVisionMission.astro";
-import AboutChairmanMessage from "../sections/about/AboutChairmanMessage.astro";
+import AboutOrgStructure from "../sections/about/AboutOrgStructure.astro";
+import MessageFromLeadership from "../sections/MessageFromLeadership.astro";
 import AboutValues from "../sections/about/AboutValues.astro";
 import AboutUnits from "../sections/about/AboutUnits.astro";
 import AboutFacts from "../sections/about/AboutFacts.astro";
 import AboutLegal from "../sections/about/AboutLegal.astro";
+import NavigationAPU from "../components/NavigationAPU.astro";
+
 ---
 
 <MainLayout
   title="Tentang APU | Agung Putra University"
   description="Kenali Agung Putra University (APU): profil, sejarah, visi & misi, nilai institusi, dan legalitas. Institusi pendidikan tinggi futuristik di Semarang."
 >
-  <AboutHero />
+    <NavigationAPU />
+
   <AboutProfile />
   <AboutHistory />
   <AboutVisionMission />
-  <AboutChairmanMessage />
+  <AboutOrgStructure />
+  <MessageFromLeadership variant="light"/>
   <AboutValues />
   <AboutUnits />
   <AboutFacts />

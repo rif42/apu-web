@@ -224,7 +224,7 @@
 
     .apu-glass-card {
         border: 1px solid var(--apu-card-border, rgb(var(--apu-border) / 0.16));
-        background: var(--apu-card-bg, rgb(255 255 255 / 0.82));
+        background: var(--apu-card-bg, rgb(255 255 255 / 0.6));
         backdrop-filter: blur(var(--apu-card-blur, 12px));
         box-shadow: var(--apu-card-shadow, var(--apu-shadow-card));
         border-radius: var(--apu-card-radius, var(--apu-radius-card));
@@ -676,5 +676,357 @@
 
     .apu-leaflet-map .leaflet-control-container {
         display: none;
+    }
+}
+
+/* ============================================
+   ORGANIZATIONAL TREE — AboutOrgStructure
+   ============================================ */
+
+@layer components {
+    /* Tree container */
+    .org-tree-container {
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+    }
+
+    .org-tree {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: fit-content;
+        width: max-content;
+        margin: 0 auto;
+        gap: 0;
+    }
+
+    /* --- Node wrapper (vertical stacking: node + children) --- */
+    .org-node-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+
+    /* --- Node card --- */
+    .org-node {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 220px;
+        padding: 1rem 1.25rem;
+        cursor: default;
+        transition:
+            transform 260ms ease,
+            box-shadow 260ms ease,
+            border-color 260ms ease,
+            background-color 260ms ease,
+            opacity 300ms ease,
+            filter 300ms ease;
+    }
+
+    .org-node:hover {
+        box-shadow:
+            0 0 0 1px rgb(var(--color-brand-border) / 0.35),
+            0 0 30px rgb(var(--color-brand-glow) / 0.18),
+            var(--apu-shadow-card-hover);
+    }
+
+    .org-node:focus-visible {
+        outline: none;
+        box-shadow:
+            0 0 0 2px rgb(var(--apu-surface)),
+            0 0 0 4px rgb(var(--apu-accent) / 0.82),
+            var(--apu-shadow-card-hover);
+    }
+
+    /* Node header: avatar + meta + toggle */
+    .org-node-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .org-node-avatar {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Space Mono", monospace;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: rgb(var(--color-brand-surface));
+        background: linear-gradient(
+            135deg,
+            rgb(var(--color-brand-primary)) 0%,
+            rgb(var(--color-brand-primary-deep)) 100%
+        );
+        box-shadow: 0 4px 12px rgb(var(--color-brand-primary) / 0.35);
+        user-select: none;
+    }
+
+    .org-node-meta {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .org-node-title {
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-weight: 500;
+        font-size: 0.95rem;
+        line-height: 1.25;
+        color: rgb(var(--color-brand-text));
+        margin: 0;
+    }
+
+    .org-node-role {
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-weight: 400;
+        font-size: 0.8rem;
+        line-height: 1.4;
+        color: rgb(var(--color-brand-text-muted));
+        margin: 0.15rem 0 0;
+    }
+
+    .org-node-toggle {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: var(--apu-radius-pill);
+        background: rgb(var(--color-brand-primary) / 0.08);
+        color: rgb(var(--color-brand-primary));
+        cursor: pointer;
+        transition: background 200ms ease, transform 260ms ease;
+    }
+
+    .org-node-toggle:hover {
+        background: rgb(var(--color-brand-primary) / 0.18);
+    }
+
+    .org-node-toggle svg {
+        transition: transform 260ms ease;
+    }
+
+    .org-node-children.is-expanded + .org-node .org-node-toggle svg,
+    .org-node-wrapper:has(.org-node-children.is-expanded) .org-node-toggle svg {
+        transform: rotate(90deg);
+    }
+
+    /* Description (optional, shown when expanded or on hover) */
+    .org-node-description {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 300ms ease, opacity 300ms ease, margin 300ms ease;
+        opacity: 0;
+    }
+
+    .org-node:hover .org-node-description {
+        max-height: 120px;
+        opacity: 1;
+        margin-top: 0.5rem;
+    }
+
+    .org-node-description p {
+        font-family: "Space Grotesk", system-ui, sans-serif;
+        font-weight: 400;
+        font-size: 0.8rem;
+        line-height: 1.5;
+        color: rgb(var(--color-brand-text-muted));
+        margin: 0;
+        padding-top: 0.5rem;
+        border-top: 1px solid rgb(var(--color-brand-border) / 0.3);
+    }
+
+    /* --- Children container (expand/collapse) --- */
+    .org-node-children {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 300ms ease;
+    }
+
+    .org-node-children.is-expanded {
+        grid-template-rows: 1fr;
+    }
+
+    .org-node-children-inner {
+        overflow: hidden;
+    }
+
+    .org-node-children-list {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        padding-top: 2rem;
+    }
+
+    /* --- Desktop connectors (≥ 768px) --- */
+    @media (min-width: 768px) {
+        /* Vertical connector from parent node down to children list */
+        .org-node-children-list::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 2rem;
+            background: rgb(var(--color-brand-border));
+            transform: translateX(-50%);
+        }
+
+        /* Each child wrapper gets a vertical connector up from the horizontal line */
+        .org-node-children-list > .org-node-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 2rem;
+            background: rgb(var(--color-brand-border));
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        /* Horizontal connector across children */
+        .org-node-children-list > .org-node-wrapper:not(:only-child)::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgb(var(--color-brand-border));
+            z-index: 0;
+        }
+
+        /* First child: horizontal line from center to right edge */
+        .org-node-children-list > .org-node-wrapper:first-child:not(:only-child)::after {
+            left: 50%;
+            width: 50%;
+        }
+
+        /* Last child: horizontal line from left edge to center */
+        .org-node-children-list > .org-node-wrapper:last-child:not(:only-child)::after {
+            width: 50%;
+        }
+
+        /* Single child: no horizontal line needed */
+        .org-node-children-list > .org-node-wrapper:only-child::after {
+            display: none;
+        }
+
+        /* Ensure children list aligns children at top */
+        .org-node-children-list {
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        /* Wrapper positioning for connectors */
+        .org-node-children-list > .org-node-wrapper {
+            padding-top: 2rem;
+        }
+    }
+
+    /* --- Mobile connectors (< 768px) --- */
+    @media (max-width: 767px) {
+        .org-tree {
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        .org-node-wrapper {
+            align-items: flex-start;
+            width: 100%;
+            padding-left: 1.5rem;
+        }
+
+        .org-node {
+            max-width: none;
+            width: auto;
+            margin-left: 0;
+        }
+
+        .org-node-children-list {
+            flex-direction: column;
+            gap: 0.75rem;
+            padding-top: 1rem;
+            padding-left: 0.75rem;
+            border-left: 2px solid rgb(var(--color-brand-border));
+            margin-left: 1.25rem;
+        }
+
+        .org-node-children-list > .org-node-wrapper {
+            padding-top: 0;
+            padding-left: 0;
+        }
+
+        .org-node-children-list > .org-node-wrapper::before {
+            content: "";
+            position: absolute;
+            top: 1.25rem;
+            left: -0.75rem;
+            width: 0.75rem;
+            height: 2px;
+            background: rgb(var(--color-brand-border));
+        }
+
+        /* Remove desktop connectors */
+        .org-node-children-list::before,
+        .org-node-children-list > .org-node-wrapper::after {
+            display: none !important;
+        }
+    }
+
+    /* --- Filter logic --- */
+    .org-tree[data-filter="semua"] .org-node-wrapper {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+    }
+
+    .org-tree[data-filter]:not([data-filter="semua"]) .org-node-wrapper {
+        opacity: 0.25;
+        transform: scale(0.95);
+        pointer-events: none;
+        transition: opacity 300ms ease, transform 300ms ease;
+    }
+
+    .org-tree[data-filter]:not([data-filter="semua"]) .org-node-wrapper[data-filter-match] {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+    }
+
+    /* When a node is dimmed, also dim its children */
+    .org-tree[data-filter]:not([data-filter="semua"]) .org-node-wrapper:not([data-filter-match]) .org-node-wrapper {
+        opacity: 0.15;
+    }
+
+    /* Ensure ancestors of matched nodes stay visible */
+    .org-tree[data-filter]:not([data-filter="semua"]) .org-node-wrapper[data-filter-match] .org-node-wrapper[data-filter-match] {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* --- Reduced motion --- */
+    @media (prefers-reduced-motion: reduce) {
+        .org-node,
+        .org-node-toggle,
+        .org-node-toggle svg,
+        .org-node-description,
+        .org-node-children,
+        .org-tree[data-filter]:not([data-filter="semua"]) .org-node-wrapper {
+            transition: none !important;
+        }
     }
 }
