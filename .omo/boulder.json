@@ -48,9 +48,9 @@
       "work_id": "org-chart-section-705d473d",
       "active_plan": "D:\\work\\apu-web\\.omo\\plans\\org-chart-section.md",
       "plan_name": "org-chart-section",
-      "status": "active",
+      "status": "completed",
       "started_at": "2026-06-04T06:13:49.520Z",
-      "updated_at": "2026-06-04T06:13:49.520Z",
+      "updated_at": "2026-06-04T07:35:46.489Z",
       "session_ids": [
         "opencode:ses_16f04b479ffe7a6ya4ngkO0e9f"
       ],
@@ -58,13 +58,15 @@
         "opencode:ses_16f04b479ffe7a6ya4ngkO0e9f": "direct"
       },
       "agent": "atlas",
-      "task_sessions": {}
+      "task_sessions": {},
+      "ended_at": "2026-06-04T07:35:46.489Z",
+      "elapsed_ms": 4916969
     }
   },
   "active_plan": "D:\\work\\apu-web\\.omo\\plans\\org-chart-section.md",
   "started_at": "2026-06-04T06:13:49.520Z",
-  "status": "active",
-  "updated_at": "2026-06-04T06:13:49.520Z",
+  "status": "completed",
+  "updated_at": "2026-06-04T07:35:46.489Z",
   "session_ids": [
     "opencode:ses_16f04b479ffe7a6ya4ngkO0e9f"
   ],
@@ -73,5 +75,7 @@
   },
   "plan_name": "org-chart-section",
   "task_sessions": {},
-  "agent": "atlas"
+  "agent": "atlas",
+  "ended_at": "2026-06-04T07:35:46.489Z",
+  "elapsed_ms": 4916969
 }
