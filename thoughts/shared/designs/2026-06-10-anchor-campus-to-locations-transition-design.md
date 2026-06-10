@@ -12,7 +12,7 @@ When visitors click the **"Lihat Ekosistem SCCR"** button in `AnchorCampusSectio
 
 ## Constraints
 
-- **No Alpine.js or Astro client directives** — use vanilla JS inside `<script>` tags per project convention.
+- **Vanilla JS chosen for zero-dependency simplicity** — Alpine.js or Astro client directives are available if scope expands, but a small inline script is sufficient and keeps the bundle lean.
 - **Graceful degradation** — if JS fails, the button must still function as a navigational anchor.
 - **Accessibility** — focus management, `aria-hidden`, and `prefers-reduced-motion` are non-negotiable.
 - **No layout shift** — the replacement must not cause visible page reflow during or after the transition.
