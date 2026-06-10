@@ -8,7 +8,7 @@ status: validated
 
 ## Problem Statement
 
-When visitors click the **"Lihat Ekosistem SCCR"** button in `AnchorCampusSectionAPU`, the section should gracefully disappear and be replaced by `CampusLocationsSection` at the exact same position on the page. The transition must feel premium and intentional — no scroll jumps, no abrupt swaps.
+When visitors click the **"Lihat Ekosistem SCCR"** button in `AnchorCampusSectionAPU`, the section should gracefully disappear and be replaced by `EcosystemSection` at the exact same position on the page. The transition must feel premium and intentional — no scroll jumps, no abrupt swaps.
 
 ## Constraints
 
@@ -39,7 +39,7 @@ index.astro
     │   └── AnchorCampusSectionAPU
     │       └── .ecosystem-trigger  [button with data attribute]
     └── #ecosystem-locations   [hidden initially, aria-hidden="true", inert]
-        └── CampusLocationsSection
+        └── EcosystemSection
 ```
 
 Both panels occupy `grid-area: stage`. The hidden panel uses `opacity: 0` + `visibility: hidden` + `pointer-events: none`. The transition duration is **600ms** with an `ease` timing function.
@@ -48,8 +48,8 @@ Both panels occupy `grid-area: stage`. The hidden panel uses `opacity: 0` + `vis
 
 ### `src/pages/index.astro`
 
-- Wraps `AnchorCampusSectionAPU` and `CampusLocationsSection` inside `.ecosystem-stage`.
-- Removes the standalone `<CampusLocationsSection />` from its former position further down the page.
+- Wraps `AnchorCampusSectionAPU` and `EcosystemSection` inside `.ecosystem-stage`.
+- Removes the standalone `<EcosystemSection />` from its former position further down the page.
 - Includes a `<script>` block that:
   1. Finds `.ecosystem-trigger` inside `#ecosystem-anchor`.
   2. Adds a `click` listener that calls `event.preventDefault()`.
@@ -63,7 +63,7 @@ Both panels occupy `grid-area: stage`. The hidden panel uses `opacity: 0` + `vis
 - Adds `class="ecosystem-trigger"` to the tertiary CtaButton.
 - Keeps `href="#jalur-masuk"` as a no-JS fallback.
 
-### `src/sections/CampusLocationsSection.astro`
+### `src/sections/EcosystemSection.astro`
 
 - No changes required.
 - The wrapper in `index.astro` handles visibility and accessibility attributes.

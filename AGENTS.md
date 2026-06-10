@@ -1,3 +1,5 @@
+ALWAYS IGNORE PREFERS-REDUCED-MOTION. ALWAYS PLAY ANIMATION ALL THE TIME ANYWHERE
+
 # Sistem Desain Website APU (Tailwind v4)
 
 Tujuan: menjaga konsistensi UI saat situs berkembang. Gunakan dokumen ini sebagai kontrak gaya default untuk semua section/komponen baru.

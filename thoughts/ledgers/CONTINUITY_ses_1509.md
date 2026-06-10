@@ -6,7 +6,7 @@ updated: 2026-06-10T03:22:18.001Z
 # Session Summary
 
 ## Goal
-Convert the CampusLocationsSection to a fullscreen immersive map with custom image-based pins for all 6 campus locations, properly sized and zoomed.
+Convert the EcosystemSection to a fullscreen immersive map with custom image-based pins for all 6 campus locations, properly sized and zoomed.
 
 ## Constraints & Preferences
 - Match the fullscreen map pattern from `AnchorCampusSectionAPU.astro` (edge-to-edge, aspect-video, content overlay)
@@ -16,7 +16,7 @@ Convert the CampusLocationsSection to a fullscreen immersive map with custom ima
 
 ## Progress
 ### Done
-- [x] Converted `CampusLocationsSection.astro` from two-column grid to fullscreen map layout with overlay content panel
+- [x] Converted `EcosystemSection.astro` from two-column grid to fullscreen map layout with overlay content panel
 - [x] Added vignette gradient overlay (90deg on desktop, 180deg on mobile) for text readability over map
 - [x] Imported all 6 custom pin images from `mapsection/` into the section component
 - [x] Extended `LeafletMap.astro` MarkerData interface with `icon?: string` property (both server + client)
@@ -62,8 +62,8 @@ Convert the CampusLocationsSection to a fullscreen immersive map with custom ima
 - `D:\work\apu-web\src\components\LeafletMap.astro`
 - `D:\work\apu-web\src\data\locations.ts`
 - `D:\work\apu-web\src\sections\AnchorCampusSectionAPU.astro`
-- `D:\work\apu-web\src\sections\CampusLocationsSection.astro`
+- `D:\work\apu-web\src\sections\EcosystemSection.astro`
 
 ### Modified
 - `D:\work\apu-web\src\components\LeafletMap.astro` — added `icon` to MarkerData, `createImageIcon()`, `zoomSnap: 0.25`, updated fitBounds padding, increased pin size to 96×120
-- `D:\work\apu-web\src\sections\CampusLocationsSection.astro` — fullscreen layout, imported 6 pin images, `pinMap` mapping, overlay panel with section header + location list, custom pin images in list cards
+- `D:\work\apu-web\src\sections\EcosystemSection.astro` — fullscreen layout, imported 6 pin images, `pinMap` mapping, overlay panel with section header + location list, custom pin images in list cards

@@ -1,6 +1,6 @@
 # Campus Map Section Implementation Plan
 
-**Goal:** Create a new `CampusLocationsSection` that displays 6 APU campus locations on a static multi-marker Leaflet map with a companion location list, while extending `LeafletMap.astro` to support multiple markers and static display mode without breaking existing usage.
+**Goal:** Create a new `EcosystemSection` that displays 6 APU campus locations on a static multi-marker Leaflet map with a companion location list, while extending `LeafletMap.astro` to support multiple markers and static display mode without breaking existing usage.
 
 **Architecture:** Extend the existing `LeafletMap.astro` component with backward-compatible props (`markers`, `animated`), extract location data into a typed data module, and compose a new section using the APU design system primitives (`apu-section-shell`, `apu-glass-card`, `apu-icon-chip`, `SectionHeader`, `ScrollReveal`).
 
@@ -351,8 +351,8 @@ const {
 
 Depends on Batch 1 completing.
 
-### Task 2.1: CampusLocationsSection Component
-**File:** `src/sections/CampusLocationsSection.astro`
+### Task 2.1: EcosystemSection Component
+**File:** `src/sections/EcosystemSection.astro`
 **Test:** Manual — section renders with header, map, and location list; responsive layout stacks on mobile
 **Depends:** 1.1 (`src/data/locations.ts`), 1.2 (`src/components/LeafletMap.astro`)
 
@@ -461,7 +461,7 @@ const mapPinIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="2
 4. Accessibility check: location list items are keyboard-navigable (they are static divs with no interactive elements; no extra tabindex needed)
 5. Fallback check: if Leaflet fails, the list still renders with location names
 
-**Commit:** `feat(sections): add CampusLocationsSection with multi-marker map`
+**Commit:** `feat(sections): add EcosystemSection with multi-marker map`
 
 ---
 
@@ -481,14 +481,14 @@ Example integration (adapt to actual page structure):
 ```astro
 ---
 // Add import near other section imports
-import CampusLocationsSection from "../sections/CampusLocationsSection.astro";
+import EcosystemSection from "../sections/EcosystemSection.astro";
 ---
 
 <!-- Place in page layout, e.g. after ProgramsSectionAPU and before ContactSection -->
-<CampusLocationsSection />
+<EcosystemSection />
 ```
 
-> **Note:** The exact page file path may vary. Search for where other sections like `<ContactSection />` or `<PathwaysSectionAPU />` are used, and insert `<CampusLocationsSection />` in the appropriate position.
+> **Note:** The exact page file path may vary. Search for where other sections like `<ContactSection />` or `<PathwaysSectionAPU />` are used, and insert `<EcosystemSection />` in the appropriate position.
 
 **Verify:**
 1. Page builds successfully
@@ -496,7 +496,7 @@ import CampusLocationsSection from "../sections/CampusLocationsSection.astro";
 3. Navigation anchor `#lokasi-kampus` works if added to nav
 4. No console errors from Leaflet
 
-**Commit:** `feat(pages): integrate CampusLocationsSection into admissions page`
+**Commit:** `feat(pages): integrate EcosystemSection into admissions page`
 
 ---
 
@@ -519,6 +519,6 @@ import CampusLocationsSection from "../sections/CampusLocationsSection.astro";
 If the extended `LeafletMap.astro` causes issues with existing sections:
 1. Revert `src/components/LeafletMap.astro` to its original content
 2. Create a separate `MultiMarkerMap.astro` component instead
-3. Update `CampusLocationsSection.astro` to import from the new component
+3. Update `EcosystemSection.astro` to import from the new component
 
 This is a safe fallback because the existing component uses `id="leaflet-map"` (single-instance only), while the extension changes to `data-map-instance` (multi-instance safe). If problems arise, the separate-component approach avoids any risk to existing pages.

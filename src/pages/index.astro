@@ -5,26 +5,82 @@ import NavigationAPU from "../components/NavigationAPU.astro";
 import HeroSectionAPU from "../sections/HeroSectionAPU.astro";
 import ProgramsSectionAPU from "../sections/ProgramsSectionAPU.astro";
 import PathwaysSectionAPU from "../sections/PathwaysSectionAPU.astro";
-import AnchorEcosystemSectionAPU from "../sections/AnchorEcosystemSectionAPU.astro";
 import RequirementsSection from "../sections/RequirementsSection.astro";
 import ContactSection from "../sections/ContactSection.astro";
 import AnchorCampusSectionAPU from "../sections/AnchorCampusSectionAPU.astro";
 import MessageFromLeadershipAstroComponent from "../sections/MessageFromLeadership.astro";
-import CampusLocationsSection from "../sections/CampusLocationsSection.astro";
+import EcosystemSection from "../sections/EcosystemSection.astro";
 ---
 
 <MainLayout>
     <NavigationAPU />
     <main>
         <HeroSectionAPU />
-        <AnchorCampusSectionAPU />
-        <!-- <AnchorEcosystemSectionAPU /> -->
+        <div class="ecosystem-stage">
+            <div id="ecosystem-anchor" class="ecosystem-panel">
+                <AnchorCampusSectionAPU />
+            </div>
+            <div id="ecosystem-locations" class="ecosystem-panel ecosystem-panel--hidden" aria-hidden="true" inert>
+                <EcosystemSection />
+            </div>
+        </div>
         <ProgramsSectionAPU />
         <PathwaysSectionAPU />
         <MessageFromLeadershipAstroComponent variant='light'/>
-        <CampusLocationsSection />
+        <!-- EcosystemSection moved into ecosystem stage above -->
         <!-- <RequirementsSection /> -->
         <ContactSection />
     </main>
+    <script is:inline>
+    (function() {
+        var isTransitioning = false;
+        var anchorPanel = document.getElementById('ecosystem-anchor');
+        var locationsPanel = document.getElementById('ecosystem-locations');
+        var trigger = anchorPanel && anchorPanel.querySelector('.ecosystem-trigger');
+
+        if (!trigger || !anchorPanel || !locationsPanel) return;
+
+        trigger.addEventListener('click', function(event) {
+            event.preventDefault();
+            if (isTransitioning) return;
+            isTransitioning = true;
+
+            var showingLocations = locationsPanel.classList.contains('ecosystem-panel--hidden');
+            var panelToShow = showingLocations ? locationsPanel : anchorPanel;
+            var panelToHide = showingLocations ? anchorPanel : locationsPanel;
+
+            // Start CSS transition
+            panelToShow.classList.remove('ecosystem-panel--hidden');
+            panelToHide.classList.add('ecosystem-panel--hidden');
+
+            // Wait for transition (600ms) then manage a11y + focus
+            setTimeout(function() {
+                if (showingLocations) {
+                    anchorPanel.setAttribute('aria-hidden', 'true');
+                    anchorPanel.setAttribute('inert', '');
+                    locationsPanel.removeAttribute('aria-hidden');
+                    locationsPanel.removeAttribute('inert');
+                } else {
+                    locationsPanel.setAttribute('aria-hidden', 'true');
+                    locationsPanel.setAttribute('inert', '');
+                    anchorPanel.removeAttribute('aria-hidden');
+                    anchorPanel.removeAttribute('inert');
+                }
+
+                // Focus management: move focus to revealed panel's heading
+                var heading = panelToShow.querySelector('h2');
+                if (heading) {
+                    var hadTabIndex = heading.hasAttribute('tabindex');
+                    if (!hadTabIndex) heading.setAttribute('tabindex', '-1');
+                    heading.focus();
+                    if (!hadTabIndex) heading.removeAttribute('tabindex');
+                }
+
+                isTransitioning = false;
+            }, 600);
+        });
+    })();
+    </script>
+
     <Footer />
 </MainLayout>

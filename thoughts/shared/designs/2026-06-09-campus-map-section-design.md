@@ -40,7 +40,7 @@ Behavior changes:
 - When `animated` is `false`: render markers as static dots (no pulse animation), set view directly without flyTo
 - Use class-based selector (`data-map-instance`) instead of ID to allow multiple map instances
 
-### Section: `CampusLocationsSection.astro`
+### Section: `EcosystemSection.astro`
 
 **Layout:**
 - Full-width `apu-section-shell` with ambient glow
@@ -77,7 +77,7 @@ const LOCATIONS = [
 ## Data Flow
 
 ```
-CampusLocationsSection.astro
+EcosystemSection.astro
 ├── Defines LOCATIONS array
 ├── Passes markers + animated=false to LeafletMap
 │   └── Extended LeafletMap.astro
