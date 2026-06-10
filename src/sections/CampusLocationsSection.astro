@@ -26,6 +26,11 @@ const mapMarkers = campusLocations.map((loc) => ({
   icon: pinMap[loc.name],
 }));
 
+const routeCoordinates: [number, number][] = campusLocations.map((loc) => [
+  loc.lat,
+  loc.lng,
+]);
+
 const APU_CENTER: [number, number] = [-7.071300, 110.362306];
 ---
 
@@ -42,6 +47,7 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
           <LeafletMap
             center={APU_CENTER}
             markers={mapMarkers}
+            route={routeCoordinates}
             animated={false}
             class="absolute inset-0 w-full h-full"
           />
@@ -53,7 +59,7 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
           style="
             background:
               linear-gradient(
-                90deg,
+                270deg,
                 rgb(var(--color-brand-surface) / 0.08) 0 46%,
                 rgb(var(--color-brand-surface) / 0.62) 72%,
                 rgb(var(--color-brand-surface) / 0.94) 100%
@@ -67,7 +73,7 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
         ></div>
 
         <!-- Content overlay panel -->
-        <div class="absolute inset-x-0 bottom-0 z-[5] grid content-end gap-5 bg-gradient-to-t from-brand-surface/92 via-brand-surface/70 to-transparent px-[clamp(1.4rem,4vw,3rem)] py-[clamp(1.8rem,4vw,3.6rem)] lg:inset-y-0 lg:left-auto lg:w-[min(42%,620px)] lg:content-center lg:bg-gradient-to-l lg:from-brand-surface/94 lg:via-brand-surface/76 lg:to-transparent lg:px-[clamp(2rem,4.2vw,4rem)]">
+        <div class="absolute ml-24 bottom-0 z-[5] grid content-end gap-5 bg-gradient-to-t from-brand-surface/92 via-brand-surface/70 to-transparent px-[clamp(1.4rem,4vw,3rem)] py-[clamp(1.8rem,4vw,3.6rem)] lg:inset-y-0 lg:left-auto lg:w-[min(42%,620px)] lg:content-center lg:bg-gradient-to-l lg:from-brand-surface/94 lg:via-brand-surface/76 lg:to-transparent lg:px-[clamp(2rem,4.2vw,4rem)]">
           <SectionHeader
             kicker="LOKASI KAMPUS"
             title="Jelajahi Lingkungan Kampus APU"
@@ -79,7 +85,7 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
           />
 
           <!-- Location List -->
-          <div class="space-y-3 mt-4 max-h-[40vh] overflow-y-auto pr-2">
+          <!-- <div class="space-y-3 mt-4 max-h-[40vh] overflow-y-auto pr-2">
             {campusLocations.map((loc, index) => (
               <ScrollReveal delay={index * 100}>
                 <div class="apu-glass-card apu-interactive-card group flex items-center gap-4 p-4 transition-all duration-220">
@@ -97,7 +103,7 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
                 </div>
               </ScrollReveal>
             ))}
-          </div>
+          </div> -->
         </div>
       </div>
     </ScrollReveal>

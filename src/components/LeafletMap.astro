@@ -12,6 +12,7 @@ interface Props {
   zoomEnd?: number;
   zoomDuration?: number;
   markers?: MarkerData[];
+  route?: [number, number][];
   animated?: boolean;
   class?: string;
 }
@@ -22,8 +23,8 @@ const {
   zoomEnd = 16,
   zoomDuration = 4000,
   markers,
+  route,
   animated = true,
-  markerIcon,
   class: className = "",
 } = Astro.props;
 ---
@@ -36,8 +37,8 @@ const {
   data-zoom-end={zoomEnd}
   data-zoom-duration={zoomDuration}
   data-markers={markers ? JSON.stringify(markers) : undefined}
+  data-route={route ? JSON.stringify(route) : undefined}
   data-animated={String(animated)}
-  data-marker-icon={markerIcon}
 >
 </div>
 
@@ -57,6 +58,7 @@ const {
     zoomEnd: number;
     zoomDuration: number;
     markers?: MarkerData[];
+    route?: [number, number][];
     animated: boolean;
     markerIcon?: string;
   }
@@ -68,6 +70,7 @@ const {
       zoomEnd: parseInt(container.dataset.zoomEnd || "16"),
       zoomDuration: parseInt(container.dataset.zoomDuration || "4000"),
       markers: container.dataset.markers ? JSON.parse(container.dataset.markers) : undefined,
+      route: container.dataset.route ? JSON.parse(container.dataset.route) : undefined,
       animated: container.dataset.animated !== "false",
       markerIcon: container.dataset.markerIcon || undefined,
     };
@@ -109,7 +112,7 @@ const {
     return L.icon({
       iconUrl: iconUrl,
       iconSize: [136, 180],
-      iconAnchor: [88, 180],
+      iconAnchor: [65, 180],
       popupAnchor: [0, -120],
       className: "apu-map-pin-image",
     });
@@ -169,6 +172,17 @@ const {
 
     const bounds = L.latLngBounds(data.markers.map((m) => [m.lat, m.lng]));
 
+    if (data.route && data.route.length > 1) {
+      L.polyline(data.route, {
+        color: "#2B7A4A",
+        weight: 4,
+        opacity: 0.8,
+        dashArray: "8, 6",
+        lineCap: "round",
+        lineJoin: "round",
+      }).addTo(map);
+    }
+
     data.markers.forEach((marker) => {
       const markerIcon = marker.icon
         ? createImageIcon(marker.icon)
@@ -184,8 +198,8 @@ const {
       }
     });
 
-    map.fitBounds(bounds, { padding: [80, 80] });
-    map.setZoom(Math.min(map.getZoom(), 17.6));
+    map.fitBounds(bounds, { paddingTopLeft: [600, 160] });
+    map.setZoom(Math.min(map.getZoom(), 17.8));
 
     return map;
   }
