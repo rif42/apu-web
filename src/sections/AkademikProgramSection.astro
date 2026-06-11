@@ -50,7 +50,7 @@ const iconSvgs: Record<string, string> = {
 
 <section
   id="program"
-  class="apu-section-shell motion-aurora-shell motion-aurora-shell--program relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface-soft after:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-[rgb(var(--color-apu-accent)_/_0.65)] after:to-transparent"
+  class="apu-section-shell  motion-aurora-shell motion-aurora-shell--program relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface-soft after:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-[rgb(var(--color-apu-accent)_/_0.65)] after:to-transparent"
 >
   <!-- Ambient orbs -->
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
@@ -66,16 +66,16 @@ const iconSvgs: Record<string, string> = {
         kicker="Programs"
         title="Learning Focus"
         description="Each program balances theory, practice, and real-world projects. The curriculum is designed to be adaptive so graduates are ready to face workforce challenges."
-        class="text-center mb-16 md:mb-20"
+        class="text-center mb-16 md:mb-20 "
         titleClass="text-h2 text-[rgb(var(--color-apu-navy))] mb-4"
       />
     </ScrollReveal>
 
     <!-- Three Pillars Grid -->
-    <div class="flex flex-col md:flex-row gap-6 px-20">
+    <div class="flex flex-col md:flex-row gap-6 px-20 ">
       {pillars.map((pillar, index) => (
         <ScrollReveal delay={index * 150}>
-          <div class="group relative h-full apu-glass-card apu-interactive-card p-8 hover:border-[rgb(var(--color-apu-accent)_/_0.65)] hover:shadow-[0_28px_70px_rgb(var(--color-apu-navy)_/_0.14)]">
+          <div class="group apu-corner-accent--tr-4 relative h-full apu-glass-card apu-interactive-card p-8 hover:border-[rgb(var(--color-apu-accent)_/_0.65)] hover:shadow-[0_28px_70px_rgb(var(--color-apu-navy)_/_0.14)]">
             {/* Accent glow orb on hover */}
             <div class="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-[rgb(var(--color-apu-accent)_/_0.12)] blur-2xl transition-opacity duration-300 opacity-0 group-hover:opacity-100"></div>
 

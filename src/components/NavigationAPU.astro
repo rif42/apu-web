@@ -28,6 +28,7 @@ type NavItem = {
   badge?: string;
   target?: string;
   rel?: string;
+  children?: NavItem[];  // NEW: nested children
 };
 
 type NavSection = {
@@ -50,9 +51,29 @@ const navSections: NavSection[] = [
   },
   {
     label: "Admissions",
-    href: `${HOME_PATH}pendaftaran`,
-    kind: "anchor",
-    section: "jalur-masuk",
+    // href removed — becomes a pure trigger when items exist
+    items: [
+      {
+        label: "Scholarship",
+        href: `${HOME_PATH}beasiswa`,
+        description: "Beasiswa APU — jalur beasiswa akademik dan non-akademik.",
+        kind: "route",
+        children: [
+          {
+            label: "Academic",
+            href: `${HOME_PATH}beasiswa-akademik`,
+            description: "Beasiswa berbasis prestasi akademik.",
+            kind: "route",
+          },
+          {
+            label: "Non-Academic",
+            href: `${HOME_PATH}beasiswa-non-akademik`,
+            description: "Beasiswa berbasis prestasi non-akademik.",
+            kind: "route",
+          },
+        ],
+      },
+    ],
   },
   {
     label: "Academic",
@@ -218,6 +239,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
                         const routePath = item.kind === "route" ? routePathFromHref(item.href) : undefined;
                         const isCurrentRoute =
                           item.kind === "route" && !item.placeholder && routePath === currentPath;
+                        const hasChildren = Array.isArray(item.children) && item.children.length > 0;
 
                         return item.placeholder ? (
                           <li role="none">
@@ -232,6 +254,53 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
                               <span class="nav-dropdown-label">{item.label}</span>
                               {item.badge && <span class="nav-dropdown-badge">{item.badge}</span>}
                             </button>
+                          </li>
+                        ) : hasChildren ? (
+                          <li role="none">
+                            <div class="nav-dropdown-cascade">
+                              <a
+                                href={item.href}
+                                target={item.target}
+                                rel={item.rel}
+                                class:list={["nav-dropdown-item", isCurrentRoute && "is-current-route"]}
+                                data-menu-link
+                                data-nav-kind={item.kind}
+                                data-section={item.section}
+                                data-route-path={routePath}
+                                aria-current={isCurrentRoute ? "page" : undefined}
+                                role="menuitem"
+                              >
+                                <span class="nav-dropdown-label">{item.label}</span>
+                                {item.badge && <span class="nav-dropdown-badge nav-dropdown-badge--live">{item.badge}</span>}
+                              </a>
+                              <ul class="nav-dropdown-children" role="menu">
+                                {item.children!.map((child) => {
+                                  const childRoutePath = child.kind === "route" ? routePathFromHref(child.href) : undefined;
+                                  const isChildCurrent =
+                                    child.kind === "route" && !child.placeholder && childRoutePath === currentPath;
+
+                                  return (
+                                    <li role="none">
+                                      <a
+                                        href={child.href}
+                                        target={child.target}
+                                        rel={child.rel}
+                                        class:list={["nav-dropdown-item nav-dropdown-item--child", isChildCurrent && "is-current-route"]}
+                                        data-menu-link
+                                        data-nav-kind={child.kind}
+                                        data-section={child.section}
+                                        data-route-path={childRoutePath}
+                                        aria-current={isChildCurrent ? "page" : undefined}
+                                        role="menuitem"
+                                      >
+                                        <span class="nav-dropdown-label">{child.label}</span>
+                                        {child.badge && <span class="nav-dropdown-badge nav-dropdown-badge--live">{child.badge}</span>}
+                                      </a>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </div>
                           </li>
                         ) : (
                           <li role="none">
@@ -355,6 +424,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
                   <ul class="mobile-nav-submenu" role="menu">
                     {section.items.map((item) => {
                       const routePath = item.kind === "route" ? routePathFromHref(item.href) : undefined;
+                      const hasChildren = Array.isArray(item.children) && item.children.length > 0;
 
                       return item.placeholder ? (
                         <li role="none">
@@ -372,26 +442,69 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
                         </li>
                       ) : (
                         <li role="none">
-                          <a
-                            href={item.href}
-                            target={item.target}
-                            rel={item.rel}
-                            class="mobile-nav-submenu-item"
-                            data-menu-link
-                            data-nav-kind={item.kind}
-                            data-section={item.section}
-                            data-route-path={routePath}
-                            role="menuitem"
-                          >
-                            <span>{item.label}</span>
-                            {item.badge && <span class="mobile-nav-badge mobile-nav-badge--live">{item.badge}</span>}
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              ) : (
+                          {hasChildren ? (
+                            <div class="mobile-nav-cascade">
+                              <a
+                                href={item.href}
+                                target={item.target}
+                                rel={item.rel}
+                                class="mobile-nav-submenu-item mobile-nav-submenu-item--parent"
+                                data-menu-link
+                                data-nav-kind={item.kind}
+                                data-section={item.section}
+                                data-route-path={routePath}
+                                role="menuitem"
+                              >
+                                <span>{item.label}</span>
+                                {item.badge && <span class="mobile-nav-badge mobile-nav-badge--live">{item.badge}</span>}
+                              </a>
+                              <ul class="mobile-nav-children" role="menu">
+                                {item.children!.map((child) => {
+                                  const childRoutePath = child.kind === "route" ? routePathFromHref(child.href) : undefined;
+
+                                  return (
+                                    <li role="none">
+                                      <a
+                                        href={child.href}
+                                        target={child.target}
+                                        rel={child.rel}
+                                        class="mobile-nav-submenu-item mobile-nav-submenu-item--child"
+                                        data-menu-link
+                                        data-nav-kind={child.kind}
+                                        data-section={child.section}
+                                        data-route-path={childRoutePath}
+                                        role="menuitem"
+                                      >
+                                        <span>{child.label}</span>
+                                        {child.badge && <span class="mobile-nav-badge mobile-nav-badge--live">{child.badge}</span>}
+                                      </a>
+                                    </li>
+                                  );
+                                })}
+                              </ul>
+                            </div>
+                          ) : (
+                            <a
+                              href={item.href}
+                              target={item.target}
+                              rel={item.rel}
+                              class="mobile-nav-submenu-item"
+                              data-menu-link
+                              data-nav-kind={item.kind}
+                              data-section={item.section}
+                              data-route-path={routePath}
+                              role="menuitem"
+                            >
+                              <span>{item.label}</span>
+                              {item.badge && <span class="mobile-nav-badge mobile-nav-badge--live">{item.badge}</span>}
+                            </a>
+                           )}
+                         </li>
+                       );
+                     })}
+                   </ul>
+                 </div>
+               ) : (
                 <a
                   href={section.href}
                   class="mobile-nav-link"
@@ -988,10 +1101,31 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
     white-space: nowrap;
   }
 
-  #apu-nav .nav-dropdown-badge--live {
+#apu-nav .nav-dropdown-badge--live {
     background: rgb(var(--color-apu-accent) / 0.15);
     color: rgb(var(--color-apu-navy));
     border-color: rgb(var(--color-apu-accent) / 0.3);
+  }
+
+  /* ===== DESKTOP CASCADED CHILDREN ===== */
+  #apu-nav .nav-dropdown-cascade {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  #apu-nav .nav-dropdown-cascade > .nav-dropdown-item {
+    font-weight: 600;
+  }
+
+  #apu-nav .nav-dropdown-children {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #apu-nav .nav-dropdown-item--child {
+    padding: 0.6rem 0.85rem 0.6rem 1.5rem;
+    font-size: 0.82rem;
   }
 
   /* ===== ACTIONS ===== */
@@ -1265,6 +1399,27 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
     border-color: rgb(var(--color-apu-accent) / 0.3);
   }
 
+  /* ===== MOBILE CASCADED CHILDREN ===== */
+  #apu-nav .mobile-nav-cascade {
+    border-bottom: 1px solid rgb(var(--color-apu-navy) / 0.04);
+  }
+
+  #apu-nav .mobile-nav-cascade > .mobile-nav-submenu-item--parent {
+    font-weight: 600;
+  }
+
+  #apu-nav .mobile-nav-children {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background: rgb(var(--color-brand-surface-soft) / 0.4);
+  }
+
+  #apu-nav .mobile-nav-submenu-item--child {
+    padding-left: 3.5rem;
+    font-size: 0.85rem;
+  }
+
   /* ===== MOBILE FOOTER ===== */
   #apu-nav .mobile-menu-footer {
     padding: 1.25rem 1.5rem;
@@ -1304,6 +1459,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
   #apu-nav .nav-link:focus-visible,
   #apu-nav .nav-trigger:focus-visible,
   #apu-nav .nav-dropdown-item:focus-visible,
+  #apu-nav .nav-dropdown-item--child:focus-visible,
   #apu-nav .mobile-nav-link:focus-visible,
   #apu-nav .mobile-nav-trigger:focus-visible,
   #apu-nav .mobile-nav-submenu-item:focus-visible,

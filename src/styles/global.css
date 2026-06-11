@@ -324,21 +324,66 @@
         --apu-corner-size: 72px;
     }
 
+    :is(
+        .apu-corner-accent--6,
+        .apu-corner-accent--tl-6, .apu-corner-accent--tr-6,
+        .apu-corner-accent--bl-6, .apu-corner-accent--br-6,
+        .apu-corner-navy--6,
+        .apu-corner-navy--tl-6, .apu-corner-navy--tr-6,
+        .apu-corner-navy--bl-6, .apu-corner-navy--br-6,
+        .apu-corner-white--6,
+        .apu-corner-white--tl-6, .apu-corner-white--tr-6,
+        .apu-corner-white--bl-6, .apu-corner-white--br-6
+    ) {
+        --apu-corner-size: 84px;
+    }
+
+    :is(
+        .apu-corner-accent--8,
+        .apu-corner-accent--tl-8, .apu-corner-accent--tr-8,
+        .apu-corner-accent--bl-8, .apu-corner-accent--br-8,
+        .apu-corner-navy--8,
+        .apu-corner-navy--tl-8, .apu-corner-navy--tr-8,
+        .apu-corner-navy--bl-8, .apu-corner-navy--br-8,
+        .apu-corner-white--8,
+        .apu-corner-white--tl-8, .apu-corner-white--tr-8,
+        .apu-corner-white--bl-8, .apu-corner-white--br-8
+    ) {
+        --apu-corner-size: 108px;
+    }
+
+    :is(
+        .apu-corner-accent--10,
+        .apu-corner-accent--tl-10, .apu-corner-accent--tr-10,
+        .apu-corner-accent--bl-10, .apu-corner-accent--br-10,
+        .apu-corner-navy--10,
+        .apu-corner-navy--tl-10, .apu-corner-navy--tr-10,
+        .apu-corner-navy--bl-10, .apu-corner-navy--br-10,
+        .apu-corner-white--10,
+        .apu-corner-white--tl-10, .apu-corner-white--tr-10,
+        .apu-corner-white--bl-10, .apu-corner-white--br-10
+    ) {
+        --apu-corner-size: 132px;
+    }
+
     /* ── Position variants ───────────────────────────────────────── */
 
     :is(
         .apu-corner-accent--tl,
         .apu-corner-accent--tl-1, .apu-corner-accent--tl-2,
         .apu-corner-accent--tl-3, .apu-corner-accent--tl-4,
-        .apu-corner-accent--tl-5,
+        .apu-corner-accent--tl-5, .apu-corner-accent--tl-6,
+        .apu-corner-accent--tl-8, .apu-corner-accent--tl-10,
         .apu-corner-navy--tl,
         .apu-corner-navy--tl-1, .apu-corner-navy--tl-2,
         .apu-corner-navy--tl-3, .apu-corner-navy--tl-4,
-        .apu-corner-navy--tl-5,
+        .apu-corner-navy--tl-5, .apu-corner-navy--tl-6,
+        .apu-corner-navy--tl-8, .apu-corner-navy--tl-10,
         .apu-corner-white--tl,
         .apu-corner-white--tl-1, .apu-corner-white--tl-2,
         .apu-corner-white--tl-3, .apu-corner-white--tl-4,
-        .apu-corner-white--tl-5
+        .apu-corner-white--tl-5, .apu-corner-white--tl-6,
+        .apu-corner-white--tl-8, .apu-corner-white--tl-10
     )::after {
         top: 0;
         left: 0;
@@ -353,15 +398,18 @@
         .apu-corner-accent--tr,
         .apu-corner-accent--tr-1, .apu-corner-accent--tr-2,
         .apu-corner-accent--tr-3, .apu-corner-accent--tr-4,
-        .apu-corner-accent--tr-5,
+        .apu-corner-accent--tr-5, .apu-corner-accent--tr-6,
+        .apu-corner-accent--tr-8, .apu-corner-accent--tr-10,
         .apu-corner-navy--tr,
         .apu-corner-navy--tr-1, .apu-corner-navy--tr-2,
         .apu-corner-navy--tr-3, .apu-corner-navy--tr-4,
-        .apu-corner-navy--tr-5,
+        .apu-corner-navy--tr-5, .apu-corner-navy--tr-6,
+        .apu-corner-navy--tr-8, .apu-corner-navy--tr-10,
         .apu-corner-white--tr,
         .apu-corner-white--tr-1, .apu-corner-white--tr-2,
         .apu-corner-white--tr-3, .apu-corner-white--tr-4,
-        .apu-corner-white--tr-5
+        .apu-corner-white--tr-5, .apu-corner-white--tr-6,
+        .apu-corner-white--tr-8, .apu-corner-white--tr-10
     )::after {
         top: 0;
         right: 0;
@@ -376,15 +424,18 @@
         .apu-corner-accent--bl,
         .apu-corner-accent--bl-1, .apu-corner-accent--bl-2,
         .apu-corner-accent--bl-3, .apu-corner-accent--bl-4,
-        .apu-corner-accent--bl-5,
+        .apu-corner-accent--bl-5, .apu-corner-accent--bl-6,
+        .apu-corner-accent--bl-8, .apu-corner-accent--bl-10,
         .apu-corner-navy--bl,
         .apu-corner-navy--bl-1, .apu-corner-navy--bl-2,
         .apu-corner-navy--bl-3, .apu-corner-navy--bl-4,
-        .apu-corner-navy--bl-5,
+        .apu-corner-navy--bl-5, .apu-corner-navy--bl-6,
+        .apu-corner-navy--bl-8, .apu-corner-navy--bl-10,
         .apu-corner-white--bl,
         .apu-corner-white--bl-1, .apu-corner-white--bl-2,
         .apu-corner-white--bl-3, .apu-corner-white--bl-4,
-        .apu-corner-white--bl-5
+        .apu-corner-white--bl-5, .apu-corner-white--bl-6,
+        .apu-corner-white--bl-8, .apu-corner-white--bl-10
     )::after {
         bottom: 0;
         left: 0;
@@ -399,15 +450,18 @@
         .apu-corner-accent--br,
         .apu-corner-accent--br-1, .apu-corner-accent--br-2,
         .apu-corner-accent--br-3, .apu-corner-accent--br-4,
-        .apu-corner-accent--br-5,
+        .apu-corner-accent--br-5, .apu-corner-accent--br-6,
+        .apu-corner-accent--br-8, .apu-corner-accent--br-10,
         .apu-corner-navy--br,
         .apu-corner-navy--br-1, .apu-corner-navy--br-2,
         .apu-corner-navy--br-3, .apu-corner-navy--br-4,
-        .apu-corner-navy--br-5,
+        .apu-corner-navy--br-5, .apu-corner-navy--br-6,
+        .apu-corner-navy--br-8, .apu-corner-navy--br-10,
         .apu-corner-white--br,
         .apu-corner-white--br-1, .apu-corner-white--br-2,
         .apu-corner-white--br-3, .apu-corner-white--br-4,
-        .apu-corner-white--br-5
+        .apu-corner-white--br-5, .apu-corner-white--br-6,
+        .apu-corner-white--br-8, .apu-corner-white--br-10
     )::after {
         bottom: 0;
         right: 0;
@@ -416,6 +470,88 @@
         border-top: none;
         border-left: none;
         border-radius: 0;
+    }
+
+    /* ── Corner radius override (target element itself) ─────────── */
+
+    :is(
+        .apu-corner-accent--tl,
+        .apu-corner-accent--tl-1, .apu-corner-accent--tl-2,
+        .apu-corner-accent--tl-3, .apu-corner-accent--tl-4,
+        .apu-corner-accent--tl-5, .apu-corner-accent--tl-6,
+        .apu-corner-accent--tl-8, .apu-corner-accent--tl-10,
+        .apu-corner-navy--tl,
+        .apu-corner-navy--tl-1, .apu-corner-navy--tl-2,
+        .apu-corner-navy--tl-3, .apu-corner-navy--tl-4,
+        .apu-corner-navy--tl-5, .apu-corner-navy--tl-6,
+        .apu-corner-navy--tl-8, .apu-corner-navy--tl-10,
+        .apu-corner-white--tl,
+        .apu-corner-white--tl-1, .apu-corner-white--tl-2,
+        .apu-corner-white--tl-3, .apu-corner-white--tl-4,
+        .apu-corner-white--tl-5, .apu-corner-white--tl-6,
+        .apu-corner-white--tl-8, .apu-corner-white--tl-10
+    ) {
+        border-top-left-radius: 0;
+    }
+
+    :is(
+        .apu-corner-accent--tr,
+        .apu-corner-accent--tr-1, .apu-corner-accent--tr-2,
+        .apu-corner-accent--tr-3, .apu-corner-accent--tr-4,
+        .apu-corner-accent--tr-5, .apu-corner-accent--tr-6,
+        .apu-corner-accent--tr-8, .apu-corner-accent--tr-10,
+        .apu-corner-navy--tr,
+        .apu-corner-navy--tr-1, .apu-corner-navy--tr-2,
+        .apu-corner-navy--tr-3, .apu-corner-navy--tr-4,
+        .apu-corner-navy--tr-5, .apu-corner-navy--tr-6,
+        .apu-corner-navy--tr-8, .apu-corner-navy--tr-10,
+        .apu-corner-white--tr,
+        .apu-corner-white--tr-1, .apu-corner-white--tr-2,
+        .apu-corner-white--tr-3, .apu-corner-white--tr-4,
+        .apu-corner-white--tr-5, .apu-corner-white--tr-6,
+        .apu-corner-white--tr-8, .apu-corner-white--tr-10
+    ) {
+        border-top-right-radius: 0;
+    }
+
+    :is(
+        .apu-corner-accent--bl,
+        .apu-corner-accent--bl-1, .apu-corner-accent--bl-2,
+        .apu-corner-accent--bl-3, .apu-corner-accent--bl-4,
+        .apu-corner-accent--bl-5, .apu-corner-accent--bl-6,
+        .apu-corner-accent--bl-8, .apu-corner-accent--bl-10,
+        .apu-corner-navy--bl,
+        .apu-corner-navy--bl-1, .apu-corner-navy--bl-2,
+        .apu-corner-navy--bl-3, .apu-corner-navy--bl-4,
+        .apu-corner-navy--bl-5, .apu-corner-navy--bl-6,
+        .apu-corner-navy--bl-8, .apu-corner-navy--bl-10,
+        .apu-corner-white--bl,
+        .apu-corner-white--bl-1, .apu-corner-white--bl-2,
+        .apu-corner-white--bl-3, .apu-corner-white--bl-4,
+        .apu-corner-white--bl-5, .apu-corner-white--bl-6,
+        .apu-corner-white--bl-8, .apu-corner-white--bl-10
+    ) {
+        border-bottom-left-radius: 0;
+    }
+
+    :is(
+        .apu-corner-accent--br,
+        .apu-corner-accent--br-1, .apu-corner-accent--br-2,
+        .apu-corner-accent--br-3, .apu-corner-accent--br-4,
+        .apu-corner-accent--br-5, .apu-corner-accent--br-6,
+        .apu-corner-accent--br-8, .apu-corner-accent--br-10,
+        .apu-corner-navy--br,
+        .apu-corner-navy--br-1, .apu-corner-navy--br-2,
+        .apu-corner-navy--br-3, .apu-corner-navy--br-4,
+        .apu-corner-navy--br-5, .apu-corner-navy--br-6,
+        .apu-corner-navy--br-8, .apu-corner-navy--br-10,
+        .apu-corner-white--br,
+        .apu-corner-white--br-1, .apu-corner-white--br-2,
+        .apu-corner-white--br-3, .apu-corner-white--br-4,
+        .apu-corner-white--br-5, .apu-corner-white--br-6,
+        .apu-corner-white--br-8, .apu-corner-white--br-10
+    ) {
+        border-bottom-right-radius: 0;
     }
 
     /* ── Color variants ──────────────────────────────────────────── */
@@ -433,9 +569,16 @@
         .apu-corner-accent--bl-4, .apu-corner-accent--br-4,
         .apu-corner-accent--tl-5, .apu-corner-accent--tr-5,
         .apu-corner-accent--bl-5, .apu-corner-accent--br-5,
+        .apu-corner-accent--tl-6, .apu-corner-accent--tr-6,
+        .apu-corner-accent--bl-6, .apu-corner-accent--br-6,
+        .apu-corner-accent--tl-8, .apu-corner-accent--tr-8,
+        .apu-corner-accent--bl-8, .apu-corner-accent--br-8,
+        .apu-corner-accent--tl-10, .apu-corner-accent--tr-10,
+        .apu-corner-accent--bl-10, .apu-corner-accent--br-10,
         .apu-corner-accent--1, .apu-corner-accent--2,
         .apu-corner-accent--3, .apu-corner-accent--4,
-        .apu-corner-accent--5
+        .apu-corner-accent--5, .apu-corner-accent--6,
+        .apu-corner-accent--8, .apu-corner-accent--10
     )::after {
         --apu-corner-color: rgb(var(--apu-accent));
     }
@@ -453,9 +596,16 @@
         .apu-corner-navy--bl-4, .apu-corner-navy--br-4,
         .apu-corner-navy--tl-5, .apu-corner-navy--tr-5,
         .apu-corner-navy--bl-5, .apu-corner-navy--br-5,
+        .apu-corner-navy--tl-6, .apu-corner-navy--tr-6,
+        .apu-corner-navy--bl-6, .apu-corner-navy--br-6,
+        .apu-corner-navy--tl-8, .apu-corner-navy--tr-8,
+        .apu-corner-navy--bl-8, .apu-corner-navy--br-8,
+        .apu-corner-navy--tl-10, .apu-corner-navy--tr-10,
+        .apu-corner-navy--bl-10, .apu-corner-navy--br-10,
         .apu-corner-navy--1, .apu-corner-navy--2,
         .apu-corner-navy--3, .apu-corner-navy--4,
-        .apu-corner-navy--5
+        .apu-corner-navy--5, .apu-corner-navy--6,
+        .apu-corner-navy--8, .apu-corner-navy--10
     )::after {
         --apu-corner-color: rgb(var(--apu-navy));
     }
@@ -473,9 +623,16 @@
         .apu-corner-white--bl-4, .apu-corner-white--br-4,
         .apu-corner-white--tl-5, .apu-corner-white--tr-5,
         .apu-corner-white--bl-5, .apu-corner-white--br-5,
+        .apu-corner-white--tl-6, .apu-corner-white--tr-6,
+        .apu-corner-white--bl-6, .apu-corner-white--br-6,
+        .apu-corner-white--tl-8, .apu-corner-white--tr-8,
+        .apu-corner-white--bl-8, .apu-corner-white--br-8,
+        .apu-corner-white--tl-10, .apu-corner-white--tr-10,
+        .apu-corner-white--bl-10, .apu-corner-white--br-10,
         .apu-corner-white--1, .apu-corner-white--2,
         .apu-corner-white--3, .apu-corner-white--4,
-        .apu-corner-white--5
+        .apu-corner-white--5, .apu-corner-white--6,
+        .apu-corner-white--8, .apu-corner-white--10
     )::after {
         --apu-corner-color: rgb(255 255 255);
     }

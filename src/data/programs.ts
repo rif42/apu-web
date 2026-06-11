@@ -5,74 +5,81 @@ export interface Program {
   subPrograms: string[];
   image: string;
   link: string;
+  desc: string;
 }
 
 export const programs: Program[] = [
   {
     id: 'biomedical-science',
     name: 'Biomedical Science',
-    degree: 'S1',
+    degree: 'Bachelor',
     subPrograms: [
       'Biomedical Cell Therapy',
       'Biomedical Industry',
       'Biomedical AI',
     ],
     image: '/images/programs/biomedical.jpg',
-    link: 'https://biomedical.kmb.ac.id/'
+    link: 'https://biomedical.kmb.ac.id/',
+    desc: 'Our biomedical program trains you to engineer life-saving medical technology. You will bridge the gap between complex human biology and mechanical design, building exact solutions like prosthetics, artificial organs, and diagnostic systems. This is a rigorous, high-stakes track designed for students who want their technical engineering skills to directly impact human survival and physical capability.',
   },
   {
     id: 'biotechnology',
     name: 'Biotechnology',
-    degree: 'S1',
+    degree: 'Bachelor',
     subPrograms: [
       'Medical Biotechnology',
       'Biotechnology Informatics',
       'Biotechnology Industry',
     ],
     image: '/images/programs/biotech.jpg',
-    link: 'https://biotechnology.kmb.ac.id/'
+    link: '/bioteknologi',
+    desc:'Biotechnology is the frontline of global survival and medical advancement. You will learn to manipulate cellular and molecular processes to engineer breakthrough therapeutics, sustainable agriculture, and advanced biomaterials. This program demands intense laboratory discipline, equipping you with the exact technical expertise required to drive commercial innovation and solve biological crises.'
   },
   {
     id: 'law',
     name: 'Law',
-    degree: 'S1',
+    degree: 'Bachelor',
     subPrograms: ['Law & Litigation', 'Medical Law'],
     image: '/images/programs/law.jpg',
-    link: 'https://law.kmb.ac.id/'
+    link: 'https://law.kmb.ac.id/',
+    desc:'Law is the operating system of society. This program strips away the abstract to teach you the exact mechanics of contracts, jurisprudence, and governance. You will learn to deconstruct complex regulatory frameworks, build ironclad arguments, and wield the legal system to enforce structure, defend rights, and drive corporate or societal accountability.'
   },
   {
     id: 'management',
     name: 'Management',
-    degree: 'S1',
+    degree: 'Bachelor',
     subPrograms: [
       'International Business Management',
       'Digital Business Management',
       'Entrepreneur Business Management',
     ],
     image: '/images/programs/management.jpg',
-    link: 'https://management.kmb.ac.id/'
+    link: 'https://management.kmb.ac.id/',
+    desc:'Businesses fail without structural discipline and precise resource allocation. Our management program delivers the exact operational frameworks required to scale organizations, optimize supply chains, and direct personnel. You will bypass corporate guesswork and learn the hard metrics of financial strategy, risk mitigation, and enterprise leadership required to drive market success.'
   },
   {
     id: 'communication',
     name: 'Communication Science',
-    degree: 'S1',
+    degree: 'Bachelor',
     subPrograms: [
       'Digital and New Media Communication Science',
       'Strategic Business Communication Science',
     ],
     image: '/images/programs/communication.jpg',
-    link: 'https://communication.kmb.ac.id/'
+    link: 'https://communication.kmb.ac.id/',
+    desc: 'Information controls markets, politics, and culture. This program teaches the precise architecture of how messages are constructed, distributed, and absorbed across global networks. You will master data-driven strategies and behavioral psychology to shape public perception, manage corporate crises, and command audience action in a highly saturated digital economy.'
   },
   {
     id: 'midwifery-s1',
     name: 'Midwifery',
-    degree: 'S1',
+    degree: 'Bachelor & Diploma',
     subPrograms: [
       'Innovative Women Health & Beauty Care in Midwifery',
       'Entrepreneur in Midwifery Business',
     ],
     image: '/images/programs/midwiferys1.jpg',
-    link: 'https://bachelor-midwifery.kmb.ac.id/'
+    link: 'https://bachelor-midwifery.kmb.ac.id/',
+    desc:'Midwifery is specialized, frontline maternal healthcare. You will master the strict clinical protocols required to manage pregnancy, execute safe deliveries, and prevent maternal and infant mortality. This program demands absolute precision, rapid decision-making, and profound resilience, preparing you to act as the primary medical authority in the delivery room.'
   },
 
 ];

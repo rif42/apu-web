@@ -79,7 +79,7 @@ const timelineSteps: TimelineStep[] = [
           const isLeft = index % 2 === 0;
           return (
             <ScrollReveal delay={index * 120}>
-              <div class={`relative flex items-start gap-8 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+              <div class={`relative flex items-start gap-8 ${isLeft ? 'md:flex-row apu-corner-accent--tl-4' : 'md:flex-row-reverse apu-corner-accent--tr-4'}`}>
                 <!-- Content Card -->
                 <div class={`flex-1 ml-16 md:ml-0 ${isLeft ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'}`}>
                   <div class="apu-glass-card apu-interactive-card p-6 group">

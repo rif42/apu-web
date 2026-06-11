@@ -1,0 +1,62 @@
+---
+import ScrollReveal from "../../components/ScrollReveal.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+import { biotechnologyProgram as program } from "../../data/program-details";
+
+const iconMap: Record<string, string> = {
+  dna: '<path d="M2 15c6.667-6 13.333 0 20-6"/><path d="M9 22c1.5-2.5 3.5-2.5 5 0"/><path d="M15 2c-1.5 2.5-3.5 2.5-5 0"/><path d="M22 9c-6.667 6-13.333 0-20 6"/>',
+  flask: '<path d="M10 2v7.31"/><path d="M14 2v7.31"/><path d="M8.5 2h7"/><path d="M14 9.3a6.5 6.5 0 1 1-4 0"/>',
+  globe: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+  factory: '<path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M17 18h1"/><path d="M12 18h1"/><path d="M7 18h1"/>',
+  cpu: '<rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>',
+  'trending-up': '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>',
+  network: '<circle cx="5" cy="6" r="3"/><circle cx="19" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M8.5 8.5 10 14.5"/><path d="M15.5 8.5 14 14.5"/>',
+};
+---
+
+<section id="keunggulan" class="apu-section-shell motion-aurora-shell relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface-soft">
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div class="absolute -left-24 top-16 h-72 w-72 rounded-full bg-[rgb(var(--color-apu-accent)_/_0.12)] blur-3xl"></div>
+    <div class="absolute -right-24 bottom-8 h-80 w-80 rounded-full bg-[rgb(var(--color-apu-navy)_/_0.10)] blur-3xl"></div>
+  </div>
+
+  <div class="content-max relative z-10">
+    <ScrollReveal>
+      <SectionHeader
+        kicker="KEUNGGULAN"
+        title="Mengapa Bioteknologi APU?"
+        class="text-center mb-16"
+        titleClass="text-h2 text-[rgb(var(--color-apu-navy))] mb-4"
+      />
+    </ScrollReveal>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      {program.strengths.map((strength, index) => (
+        <ScrollReveal delay={index * 120}>
+          <div class="apu-glass-card apu-interactive-card p-6 md:p-8 h-full">
+            <div class="apu-icon-chip h-12 w-12 rounded-xl flex-shrink-0 mb-5">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                set:html={iconMap[strength.icon] || iconMap['dna']}
+              />
+            </div>
+            <h3 class="text-h3 text-brand-primary-deep text-lg md:text-xl mb-3">
+              {strength.title}
+            </h3>
+            <p class="text-body-s text-brand-text-muted leading-relaxed">
+              {strength.description}
+            </p>
+          </div>
+        </ScrollReveal>
+      ))}
+    </div>
+  </div>
+</section>
