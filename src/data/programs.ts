@@ -34,7 +34,7 @@ export const programs: Program[] = [
   },
   {
     id: 'law',
-    name: 'Hukum',
+    name: 'Law',
     degree: 'S1',
     subPrograms: ['Law & Litigation', 'Medical Law'],
     image: '/images/programs/law.jpg',
@@ -42,7 +42,7 @@ export const programs: Program[] = [
   },
   {
     id: 'management',
-    name: 'Manajemen',
+    name: 'Management',
     degree: 'S1',
     subPrograms: [
       'International Business Management',
@@ -54,7 +54,7 @@ export const programs: Program[] = [
   },
   {
     id: 'communication',
-    name: 'Ilmu Komunikasi',
+    name: 'Communication Science',
     degree: 'S1',
     subPrograms: [
       'Digital and New Media Communication Science',
@@ -65,7 +65,7 @@ export const programs: Program[] = [
   },
   {
     id: 'midwifery-s1',
-    name: 'Kebidanan',
+    name: 'Midwifery',
     degree: 'S1',
     subPrograms: [
       'Innovative Women Health & Beauty Care in Midwifery',

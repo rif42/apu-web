@@ -5,7 +5,7 @@ import LeafletMap from "../components/LeafletMap.astro";
 import apuPin from "../../mapsection/apu-pin.webp";
 
 const admissionsWhatsApp =
-  "https://wa.me/628113755552?text=Halo, saya ingin menanyakan informasi pendaftaran mahasiswa baru APU 2026/2027.";
+  "https://wa.me/628113755552?text=Hello, I would like to ask about new student admission information for APU 2026/2027.";
 
 const APU_CENTER: [number, number] = [-7.071300, 110.362306];
 ---
@@ -13,12 +13,12 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
 <section
   id="ekosistem"
   class="apu-anchor-campus apu-section-shell motion-aurora-shell relative isolate overflow-hidden bg-white"
-  aria-label="Ekosistem kampus Agung Putra University"
+  aria-label="Agung Putra University campus ecosystem"
 >
   <div class="w-full relative z-[1]">
     <ScrollReveal>
       <div class="apu-anchor-campus__frame relative isolate aspect-video w-full overflow-hidden bg-white shadow-[0_30px_72px_rgb(var(--color-brand-primary-deeper)/0.16)]">
-        <section class="apu-anchor-campus__map-zone absolute inset-0 overflow-hidden" aria-label="Visual map kampus APU">
+        <section class="apu-anchor-campus__map-zone absolute inset-0 overflow-hidden" aria-label="APU campus visual map">
           <div class="apu-anchor-campus__map-stage absolute left-1/2 top-1/2 aspect-square w-[150%] translate-x-[-61%] translate-y-[-46%]">
             <LeafletMap
               center={APU_CENTER}
@@ -33,35 +33,35 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
 
           <div
             class="apu-anchor-campus__pin-wrap absolute left-[33.4%] top-[50%] z-[4] grid aspect-square w-44 -translate-x-1/2 -translate-y-1/2 place-items-center md:w-80 max-[980px]:left-[50%] max-[980px]:top-[50%]"
-            aria-label="Pin lokasi kampus APU"
+            aria-label="APU campus location pin"
           >
             <img
               src={apuPin.src}
-              alt="Pin lokasi kampus APU"
+              alt="APU campus location pin"
               class="apu-anchor-campus__pin-image relative z-[3] h-[92%] w-[92%] object-contain opacity-100 translate-y-[-12%]"
               loading="lazy"
               decoding="async"
             />
             <p class="text-3xl absolute left-1/2 top-[calc(80%+14px)] m-0 -translate-x-1/2 whitespace-nowrap rounded-full border border-apu-navy/24 bg-brand-surface/86 px-3 py-1.5 font-semibold text-apu-navy">
-                Kampus APU
+                APU Campus
             </p>
           </div>
         </section>
 
         <section class="apu-anchor-campus__text-zone absolute inset-x-0 bottom-0 z-[5] grid content-end gap-5 bg-gradient-to-t from-brand-surface/92 via-brand-surface/70 to-transparent px-[clamp(1.4rem,4vw,3rem)] py-[clamp(1.8rem,4vw,3.6rem)] lg:inset-y-0 lg:left-auto lg:w-[min(42%,620px)] lg:content-center lg:bg-gradient-to-l lg:from-brand-surface/94 lg:via-brand-surface/76 lg:to-transparent lg:px-[clamp(2rem,4.2vw,4rem)]">
-          <span class="apu-section-kicker mb-1 w-fit">Anchor Campus · 360° View</span>
+          <span class="apu-section-kicker mb-1 w-fit">Ecosystem</span>
           <h2 class="text-h2 m-0 max-w-[18ch] text-apu-navy">
-            Kampus APU menjadi poros ekosistem yang terus bergerak
+            Agung Putra University is the center of the SCCR ecosystem
           </h2>
           <p class="text-body m-0 max-w-[35ch] text-brand-text-muted">
-              Dari Semarang, Agung Putra University terhubung dengan mitra akademik, industri, dan komunitas. <br>Pusatnya tetap satu; kampus yang menyiapkan masa depanmu dengan arah yang jelas.
+              From Semarang, Agung Putra University connects with academic, industry, and community partners. <br>Its center remains one; a campus that prepares your future with a clear direction.
           </p>
           <div class="flex flex-wrap gap-3 pt-2">
             <CtaButton href={admissionsWhatsApp} target="_blank" rel="noopener noreferrer" withArrow>
-              Daftar Sekarang
+              Apply Now
             </CtaButton>
             <CtaButton href="#jalur-masuk" variant="tertiary" class="ecosystem-trigger">
-                Lihat Ekosistem SCCR
+                View SCCR Ecosystem
             </CtaButton>
           </div>
         </section>

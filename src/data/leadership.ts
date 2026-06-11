@@ -12,18 +12,18 @@ export interface LeadershipMessage {
 }
 
 export const leadershipMessage: LeadershipMessage = {
-  kicker: "PESAN DARI PEMIMPIN",
-  title: "Membangun Masa Depan Bersama",
+  kicker: "MESSAGE FROM LEADERSHIP",
+  title: "Building the Future Together",
   quote: [
-    "Selamat datang di Agung Putra University. Kami hadir dengan komitmen kuat untuk mencetak generasi unggul yang siap menghadapi tantangan dunia dengan kecerdasan, integritas, dan semangat kolaborasi.",
-    "APU bukan sekadar kampus. Ini adalah ekosistem pembelajaran futuristik di mana setiap mahasiswa diberdayakan untuk menemukan potensi terbaiknya, didukung oleh kurikulum inovatif dan lingkungan yang inspiratif.",
-    "Bergabunglah dengan kami, dan bersama-sama kita wujudkan impian besar untuk Indonesia yang lebih baik."
+    "Welcome to Agung Putra University. We are here with a strong commitment to cultivate an outstanding generation ready to face global challenges with intelligence, integrity, and a spirit of collaboration.",
+    "APU is more than a campus. It is a futuristic learning ecosystem where every student is empowered to discover their best potential, supported by an innovative curriculum and an inspiring environment.",
+    "Join us, and together let us realize a great dream for a better Indonesia."
   ],
   leaderName: "Prof. Dr. Agung Putra, M.Si.",
-  leaderTitle: "Founder and Commisoner PT. SCCR",
+  leaderTitle: "Founder and Commissioner PT. SCCR",
   leaderImage: "/images/leadership-portrait.webp",
   cta: {
     href: "/about-apu",
-    label: "Kenali Visi Kampus",
+    label: "Discover the Campus Vision",
   },
 };

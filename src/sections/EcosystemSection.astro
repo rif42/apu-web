@@ -10,13 +10,29 @@ import dermaninaPin from "../../mapsection/dermanina-pin.webp";
 import farmPin from "../../mapsection/farm-pin.webp";
 import restoPin from "../../mapsection/resto-pin.webp";
 
+import apuImg from "../../mapsection/images/apu.png";
+import sccrImg from "../../mapsection/images/sccr.jpg";
+import kareninaImg from "../../mapsection/images/karenina.jpg";
+import dermaninaImg from "../../mapsection/images/dermanina.jpeg";
+import farmImg from "../../mapsection/images/farm.jpg";
+import restoImg from "../../mapsection/images/resto.jpg";
+
 const pinMap: Record<string, string> = {
-  "Kampus Utama APU": apuPin.src,
+  "APU Main Campus": apuPin.src,
   "SCCR": sccrPin.src,
   "Karenina Resort": kareninaPin.src,
   "Dermanina": dermaninaPin.src,
   "Agung Farm": farmPin.src,
   "Sains De Resto": restoPin.src,
+};
+
+const imageMap: Record<string, { url: string; name: string }> = {
+  "APU Main Campus": { url: apuImg.src, name: "APU Main Campus" },
+  "SCCR": { url: sccrImg.src, name: "SCCR" },
+  "Karenina Resort": { url: kareninaImg.src, name: "Karenina Resort" },
+  "Dermanina": { url: dermaninaImg.src, name: "Dermanina" },
+  "Agung Farm": { url: farmImg.src, name: "Agung Farm" },
+  "Sains De Resto": { url: restoImg.src, name: "Sains De Resto" },
 };
 
 const mapMarkers = campusLocations.map((loc) => ({
@@ -43,7 +59,7 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
       <!-- Fullscreen map frame -->
       <div class="relative isolate aspect-video w-full overflow-hidden bg-white shadow-[0_30px_72px_rgb(var(--color-brand-primary-deeper)/0.16)]">
         <!-- Map layer -->
-        <div class="absolute inset-0 overflow-hidden" aria-label="Visual peta lokasi kampus APU">
+        <div class="absolute inset-0 overflow-hidden" aria-label="Visual map of APU campus locations">
           <LeafletMap
             center={APU_CENTER}
             markers={mapMarkers}
@@ -75,14 +91,34 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
         <!-- Content overlay panel -->
         <div class="absolute ml-48 bottom-0 z-[5] grid content-end gap-5 bg-gradient-to-t from-brand-surface/92 via-brand-surface/70 to-transparent px-[clamp(1.4rem,4vw,3rem)] py-[clamp(1.8rem,4vw,3.6rem)] lg:inset-y-0 lg:left-auto lg:w-[min(42%,620px)] lg:content-center lg:bg-gradient-to-l lg:from-brand-surface/94 lg:via-brand-surface/76 lg:to-transparent lg:px-[clamp(2rem,4.2vw,4rem)]">
           <SectionHeader
-            kicker="LOKASI KAMPUS"
-            title="Ekosistem SCCR"
-            description="Agung Putra University adalah bagian dari ekosistem SCCR. Ekosistem SCCR terdiri dari berbagai sektor bisnis yang dapat bekerja sama dan saling melengkapi untuk memajukan peradaban"
+            kicker="CAMPUS LOCATIONS"
+            title="SCCR Ecosystem"
+            description="Agung Putra University is part of the SCCR ecosystem. The SCCR ecosystem consists of various business sectors that can collaborate and complement each other to advance civilization."
             class="text-left"
             titleClass="text-h2 text-[rgb(var(--color-apu-navy))] mb-4"
             descriptionClass="text-body-s text-brand-text-muted max-w-sm leading-relaxed"
             dividerClass="apu-gradient-line mt-4 w-48"
           />
+
+          <!-- Reactive location image -->
+          <div
+            class="ecosystem-image-wrapper aspect-[16/10] w-full overflow-hidden rounded-[var(--apu-radius-card)] border border-[var(--apu-border)] bg-[var(--apu-surface-soft)] relative isolate"
+          >
+            <img
+              id="ecosystem-location-image"
+              src={apuImg.src}
+              alt="APU Main Campus — APU Ecosystem"
+              class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-in-out"
+              loading="eager"
+              decoding="async"
+            />
+            <span
+              id="ecosystem-location-caption"
+              class="absolute bottom-0 left-0 right-0 px-4 py-2 text-caption font-medium text-white bg-gradient-to-t from-black/60 to-transparent"
+            >
+              APU Main Campus
+            </span>
+          </div>
 
           <!-- Location List -->
           <!-- <div class="space-y-3 mt-4 max-h-[40vh] overflow-y-auto pr-2">
@@ -128,3 +164,55 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
     }
   }
 </style>
+
+<script define:vars={{ imageMap }}>
+  (function () {
+    var IMAGE_MAP = imageMap;
+    var DEFAULT_KEY = "APU Main Campus";
+    var TRANSITION_DURATION = 300;
+
+    function initReactiveImage() {
+      var mapContainer = document.querySelector("[data-map-instance]");
+      var img = document.getElementById("ecosystem-location-image");
+      var caption = document.getElementById("ecosystem-location-caption");
+
+      if (!mapContainer || !img) {
+        console.log("[EcosystemSection] Missing elements:", { mapContainer: !!mapContainer, img: !!img });
+        return;
+      }
+
+      console.log("[EcosystemSection] Init reactive image listener");
+
+      function setImage(label) {
+        var entry = IMAGE_MAP[label] || IMAGE_MAP[DEFAULT_KEY];
+        if (!entry) return;
+
+        img.style.opacity = "0";
+
+        setTimeout(function () {
+          img.src = entry.url;
+          img.alt = entry.name + " \u2014 APU Ecosystem";
+          if (caption) {
+            caption.textContent = entry.name;
+          }
+          img.style.opacity = "1";
+        }, TRANSITION_DURATION);
+      }
+
+      document.addEventListener("markerclick", function (event) {
+        console.log("[EcosystemSection] markerclick received:", event.detail);
+        var label = event.detail && event.detail.label;
+        if (!label) return;
+        setImage(label);
+      });
+
+      setImage(DEFAULT_KEY);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initReactiveImage);
+    } else {
+      initReactiveImage();
+    }
+  })();
+</script>

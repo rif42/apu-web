@@ -7,27 +7,27 @@ export interface Requirement {
 export const requirements: Requirement[] = [
   {
     number: '01',
-    title: 'Lulusan SMA/SMK/MA',
-    description: 'Lulusan tahun 2026 atau sebelumnya dari jenjang SMA, SMK, atau MA',
+    title: 'Senior High/Vocational/Islamic High School Graduate',
+    description: 'Graduates in 2026 or earlier from senior high, vocational, or Islamic high school',
   },
   {
     number: '02',
-    title: 'Sehat Jasmani & Rohani',
-    description: 'Surat keterangan sehat dari dokter atau puskesmas',
+    title: 'Physically & Mentally Healthy',
+    description: 'Health certificate from a doctor or community health center',
   },
   {
     number: '03',
-    title: 'Kartu Tanda Penduduk',
-    description: 'Kartu Tanda Penduduk yang masih berlaku',
+    title: 'Identity Card',
+    description: 'Valid Identity Card',
   },
   {
     number: '04',
-    title: 'Kartu Keluarga',
-    description: 'Kartu Keluarga sebagai bukti domisili',
+    title: 'Family Card',
+    description: 'Family Card as proof of domicile',
   },
   {
     number: '05',
-    title: 'Ijazah/SKL',
-    description: 'Ijazah atau Surat Keterangan Lulus sementara',
+    title: 'Diploma/Graduation Certificate',
+    description: 'Diploma or temporary graduation certificate',
   },
 ];

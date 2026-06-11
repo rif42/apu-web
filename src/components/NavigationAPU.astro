@@ -44,105 +44,105 @@ type NavSection = {
 
 const navSections: NavSection[] = [
   {
-    label: "Beranda",
+    label: "Home",
     href: HOME_PATH,
     kind: "route",
   },
   {
-    label: "Pendaftaran",
+    label: "Admissions",
     href: `${HOME_PATH}pendaftaran`,
     kind: "anchor",
     section: "jalur-masuk",
   },
   {
-    label: "Akademik",
+    label: "Academic",
     href: `${HOME_PATH}akademik`,
     kind: "anchor",
     section: "program",
   },
   // {
-  //   label: "Riset",
+  //   label: "Research",
   //   href: `${HOME_PATH}riset`,
   //   kind: "route",
   //   placeholder: true,
-  //   badge: "Segera Hadir",
+  //   badge: "Coming Soon",
   // },
   // {
-  //   label: "Berita",
+  //   label: "News",
   //   href: `${HOME_PATH}berita`,
   //   kind: "route",
   //   placeholder: true,
-  //   badge: "Segera Hadir",
+  //   badge: "Coming Soon",
   // },
   {
-    label: "Tentang APU",
+    label: "About APU",
     href: `${HOME_PATH}about-apu`,
     kind: "route",
     placeholder: true,
-    // badge: "Segera Hadir",
+    // badge: "Coming Soon",
   },
 ];
 
 const utilityActions: NavItem[] = [
   {
-    label: "Daftar Sekarang",
+    label: "Apply Now",
     href: admissionsWhatsApp,
-    description: "Konsultasi pendaftaran langsung dengan tim pendaftaran.",
+    description: "Direct admissions consultation with the admissions team.",
     kind: "external",
     target: "_blank",
     rel: "noopener noreferrer",
   },
   {
-    label: "Unduhan",
+    label: "Downloads",
     href: `${HOME_PATH}/downloads`,
-    description: "Panduan, formulir, dan file referensi APU.",
+    description: "Guides, forms, and APU reference files.",
     kind: "route",
     placeholder: true,
-    // badge: "Segera Hadir",
+    // badge: "Coming Soon",
   },
   {
-    label: "Login Sistem",
+    label: "System Login",
     href: `${HOME_PATH}/systems`,
-    description: "Portal mahasiswa, LMS, dan akses sistem kampus.",
+    description: "Student portal, LMS, and campus system access.",
     kind: "route",
     placeholder: true,
-    // badge: "Segera Hadir",
+    // badge: "Coming Soon",
   },
 ];
 
 const homeAnchors: NavItem[] = [
   {
-    label: "Beranda",
+    label: "Home",
     href: `${HOME_PATH}#beranda-orange-navy`,
-    description: "Tampilan dan penentuan posisi utama APU.",
+    description: "APU main overview and positioning.",
     kind: "anchor",
     section: "beranda-orange-navy",
   },
   {
-    label: "Program",
+    label: "Programs",
     href: `${HOME_PATH}#program`,
-    description: "Gambaran seluruh program studi.",
+    description: "Overview of all study programs.",
     kind: "anchor",
     section: "program",
   },
   {
-    label: "Jalur Masuk",
+    label: "Admissions",
     href: `${HOME_PATH}#jalur-masuk`,
-    description: "Ringkasan pendaftaran di beranda.",
+    description: "Homepage admissions summary.",
     kind: "anchor",
     section: "jalur-masuk",
   },
   {
-    label: "Persyaratan",
+    label: "Requirements",
     href: `${HOME_PATH}#persyaratan`,
-    description: "Dokumen dan syarat pendaftaran.",
+    description: "Registration documents and requirements.",
     kind: "anchor",
     section: "persyaratan",
   },
   {
-    label: "Kontak",
+    label: "Contact",
     href: `${HOME_PATH}#kontak`,
-    description: "Alamat, WhatsApp, dan info kunjungan.",
+    description: "Address, WhatsApp, and visit info.",
     kind: "anchor",
     section: "kontak",
   },
@@ -157,7 +157,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
   data-open="false"
   data-scrolled="false"
   class="fixed inset-x-0 top-0 z-50"
-  aria-label="Navigasi utama APU"
+  aria-label="Main APU navigation"
 >
 
   <div class="nav-bar">
@@ -171,7 +171,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
         />
         <span class="nav-brand-copy hidden sm:flex">
           <span class="nav-brand-title">Agung Putra University</span>
-          <span class="nav-brand-meta">Universitas Siap Masa Depan · Semarang</span>
+          <span class="nav-brand-meta">Future-Ready University · Semarang</span>
         </span>
       </a>
 
@@ -294,7 +294,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
           class="menu-toggle"
           aria-controls="apu-mobile-menu"
           aria-expanded="false"
-          aria-label="Buka menu utama APU"
+          aria-label="Open main APU menu"
         >
           <span class="menu-toggle-label">Menu</span>
           <span class="menu-toggle-icon" aria-hidden="true">
@@ -307,16 +307,16 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
     </div>
   </div>
 
-  <div id="apu-mobile-menu" class="mobile-menu" hidden aria-hidden="true">
+    <div id="apu-mobile-menu" class="mobile-menu" hidden aria-hidden="true">
     <div class="mobile-menu-backdrop"></div>
-    <div class="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Menu navigasi APU">
+    <div class="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="APU navigation menu">
       <div class="mobile-menu-header">
-        <span class="apu-section-kicker">Menu Navigasi</span>
+        <span class="apu-section-kicker">Navigation Menu</span>
         <button
           id="apu-menu-close"
           type="button"
           class="mobile-menu-close"
-          aria-label="Tutup menu"
+          aria-label="Close menu"
         >
           <span aria-hidden="true">×</span>
         </button>
@@ -411,7 +411,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
 
       <div class="mobile-menu-footer">
         <div class="mobile-menu-contact">
-          <p class="mobile-menu-contact-label">WhatsApp Pendaftaran</p>
+          <p class="mobile-menu-contact-label">Admissions WhatsApp</p>
           <a
             href={admissionsWhatsApp}
             target="_blank"
@@ -589,7 +589,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
       menuToggleEl.setAttribute("aria-expanded", String(nextState));
       menuToggleEl.setAttribute(
         "aria-label",
-        nextState ? "Tutup menu utama APU" : "Buka menu utama APU",
+        nextState ? "Close main APU menu" : "Open main APU menu",
       );
 
       if (nextState) {
@@ -732,8 +732,8 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
 
         placeholderStatus.hidden = false;
         placeholderStatus.textContent = path
-          ? `${label} sedang dipersiapkan. Rute ${path} belum dipublikasikan pada fase ini.`
-          : `${label} sedang dipersiapkan dan akan hadir pada fase berikutnya.`;
+          ? `${label} is being prepared. The ${path} route has not been published in this phase.`
+          : `${label} is being prepared and will be available in the next phase.`;
       });
     });
 

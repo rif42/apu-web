@@ -229,6 +229,15 @@ const {
           closeButton: false,
           className: "apu-map-popup",
         });
+        m.on("click", () => {
+          console.log("[LeafletMap] Marker clicked:", marker.label);
+          container.dispatchEvent(
+            new CustomEvent("markerclick", {
+              detail: { label: marker.label },
+              bubbles: true,
+            })
+          );
+        });
       }
     });
 

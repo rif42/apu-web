@@ -24,58 +24,58 @@ export interface Pathway {
 export const pathways: Pathway[] = [
   {
     id: "jalur-reguler",
-    name: "Jalur Reguler",
+    name: "Regular Pathway",
     description:
-      "Pendaftaran umum bagi lulusan SMA/SMK/MA dan sederajat. Tersedia 3 gelombang pendaftaran dengan berbagai keuntungan.",
+      "General registration for graduates of senior high/vocational/Islamic high school and equivalent. 3 admission waves are available with various benefits.",
     icon: "graduation-cap",
     waves: [
       {
-        name: "Gelombang I",
-        period: "Oktober 2025 – Mei 2026",
-        benefit: "Diskon 50%",
+        name: "Wave I",
+        period: "October 2025 – May 2026",
+        benefit: "50% Discount",
         badgeType: "active",
       },
       {
-        name: "Gelombang II",
-        period: "Juni 2026 – Juli 2026",
-        benefit: "Diskon 30%",
+        name: "Wave II",
+        period: "June 2026 – July 2026",
+        benefit: "30% Discount",
         badgeType: "upcoming",
       },
       {
-        name: "Gelombang III",
+        name: "Wave III",
         period: "September 2026",
-        benefit: "Harga Normal",
+        benefit: "Regular Price",
         badgeType: "normal",
       },
     ],
-    ctaText: "Daftar Reguler",
+    ctaText: "Apply — Regular",
     ctaLink: "http://49.50.9.214:8060/index.php/pendaftaran_pmb",
   },
   {
     id: "jalur-beasiswa",
-    name: "Jalur Beasiswa",
+    name: "Scholarship Pathway",
     description:
-      "Program beasiswa untuk mahasiswa berprestasi akademik, non-akademik, dan content creator. Potongan biaya hingga 100%.",
+      "Scholarship program for students with academic, non-academic, and content creator achievements. Fee reduction up to 100%.",
     icon: "award",
     scholarships: [
       {
-        name: "Beasiswa Akademik",
+        name: "Academic Scholarship",
         link: "https://scholarship.kmb.ac.id/academic-scholarship/",
       },
       {
-        name: "Beasiswa Non-Akademik",
+        name: "Non-Academic Scholarship",
         link: "https://scholarship.kmb.ac.id/non-academic-achievement-scholarship/",
       },
       {
-        name: "Beasiswa Konten Kreator",
+        name: "Content Creator Scholarship",
         link: "https://scholarship.kmb.ac.id/content-creator-scholarship/",
       },
       {
-        name: "Beasiswa Partnership",
+        name: "Partnership Scholarship",
         link: "https://scholarship.kmb.ac.id/partnership-scholarship/",
       },
     ],
-    ctaText: "Daftar Beasiswa",
+    ctaText: "Apply for Scholarship",
     ctaLink: "https://scholarship.kmb.ac.id",
   },
 ];
