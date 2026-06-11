@@ -5,38 +5,38 @@ import SectionHeader from '../components/SectionHeader.astro';
 const pillars = [
   {
     icon: 'book-open',
-    title: 'Kurikulum Berbasis Capaian',
-    subtitle: 'Teori yang Terukur',
+    title: 'Outcome-Based Curriculum',
+    subtitle: 'Measurable Theory',
     description:
-      'Setiap mata kuliah dirancang dengan capaian pembelajaran jelas yang selaras dengan kebutuhan industri. Mahasiswa tidak hanya memahami konsep, tetapi juga mampu mengaplikasikannya dalam konteks profesional.',
+      'Each course is designed with clear learning outcomes aligned with industry needs. Students not only understand concepts but are also able to apply them in professional contexts.',
     points: [
-      'Learning outcome terdefinisi per semester',
-      'Alignment dengan standar kompetensi nasional',
-      'Pathway sertifikasi profesional',
+      'Defined learning outcomes per semester',
+      'Alignment with national competency standards',
+      'Professional certification pathway',
     ],
   },
   {
     icon: 'microscope',
-    title: 'Praktikum Terstruktur',
-    subtitle: 'Praktik dengan Pendampingan',
+    title: 'Structured Practicum',
+    subtitle: 'Practice with Mentorship',
     description:
-      'Sesi praktikum dilaksanakan secara terjadwal dengan rasio dosen pendamping yang optimal. Evaluasi berkala memastikan mahasiswa menguasai keterampilan teknis sebelum melangkah ke proyek mandiri.',
+      'Practicum sessions are conducted on a scheduled basis with an optimal mentoring lecturer ratio. Regular evaluations ensure students master technical skills before moving on to independent projects.',
     points: [
-      'Laboratorium dengan peralatan standar industri',
-      'Dosen pendamping aktif selama sesi praktik',
-      'Evaluasi formatif tiap pertemuan',
+      'Laboratories with industry-standard equipment',
+      'Active mentoring lecturers during practice sessions',
+      'Formative evaluation every session',
     ],
   },
   {
     icon: 'puzzle',
-    title: 'Proyek Lintas Disiplin',
-    subtitle: 'Kolaborasi & Problem Solving',
+    title: 'Cross-Disciplinary Projects',
+    subtitle: 'Collaboration & Problem Solving',
     description:
-      'Mahasiswa dari berbagai program studi berkumpul dalam tim untuk menyelesaikan masalah nyata. Pengalaman ini melatih komunikasi antar-disiplin, manajemen proyek, dan pemikiran sistem.',
+      'Students from various study programs come together in teams to solve real problems. This experience trains cross-disciplinary communication, project management, and systems thinking.',
     points: [
-      'Tim multidisiplin dari 2–3 program studi',
-      'Case study dari mitra industri dan komunitas',
-      'Portofolio proyek yang dapat ditampilkan',
+      'Multidisciplinary teams from 2–3 study programs',
+      'Case studies from industry partners and communities',
+      'Showcaseable project portfolio',
     ],
   },
 ];
@@ -63,9 +63,9 @@ const iconSvgs: Record<string, string> = {
     <!-- Section Header -->
     <ScrollReveal>
       <SectionHeader
-        kicker="Program"
-        title="Fokus Pembelajaran"
-        description="Setiap program menyeimbangkan teori, praktik, dan proyek nyata. Kurikulum dirancang adaptif agar lulusan siap menghadapi tantangan dunia kerja."
+        kicker="Programs"
+        title="Learning Focus"
+        description="Each program balances theory, practice, and real-world projects. The curriculum is designed to be adaptive so graduates are ready to face workforce challenges."
         class="text-center mb-16 md:mb-20"
         titleClass="text-h2 text-[rgb(var(--color-apu-navy))] mb-4"
       />
@@ -97,7 +97,7 @@ const iconSvgs: Record<string, string> = {
             </p>
 
             {/* Key Points */}
-            <ul class="space-y-3" aria-label={`Poin utama ${pillar.title}`}>
+            <ul class="space-y-3" aria-label={`Key points for ${pillar.title}`}>
               {pillar.points.map((point) => (
                 <li class="flex items-start gap-3">
                   <span class="mt-1 h-2 w-2 rounded-full bg-[rgb(var(--color-apu-accent))] shadow-[0_0_0_4px_rgb(var(--color-apu-accent)_/_0.15)] flex-shrink-0"></span>
@@ -112,11 +112,11 @@ const iconSvgs: Record<string, string> = {
 
     <!-- Bottom CTA -->
     <ScrollReveal delay={500} class="text-center mt-14 md:mt-18">
-      <a
+        <a
         href="/pendaftaran"
         class="apu-btn apu-btn--primary inline-flex items-center gap-3 px-8 py-4 text-body-s font-medium"
       >
-        <span>Lihat Program Studi Lengkap</span>
+        <span>See Complete Study Programs</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -134,7 +134,7 @@ const iconSvgs: Record<string, string> = {
         </svg>
       </a>
       <p class="text-caption text-brand-text-muted mt-4">
-        Atau jelajahi katalog mata kuliah per semester di bawah.
+        Or explore the course catalog by semester below.
       </p>
     </ScrollReveal>
   </div>

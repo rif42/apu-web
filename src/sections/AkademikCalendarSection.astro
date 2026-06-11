@@ -24,111 +24,111 @@ interface SemesterData {
 const semesters: SemesterData[] = [
   {
     id: 'ganjil',
-    label: 'Semester Ganjil',
-    period: 'Agustus 2025 – Januari 2026',
+    label: 'Odd Semester',
+    period: 'August 2025 – January 2026',
     months: [
       {
-        month: 'Agustus',
+        month: 'August',
         year: '2025',
         events: [
-          { dateRange: '1 – 15 Agt', title: 'Pendaftaran Ulang Mahasiswa Baru', description: 'Registrasi dan verifikasi data untuk mahasiswa yang diterima pada periode penerimaan sebelumnya.', type: 'pendaftaran' },
-          { dateRange: '18 – 22 Agt', title: 'Pengenalan Kehidupan Kampus', description: 'Orientasi mahasiswa baru mengenai fasilitas, aturan akademik, dan organisasi kemahasiswaan.', type: 'akademik', highlight: true },
-          { dateRange: '25 Agt', title: 'Awal Perkuliahan Semester Ganjil', description: 'Pertemuan pertama perkuliahan untuk seluruh program studi.', type: 'akademik', highlight: true },
+          { dateRange: '1 – 15 Aug', title: 'New Student Re-registration', description: 'Registration and data verification for students accepted in previous admission periods.', type: 'pendaftaran' },
+          { dateRange: '18 – 22 Aug', title: 'Campus Life Orientation', description: 'Orientation for new students regarding facilities, academic rules, and student organizations.', type: 'akademik', highlight: true },
+          { dateRange: '25 Aug', title: 'Start of Odd Semester Classes', description: 'First lecture meeting for all study programs.', type: 'akademik', highlight: true },
         ]
       },
       {
         month: 'September',
         year: '2025',
         events: [
-          { dateRange: '1 – 5 Sep', title: 'Periode Penambahan & Penggantian MK', description: 'Jadwal untuk mengubah mata kuliah yang telah dipilih sebelumnya.', type: 'akademik' },
-          { dateRange: '15 – 19 Sep', title: 'Pendaftaran Beasiswa Semester Ganjil', description: 'Pengajuan berkas beasiswa berprestasi dan bantuan biaya pendidikan.', type: 'pendaftaran' },
+          { dateRange: '1 – 5 Sep', title: 'Course Add & Drop Period', description: 'Schedule for changing previously selected courses.', type: 'akademik' },
+          { dateRange: '15 – 19 Sep', title: 'Odd Semester Scholarship Registration', description: 'Submission of achievement scholarship and tuition assistance documents.', type: 'pendaftaran' },
         ]
       },
       {
-        month: 'Oktober',
+        month: 'October',
         year: '2025',
         events: [
-          { dateRange: '6 – 10 Okt', title: 'Ujian Tengah Semester (UTS)', description: 'Evaluasi pembelajaran pertengahan semester untuk seluruh mata kuliah.', type: 'ujian', highlight: true },
-          { dateRange: '20 Okt – 24 Okt', title: 'Pekan Kampus', description: 'Serangkaian acara kemahasiswaan, seminar, dan kompetisi antar-fakultas.', type: 'akademik' },
+          { dateRange: '6 – 10 Oct', title: 'Mid-Semester Exam (UTS)', description: 'Mid-semester learning evaluation for all courses.', type: 'ujian', highlight: true },
+          { dateRange: '20 Oct – 24 Oct', title: 'Campus Week', description: 'Series of student events, seminars, and inter-faculty competitions.', type: 'akademik' },
         ]
       },
       {
         month: 'November',
         year: '2025',
         events: [
-          { dateRange: '10 – 14 Nov', title: 'Pengisian KRS Semester Genap', description: 'Perencanaan studi dan pemilihan mata kuliah untuk semester berikutnya.', type: 'akademik' },
+          { dateRange: '10 – 14 Nov', title: 'Even Semester Course Planning', description: 'Study planning and course selection for the next semester.', type: 'akademik' },
         ]
       },
       {
-        month: 'Desember',
+        month: 'December',
         year: '2025',
         events: [
-          { dateRange: '1 – 5 Des', title: 'Batas Pembayaran UKT Semester Genap', description: 'Tenggat waktu pembayaran uang kuliah tunggal untuk semester berikutnya.', type: 'pendaftaran', highlight: true },
-          { dateRange: '15 – 19 Des', title: 'Ujian Akhir Semester (UAS)', description: 'Evaluasi akhir semester untuk mengukur capaian pembelajaran mahasiswa.', type: 'ujian', highlight: true },
+          { dateRange: '1 – 5 Dec', title: 'Even Semester Tuition Payment Deadline', description: 'Deadline for single tuition fee payment for the next semester.', type: 'pendaftaran', highlight: true },
+          { dateRange: '15 – 19 Dec', title: 'Final Semester Exam (UAS)', description: 'End-of-semester evaluation to measure student learning achievement.', type: 'ujian', highlight: true },
         ]
       },
       {
-        month: 'Januari',
+        month: 'January',
         year: '2026',
         events: [
-          { dateRange: '5 – 9 Jan', title: 'Pengumuman Hasil UAS', description: 'Penilaian akhir dan pengumuman indeks prestasi semester ganjil.', type: 'akademik' },
-          { dateRange: '12 Jan', title: 'Akhir Perkuliahan Semester Ganjil', description: 'Penutupan aktivitas akademik semester ganjil.', type: 'akademik' },
+          { dateRange: '5 – 9 Jan', title: 'Final Exam Results Announcement', description: 'Final assessment and announcement of odd semester grade point average.', type: 'akademik' },
+          { dateRange: '12 Jan', title: 'End of Odd Semester Classes', description: 'Closing of odd semester academic activities.', type: 'akademik' },
         ]
       },
     ]
   },
   {
     id: 'genap',
-    label: 'Semester Genap',
-    period: 'Februari 2026 – Juli 2026',
+    label: 'Even Semester',
+    period: 'February 2026 – July 2026',
     months: [
       {
-        month: 'Februari',
+        month: 'February',
         year: '2026',
         events: [
-          { dateRange: '2 Feb', title: 'Awal Perkuliahan Semester Genap', description: 'Pertemuan pertama perkuliahan semester genap untuk seluruh program studi.', type: 'akademik', highlight: true },
-          { dateRange: '9 – 13 Feb', title: 'Periode Penambahan & Penggantian MK', description: 'Jadwal untuk menyesuaikan pilihan mata kuliah semester genap.', type: 'akademik' },
+          { dateRange: '2 Feb', title: 'Start of Even Semester Classes', description: 'First lecture meeting for the even semester for all study programs.', type: 'akademik', highlight: true },
+          { dateRange: '9 – 13 Feb', title: 'Course Add & Drop Period', description: 'Schedule for adjusting even semester course selections.', type: 'akademik' },
         ]
       },
       {
-        month: 'Maret',
+        month: 'March',
         year: '2026',
         events: [
-          { dateRange: '16 – 20 Mar', title: 'Pendaftaran Beasiswa Semester Genap', description: 'Pengajuan ulang berkas beasiswa untuk periode semester genap.', type: 'pendaftaran' },
-          { dateRange: '23 – 27 Mar', title: 'Seminar Karier & Industri', description: 'Paparan peluang karier dan kolaborasi dengan mitra industri.', type: 'akademik' },
+          { dateRange: '16 – 20 Mar', title: 'Even Semester Scholarship Registration', description: 'Resubmission of scholarship documents for the even semester period.', type: 'pendaftaran' },
+          { dateRange: '23 – 27 Mar', title: 'Career & Industry Seminar', description: 'Presentation of career opportunities and collaboration with industry partners.', type: 'akademik' },
         ]
       },
       {
         month: 'April',
         year: '2026',
         events: [
-          { dateRange: '6 – 10 Apr', title: 'Ujian Tengah Semester (UTS)', description: 'Evaluasi tengah semester genap untuk mengukur progress belajar.', type: 'ujian', highlight: true },
-          { dateRange: '13 – 17 Apr', title: 'Libur Paskah', description: 'Cuti akademik dalam rangka perayaan Paskah.', type: 'libur' },
+          { dateRange: '6 – 10 Apr', title: 'Mid-Semester Exam (UTS)', description: 'Mid-even-semester evaluation to measure learning progress.', type: 'ujian', highlight: true },
+          { dateRange: '13 – 17 Apr', title: 'Easter Holiday', description: 'Academic break for Easter celebration.', type: 'libur' },
         ]
       },
       {
-        month: 'Mei',
+        month: 'May',
         year: '2026',
         events: [
-          { dateRange: '1 Mei', title: 'Hari Buruh Internasional', description: 'Libur nasional, tidak ada aktivitas perkuliahan.', type: 'libur' },
-          { dateRange: '11 – 15 Mei', title: 'Pengisian KRS Semester Ganjil 2026/2027', description: 'Perencanaan studi untuk semester ganjil tahun ajaran berikutnya.', type: 'akademik' },
+          { dateRange: '1 May', title: 'International Labor Day', description: 'National holiday, no academic activities.', type: 'libur' },
+          { dateRange: '11 – 15 May', title: 'Odd Semester 2026/2027 Course Planning', description: 'Study planning for the next odd semester.', type: 'akademik' },
         ]
       },
       {
-        month: 'Juni',
+        month: 'June',
         year: '2026',
         events: [
-          { dateRange: '1 – 5 Jun', title: 'Batas Pembayaran UKT Semester Ganjil', description: 'Tenggat pembayaran UKT untuk semester ganjil tahun ajaran baru.', type: 'pendaftaran', highlight: true },
-          { dateRange: '8 – 12 Jun', title: 'Ujian Akhir Semester (UAS)', description: 'Evaluasi akhir semester genap.', type: 'ujian', highlight: true },
+          { dateRange: '1 – 5 Jun', title: 'Odd Semester Tuition Payment Deadline', description: 'Tuition payment deadline for the new academic year odd semester.', type: 'pendaftaran', highlight: true },
+          { dateRange: '8 – 12 Jun', title: 'Final Semester Exam (UAS)', description: 'End of even semester evaluation.', type: 'ujian', highlight: true },
         ]
       },
       {
-        month: 'Juli',
+        month: 'July',
         year: '2026',
         events: [
-          { dateRange: '6 – 10 Jul', title: 'Pengumuman Hasil UAS', description: 'Penilaian akhir semester genap dan pengumuman IP.', type: 'akademik' },
-          { dateRange: '13 Jul', title: 'Akhir Perkuliahan Semester Genap', description: 'Penutupan aktivitas akademik semester genap.', type: 'akademik' },
-          { dateRange: '20 Jul – 14 Agt', title: 'Libur Antara Semester', description: 'Periode istirahat akademik sebelum semester ganjil dimulai.', type: 'libur' },
+          { dateRange: '6 – 10 Jul', title: 'Final Exam Results Announcement', description: 'End of even semester assessment and GPA announcement.', type: 'akademik' },
+          { dateRange: '13 Jul', title: 'End of Even Semester Classes', description: 'Closing of even semester academic activities.', type: 'akademik' },
+          { dateRange: '20 Jul – 14 Aug', title: 'Inter-Semester Break', description: 'Academic rest period before the odd semester begins.', type: 'libur' },
         ]
       },
     ]
@@ -136,10 +136,10 @@ const semesters: SemesterData[] = [
 ];
 
 const typeConfig = {
-  akademik: { label: 'Akademik', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>', color: '#14B8A6' },
-  pendaftaran: { label: 'Pendaftaran', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>', color: '#F59E0B' },
-  libur: { label: 'Libur', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>', color: '#F43F5E' },
-  ujian: { label: 'Ujian', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>', color: '#3B82F6' },
+  akademik: { label: 'Academic', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>', color: '#14B8A6' },
+  pendaftaran: { label: 'Registration', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>', color: '#F59E0B' },
+  libur: { label: 'Holiday', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>', color: '#F43F5E' },
+  ujian: { label: 'Exam', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>', color: '#3B82F6' },
 };
 ---
 
@@ -336,9 +336,9 @@ const typeConfig = {
   <div class="content-max relative z-10">
     <ScrollReveal>
       <SectionHeader
-        kicker="KALENDER AKADEMIK"
-        title="Jadwal Kegiatan Kampus"
-        description="Rencanakan semester-mu dengan memahami jadwal akademik, ujian, dan kegiatan kampus sepanjang tahun ajaran."
+        kicker="ACADEMIC CALENDAR"
+        title="Campus Activity Schedule"
+        description="Plan your semester by understanding the academic schedule, exams, and campus activities throughout the academic year."
         class="text-center mb-12"
         titleClass="text-h2 text-[rgb(var(--color-apu-navy))] mb-4"
         descriptionClass="text-body-s text-brand-text-muted max-w-2xl mx-auto leading-relaxed"
@@ -347,7 +347,7 @@ const typeConfig = {
 
     <!-- Semester Tabs -->
     <ScrollReveal delay={150}>
-      <div class="calendar-tabs" role="tablist" aria-label="Pilih Semester">
+      <div class="calendar-tabs" role="tablist" aria-label="Select Semester">
         {semesters.map((sem, idx) => (
           <button
             class="calendar-tab"

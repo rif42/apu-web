@@ -8,22 +8,22 @@ import AkademikProgramSection from "../sections/AkademikProgramSection.astro";
 import AkademikCalendarSection from "../sections/AkademikCalendarSection.astro";
 ---
 
-<MainLayout title="Akademik APU" description="Program studi, kurikulum, dan dukungan belajar di APU.">
+<MainLayout title="APU Academics" description="Study programs, curriculum, and learning support at APU.">
   <NavigationAPU />
   <main>
     <AkademikHero
-      kicker="Akademik"
-      title="Pembelajaran yang Relevan untuk Dunia Kerja"
-      description="Program akademik APU dirancang adaptif, terukur, dan dekat dengan kebutuhan industri."
+      kicker="Academics"
+      title="Relevant Learning for the Workforce"
+      description="APU's academic programs are designed to be adaptive, measurable, and aligned with industry needs."
       primaryHref="#program"
-      primaryLabel="Jelajahi Program"
+      primaryLabel="Explore Programs"
       secondaryHref="/pendaftaran"
-      secondaryLabel="Mulai Pendaftaran"
+      secondaryLabel="Start Registration"
     />
     <AkademikProgramSection />
     <AkademikCalendarSection />
-    <!-- <WireframePageSectionAPU id="dukungan" kicker="Dukungan" title="Layanan Akademik Mahasiswa" description="Tim akademik membantu mahasiswa menjaga progres studi dari awal sampai lulus." bullets={["Bimbingan dosen wali untuk perencanaan mata kuliah.","Klinik belajar untuk pendalaman materi inti.","Monitoring capaian semester dan rencana perbaikan terarah."]} ctaHref="/apu/student-life-services" ctaLabel="Lihat Layanan Mahasiswa" />
-    <WireframePageSectionAPU id="katalog" kicker="Katalog" title="Katalog Mata Kuliah Digital" description="Katalog interaktif per semester sedang disiapkan agar calon mahasiswa bisa eksplor lebih detail." /> -->
+    <!-- <WireframePageSectionAPU id="dukungan" kicker="Support" title="Student Academic Services" description="The academic team helps students maintain their study progress from start to finish." bullets={["Academic advisor guidance for course planning.","Learning clinics for deepening core material.","Semester achievement monitoring and targeted improvement plans."]} ctaHref="/apu/student-life-services" ctaLabel="See Student Services" />
+    <WireframePageSectionAPU id="katalog" kicker="Catalog" title="Digital Course Catalog" description="An interactive semester catalog is being prepared so prospective students can explore in more detail." /> -->
   </main>
   <Footer />
 </MainLayout>

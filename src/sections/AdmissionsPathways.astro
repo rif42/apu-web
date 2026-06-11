@@ -28,9 +28,9 @@ const getBadgeClasses = (type: string) => {
     <!-- Section Header -->
     <ScrollReveal>
       <SectionHeader
-        kicker="JALUR PENDAFTARAN"
-        title="Dua Jalur Menuju Kampus Impian"
-        description="Pilih jalur yang sesuai dengan potensi dan persiapanmu. Kami membuka kesempatan seluas-luasnya untuk calon mahasiswa berprestasi."
+        kicker="ADMISSION PATHWAYS"
+        title="Two Pathways to Your Dream Campus"
+        description="Choose the pathway that matches your potential and preparation. We open the widest opportunities for high-achieving prospective students."
         class="text-center mb-16"
         titleClass="text-h2 text-[rgb(var(--color-apu-navy))] mb-4"
       />
@@ -98,7 +98,7 @@ const getBadgeClasses = (type: string) => {
                           <h3 class="font-bold uppercase tracking-wide text-[rgb(var(--color-apu-navy))] mb-2">{detail.name}</h3>
                           <p class="text-caption text-brand-text-muted mb-4">{detail.description}</p>
                           <div class="space-y-1.5 mb-4">
-                            <h4 class="text-brand-text tracking-widest font-bold">Persyaratan Utama</h4>
+                            <h4 class="text-brand-text tracking-widest font-bold">Main Requirements</h4>
                             <ul class="text-caption text-brand-text space-y-1.5">
                               {detail.requirements.map(req => (
                                 <li class="flex text-caption items-start gap-2"><span class="text-[rgb(var(--color-apu-accent))] mt-0.5">•</span><span class="leading-snug">{req}</span></li>
@@ -133,7 +133,7 @@ const getBadgeClasses = (type: string) => {
     <!-- Note -->
     <ScrollReveal class="text-center mt-8">
       <p class="text-caption text-brand-text-muted">
-        *Syarat dan ketentuan berlaku untuk setiap jalur pendaftaran
+        *Terms and conditions apply to every admission pathway
       </p>
     </ScrollReveal>
   </div>

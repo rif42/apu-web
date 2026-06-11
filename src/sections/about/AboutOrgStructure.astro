@@ -5,11 +5,11 @@ import ScrollReveal from "../../components/ScrollReveal.astro";
 import { organization, buildTree, type OrgTreeNode } from "../../data/organization";
 
 const tabs = [
-  { id: "semua", label: "Semua" },
-  { id: "pimpinan", label: "Pimpinan" },
-  { id: "fakultas", label: "Fakultas" },
-  { id: "unit-pendukung", label: "Unit Pendukung" },
-  { id: "prodi", label: "Prodi" },
+  { id: "semua", label: "All" },
+  { id: "pimpinan", label: "Leadership" },
+  { id: "fakultas", label: "Faculties" },
+  { id: "unit-pendukung", label: "Support Units" },
+  { id: "prodi", label: "Study Programs" },
 ];
 
 const treeData = buildTree(organization);
@@ -77,9 +77,9 @@ function escapeHtml(text: string): string {
     <div class="content-max">
       <ScrollReveal>
         <SectionHeader
-          kicker="Struktur Organisasi"
-          title="Tata Kelola Institusi"
-          description="Struktur organisasi Universitas Agung Putra yang menunjukkan hierarki dan tata kelola institusi."
+          kicker="ORGANIZATIONAL STRUCTURE"
+          title="Institutional Governance"
+          description="The organizational structure of Agung Putra University showing the hierarchy and institutional governance."
         />
       </ScrollReveal>
 
