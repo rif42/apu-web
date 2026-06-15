@@ -806,6 +806,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
       dropdown.addEventListener('mouseleave', closeDropdown);
 
       trigger.addEventListener('click', (e) => {
+        if (trigger instanceof HTMLAnchorElement) return;
         e.preventDefault();
         const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
         trigger.setAttribute('aria-expanded', String(!isExpanded));
@@ -814,6 +815,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
 
       trigger.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
+          if (trigger instanceof HTMLAnchorElement) return;
           e.preventDefault();
           const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
           trigger.setAttribute('aria-expanded', String(!isExpanded));
