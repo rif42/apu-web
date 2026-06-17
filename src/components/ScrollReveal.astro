@@ -53,10 +53,11 @@ const getFinalTransform = () => {
       { threshold: 0.15 }
     );
     
-    reveals.forEach((el) => {
+    reveals.forEach((rawEl) => {
+      const el = rawEl as HTMLElement;
       el.setAttribute('data-scroll-reveal-bound', 'true');
       if (isNarrow) {
-        const dir = (el as HTMLElement).dataset.scrollRevealDirection;
+        const dir = el.dataset.scrollRevealDirection;
         if (dir === 'left') el.style.transform = 'translateX(-16px)';
         if (dir === 'right') el.style.transform = 'translateX(16px)';
       }
