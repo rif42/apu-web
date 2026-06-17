@@ -32,7 +32,7 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
           <div class="apu-anchor-campus__map-vignette pointer-events-none absolute inset-0 z-[2]"></div>
 
           <div
-            class="apu-anchor-campus__pin-wrap absolute left-[33.4%] top-[50%] z-[4] grid aspect-square w-44 -translate-x-1/2 -translate-y-1/2 place-items-center md:w-80 max-[980px]:left-[50%] max-[980px]:top-[50%]"
+            class="apu-anchor-campus__pin-wrap absolute left-[33.4%] top-[50%] z-[4] grid aspect-square w-32 sm:w-44 md:w-80 -translate-x-1/2 -translate-y-1/2 place-items-center max-lg:left-1/2 max-lg:top-[35%]"
             aria-label="APU campus location pin"
           >
             <img
@@ -190,6 +190,17 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
           rgb(var(--color-apu-accent) / 0.2),
           transparent 42%
         );
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .apu-anchor-campus__map-stage {
+      width: 115%;
+      transform: translate(-50%, -50%);
+      animation: none;
+    }
+    .apu-anchor-campus__map-plate {
+      transform: scale(1.02);
     }
   }
 
