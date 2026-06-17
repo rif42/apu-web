@@ -1,7 +1,5 @@
 ---
 import { assetUrl } from '@lib/assets';
-import { contact } from "@data/contact";
-import CtaButton from "@components/CtaButton.astro";
 ---
 
 <section
@@ -33,7 +31,7 @@ import CtaButton from "@components/CtaButton.astro";
         <div class="content-max mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex flex-col">
             <p
                 id="hero-on-subtitle"
-                class="text-body-s sm:text-body text-brand-surface-alt/90 max-w-2xl mb-6 opacity-0 translate-y-2 hero-on-subtitle"
+                class="text-body-s sm:text-body max-w-2xl mb-6 opacity-0 translate-y-2 hero-on-subtitle"
             >
                 A bright, future-ready university ecosystem connecting
                 strong academics, applied research, and real industry
@@ -42,7 +40,7 @@ import CtaButton from "@components/CtaButton.astro";
 
             <h1
                 id="hero-on-headline"
-                class="text-h1 text-5xl sm:text-7xl md:text-8xl lg:text-9xl tracking-wide opacity-0 text-white hero-on-headline"
+                class="text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl tracking-wide opacity-0 text-white hero-on-headline break-words min-w-0"
             >
                 BIOMEDICAL SCIENCE
             </h1>
@@ -192,13 +190,7 @@ import CtaButton from "@components/CtaButton.astro";
         document.head.appendChild(style);
 
         const headline = document.getElementById("hero-on-headline");
-        const tagline = document.getElementById("hero-on-tagline");
         const subtitle = document.getElementById("hero-on-subtitle");
-        const cta = document.getElementById("hero-on-cta");
-        const facts = document.getElementById("hero-on-facts");
-        const scrollIndicator = document.getElementById(
-            "hero-on-scroll-indicator",
-        );
         const bg = document.getElementById("hero-on-bg");
 
         document.fonts.ready.then(() => {
@@ -208,15 +200,6 @@ import CtaButton from "@components/CtaButton.astro";
                 bg.style.opacity = "1";
                 bg.style.transform = "scale(1)";
             }
-
-            setTimeout(() => {
-                if (tagline) {
-                    tagline.style.transition =
-                        "opacity 0.8s ease-out, transform 0.8s ease-out";
-                    tagline.style.opacity = "1";
-                    tagline.style.transform = "translateY(0)";
-                }
-            }, 450);
 
             setTimeout(() => {
                 if (headline) {
@@ -236,30 +219,6 @@ import CtaButton from "@components/CtaButton.astro";
                 }
             }, 1120);
 
-            setTimeout(() => {
-                if (cta) {
-                    cta.style.transition =
-                        "opacity 0.6s ease-out, transform 0.6s ease-out";
-                    cta.style.opacity = "1";
-                    cta.style.transform = "translateY(0)";
-                }
-            }, 1480);
-
-            setTimeout(() => {
-                if (facts) {
-                    facts.style.transition =
-                        "opacity 0.7s ease-out, transform 0.7s ease-out";
-                    facts.style.opacity = "1";
-                    facts.style.transform = "translateY(0)";
-                }
-            }, 1680);
-
-            setTimeout(() => {
-                if (scrollIndicator) {
-                    scrollIndicator.style.transition = "opacity 0.6s ease-out";
-                    scrollIndicator.style.opacity = "1";
-                }
-            }, 2100);
         });
 
         let mouseX = 0;
@@ -302,19 +261,6 @@ import CtaButton from "@components/CtaButton.astro";
                             headline.style.transform = `scale(${scale}) translateY(${yOffset}%)`;
                             headline.style.opacity = String(
                                 Math.max(opacity, 0),
-                            );
-                        }
-
-                        if (tagline) {
-                            tagline.style.transform = `translateY(${-progress * 25}%)`;
-                            tagline.style.opacity = String(
-                                Math.max(1 - progress, 0),
-                            );
-                        }
-
-                        if (scrollIndicator) {
-                            scrollIndicator.style.opacity = String(
-                                Math.max(1 - progress * 3, 0),
                             );
                         }
 
