@@ -1,3 +1,4 @@
+import { assetUrl } from '@lib/assets';
 export interface OrgNode {
   id: string;
   name: string;
@@ -55,7 +56,7 @@ export const organization: OrgNode[] = [
     category: "pimpinan",
     description:
       "Educational foundation that operates Agung Putra Ibrahim University (APU).",
-    image: "/images/organization/yayasan.webp",
+    image: assetUrl('/images/organization/yayasan.webp'),
   },
 
   // Under Yayasan
@@ -67,7 +68,7 @@ export const organization: OrgNode[] = [
     parentId: "yayasan",
     description:
       "The highest university leadership responsible for the implementation of the university's three pillars (education, research, community service).",
-    image: "/images/organization/rektor.webp",
+    image: assetUrl('/images/organization/rektor.webp'),
   },
   {
     id: "senat",
@@ -77,7 +78,7 @@ export const organization: OrgNode[] = [
     parentId: "yayasan",
     description:
       "The highest academic advisory body that provides academic policy recommendations.",
-    image: "/images/organization/senat.webp",
+    image: assetUrl('/images/organization/senat.webp'),
   },
 
   // Under Rektor — Wakil Rektor
@@ -89,7 +90,7 @@ export const organization: OrgNode[] = [
     parentId: "rektor",
     description:
       "Handling academic affairs, curriculum, and learning quality.",
-    image: "/images/organization/wr1.webp",
+    image: assetUrl('/images/organization/wr1.webp'),
   },
   {
     id: "wr1-a",
@@ -99,7 +100,7 @@ export const organization: OrgNode[] = [
     parentId: "wr1",
     description:
       "Handling class schedules, curriculum planning, and student administration.",
-    image: "/images/organization/wr1.webp",
+    image: assetUrl('/images/organization/wr1.webp'),
   },
   {
     id: "wr1-b",
@@ -109,7 +110,7 @@ export const organization: OrgNode[] = [
     parentId: "wr1",
     description:
       "Handling data and information systems related to university LMS and PDDIKTI.",
-    image: "/images/organization/wr1.webp",
+    image: assetUrl('/images/organization/wr1.webp'),
   },
   {
     id: "wr2",
@@ -119,7 +120,7 @@ export const organization: OrgNode[] = [
     parentId: "rektor",
     description:
       "Handling financial administration, infrastructure, and asset management.",
-    image: "/images/organization/wr2.webp",
+    image: assetUrl('/images/organization/wr2.webp'),
   },
   {
     id: "lab",
@@ -129,7 +130,7 @@ export const organization: OrgNode[] = [
     parentId: "wr2",
     description:
       "Managing laboratories, equipment, and facilities supporting academic and non-academic activities.",
-    image: "/images/organization/wr2.webp",
+    image: assetUrl('/images/organization/wr2.webp'),
   },
   {
     id: "perpus",
@@ -139,7 +140,7 @@ export const organization: OrgNode[] = [
     parentId: "wr2",
     description:
       "Managing the library, book collections, and facilities supporting academic and non-academic activities.",
-    image: "/images/organization/wr2.webp",
+    image: assetUrl('/images/organization/wr2.webp'),
   },
   {
     id: "keuangan",
@@ -149,7 +150,7 @@ export const organization: OrgNode[] = [
     parentId: "wr2",
     description:
       "Managing finances, administration, and material asset management supporting academic and non-academic activities.",
-    image: "/images/organization/wr2.webp",
+    image: assetUrl('/images/organization/wr2.webp'),
   },
   {
     id: "sarpras",
@@ -159,7 +160,7 @@ export const organization: OrgNode[] = [
     parentId: "wr2",
     description:
       "Managing infrastructure, facilities, and physical asset management supporting academic and non-academic activities.",
-    image: "/images/organization/wr2.webp",
+    image: assetUrl('/images/organization/wr2.webp'),
   },
   {
     id: "kepegawaian",
@@ -169,7 +170,7 @@ export const organization: OrgNode[] = [
     parentId: "wr2",
     description:
       "Managing human resources and administration supporting academic and non-academic activities.",
-    image: "/images/organization/wr2.webp",
+    image: assetUrl('/images/organization/wr2.webp'),
   },
   {
     id: "wr3",
@@ -179,7 +180,7 @@ export const organization: OrgNode[] = [
     parentId: "rektor",
     description:
       "Handling student activities, career, and student welfare.",
-    image: "/images/organization/wr3.webp",
+    image: assetUrl('/images/organization/wr3.webp'),
   },
   {
     id: "kerjasama",
@@ -189,7 +190,7 @@ export const organization: OrgNode[] = [
     parentId: "wr3",
     description:
       "Handling cooperation activities with external parties, both within and outside the university.",
-    image: "/images/organization/wr3.webp",
+    image: assetUrl('/images/organization/wr3.webp'),
   },
   {
     id: "kemahasiswaan",
@@ -199,7 +200,7 @@ export const organization: OrgNode[] = [
     parentId: "rektor",
     description:
       "Handling student activities, career, and student welfare.",
-    image: "/images/organization/wr3.webp",
+    image: assetUrl('/images/organization/wr3.webp'),
   },
 
   // Under Rektor — Unit Pendukung
@@ -211,7 +212,7 @@ export const organization: OrgNode[] = [
     parentId: "rektor",
     description:
       "Managing research and community service programs.",
-    image: "/images/organization/lppm.webp",
+    image: assetUrl('/images/organization/lppm.webp'),
   },
   {
     id: "lpmi",
@@ -221,7 +222,7 @@ export const organization: OrgNode[] = [
     parentId: "rektor",
     description:
       "Ensuring and improving the quality of education implementation sustainably.",
-    image: "/images/organization/lpmi.webp",
+    image: assetUrl('/images/organization/lpmi.webp'),
   },
 
   // Under Rektor — Fakultas
@@ -233,7 +234,7 @@ export const organization: OrgNode[] = [
     parentId: "rektor",
     description:
       "Faculty that organizes study programs in social sciences and humanities.",
-    image: "/images/organization/fis.webp",
+    image: assetUrl('/images/organization/fis.webp'),
   },
   {
     id: "fik",
@@ -243,7 +244,7 @@ export const organization: OrgNode[] = [
     parentId: "rektor",
     description:
       "Faculty that organizes study programs in health and biomedical sciences.",
-    image: "/images/organization/fik.webp",
+    image: assetUrl('/images/organization/fik.webp'),
   },
 
   // Prodi under FIS
@@ -255,7 +256,7 @@ export const organization: OrgNode[] = [
     parentId: "fis",
     description:
       "Law Study Program prepares graduates competent in national and international law.",
-    image: "/images/organization/prodi-hukum.webp",
+    image: assetUrl('/images/organization/prodi-hukum.webp'),
   },
   {
     id: "ilmu-komunikasi",
@@ -265,7 +266,7 @@ export const organization: OrgNode[] = [
     parentId: "fis",
     description:
       "Communication Science Study Program prepares media practitioners, journalists, and strategic communication professionals.",
-    image: "/images/organization/prodi-ilmu-komunikasi.webp",
+    image: assetUrl('/images/organization/prodi-ilmu-komunikasi.webp'),
   },
   {
     id: "manajemen",
@@ -275,7 +276,7 @@ export const organization: OrgNode[] = [
     parentId: "fis",
     description:
       "Management Study Program prepares graduates with expertise in business and organizational management.",
-    image: "/images/organization/prodi-manajemen.webp",
+    image: assetUrl('/images/organization/prodi-manajemen.webp'),
   },
   {
     id: "bioteknologi",
@@ -285,7 +286,7 @@ export const organization: OrgNode[] = [
     parentId: "fis",
     description:
       "Biotechnology Study Program prepares graduates in biological technology and life science-based innovation.",
-    image: "/images/organization/prodi-bioteknologi.webp",
+    image: assetUrl('/images/organization/prodi-bioteknologi.webp'),
   },
 
   // Prodi under FIK
@@ -297,7 +298,7 @@ export const organization: OrgNode[] = [
     parentId: "fik",
     description:
       "Biomedical Science Study Program prepares graduates expert in health research and medical laboratories.",
-    image: "/images/organization/prodi-ilmu-biomedis.webp",
+    image: assetUrl('/images/organization/prodi-ilmu-biomedis.webp'),
   },
   {
     id: "sarjana-kebidanan",
@@ -307,7 +308,7 @@ export const organization: OrgNode[] = [
     parentId: "fik",
     description:
       "Bachelor of Midwifery Study Program prepares graduates as professional bachelor's-level midwives.",
-    image: "/images/organization/prodi-sarjana-kebidanan.webp",
+    image: assetUrl('/images/organization/prodi-sarjana-kebidanan.webp'),
   },
   {
     id: "profesi-bidan",
@@ -317,7 +318,7 @@ export const organization: OrgNode[] = [
     parentId: "fik",
     description:
       "Midwifery Profession Program is an advanced education program to prepare professional midwifery personnel.",
-    image: "/images/organization/prodi-profesi-bidan.webp",
+    image: assetUrl('/images/organization/prodi-profesi-bidan.webp'),
   },
   {
     id: "d3-kebidanan",
@@ -327,6 +328,6 @@ export const organization: OrgNode[] = [
     parentId: "fik",
     description:
       "D3 Midwifery Study Program prepares competent associate expert midwifery personnel.",
-    image: "/images/organization/prodi-d3-kebidanan.webp",
+    image: assetUrl('/images/organization/prodi-d3-kebidanan.webp'),
   },
 ];

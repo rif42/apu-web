@@ -1,4 +1,5 @@
 ---
+import { assetUrl } from '@lib/assets';
 import CtaButton from "@components/CtaButton.astro";
 import { contact } from "@data/contact";
 ---
@@ -13,7 +14,7 @@ import { contact } from "@data/contact";
         class="absolute inset-0 z-[1] will-change-transform opacity-0 scale-[1.04]"
     >
         <img
-            src="/images/loby1.webp"
+            src={assetUrl('/images/loby1.webp')}
             alt="Futuristic Campus of Agung Putra University"
             class="w-full h-full object-cover"
             loading="eager"

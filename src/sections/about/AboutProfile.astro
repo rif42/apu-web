@@ -1,11 +1,12 @@
 ---
+import { assetUrl } from '@lib/assets';
 import ScrollReveal from "@components/ScrollReveal.astro";
 ---
 
 <section
   id="profil-institusi"
   class="apu-section-shell relative overflow-hidden bg-cover bg-center bg-no-repeat"
-  style="background-image: url('/images/loby2.webp');"
+  style={`background-image: url('${assetUrl('/images/loby2.webp')}');`}
 >
   <div class="content-max py-[var(--apu-section-spacing-y)]">
     <ScrollReveal>

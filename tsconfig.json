@@ -9,7 +9,7 @@
       "@db/*": ["src/db/*"],
       "@layouts/*": ["src/layouts/*"],
       "@lib/*": ["src/lib/*"],
-      "@mapsection/*": ["mapsection/*"],
+      "@mapsection/*": ["src/assets/mapsection/*"],
       "@pages/*": ["src/pages/*"],
       "@sections/*": ["src/sections/*"],
       "@styles/*": ["src/styles/*"]

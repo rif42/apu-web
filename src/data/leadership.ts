@@ -1,3 +1,4 @@
+import { assetUrl } from '@lib/assets';
 export interface LeadershipMessage {
   kicker: string;
   title: string;
@@ -21,7 +22,7 @@ export const leadershipMessage: LeadershipMessage = {
   ],
   leaderName: "Prof. Dr. Agung Putra, M.Si.",
   leaderTitle: "Founder and Commissioner PT. SCCR",
-  leaderImage: "/images/leadership-portrait.webp",
+  leaderImage: assetUrl('/images/leadership-portrait.webp'),
   cta: {
     href: "/about-apu",
     label: "Discover the Campus Vision",

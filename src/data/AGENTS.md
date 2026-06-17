@@ -16,7 +16,7 @@
 - Keep explicit exported interfaces when file shape is reused by sections.
 - Export plain constants; no fetch logic, no runtime transforms.
 - Preserve Indonesian display copy unless request explicitly changes content language.
-- Use absolute image paths in data (`/images/...`) to match current asset usage.
+- Wrap image paths with `assetUrl('/images/...')` imported from `@lib/assets` so assets live in `src/assets/images` and are processed at build time.
 
 ## ANTI-PATTERNS
 - Do not move presentation logic into data files.

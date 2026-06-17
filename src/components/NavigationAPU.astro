@@ -1,4 +1,5 @@
 ---
+import { assetUrl } from '@lib/assets';
 const HOME_PATH = "/";
 
 const normalizePath = (path: string) => {
@@ -200,7 +201,7 @@ const visibleUtilities = utilityActions.filter((item) => !item.placeholder).slic
     <div class="nav-bar-inner">
       <a href={HOME_PATH} class="nav-brand">
         <img
-          src="/images/apu.webp"
+          src={assetUrl('/images/apu.webp')}
           alt="Agung Putra University"
           class="h-12 w-auto shrink-0"
           loading="eager"

@@ -1,4 +1,5 @@
 ---
+import { assetUrl } from '@lib/assets';
 import ScrollReveal from "@components/ScrollReveal.astro";
 import { lecturers } from "@data/lecturers";
 
@@ -11,7 +12,7 @@ const welcomeBody = [
 ];
 const leaderName = "Prof. Dr. Eleanor Tan, S.H., M.Hum.";
 const leaderTitle = "Dekan Fakultas Hukum";
-const leaderImage = "/images/dean-portrait.webp";
+const leaderImage = assetUrl('/images/dean-portrait.webp');
 
 const galleryTitle = "Dosen \u003cem\u003eTerbaik\u003c/em\u003e Kami";
 const galleryKicker = "KENALI TIM PENGAJAR";

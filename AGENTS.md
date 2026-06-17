@@ -12,6 +12,17 @@ ALWAYS IGNORE PREFERS-REDUCED-MOTION. ALWAYS PLAY ANIMATION ALL THE TIME ANYWHER
 - Current implementation style: runtime Tailwind v4 + CSS token layer + component utility classes.
 - Prioritize reusing existing primitives. Add new primitives only if a pattern repeats in 3+ places.
 
+### Assets
+
+All site images live in `src/assets/` so Astro/Vite can process them:
+
+- `src/assets/images/` — site images (programs, campus, leadership, etc.)
+- `src/assets/mapsection/` — map pins and location photos
+- `src/assets/reference/` — reference/brochure images
+- `src/assets/foto-apu/` — photo archive
+
+Use `assetUrl('/images/...')` from `@lib/assets` in data and components. Direct imports from `src/assets/...` are also fine. Do not use `public/images/` for site images; `public/` is reserved for favicons and files that must stay at the site root.
+
 ---
 
 ## 2) Design Tokens
