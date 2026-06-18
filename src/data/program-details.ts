@@ -102,8 +102,7 @@ Lulusan Biotechnology APU siap menghadapi tantangan global di bidang medis, digi
     'Menyelenggarakan pendidikan bioteknologi berkualitas dunia yang berbasis riset dan teknologi terkini.',
     'Mengembangkan penelitian inovatif di bidang medical biotechnology, bioinformatics, dan industrial biotechnology.',
     'Membangun kerja sama strategis dengan industri dan institusi akademik dalam dan luar negeri.',
-    'Menghasilkan lulusan yang adaptif, kreatif, dan bertanggung jawab sosial.',
-    'Mendorong kewirausahaan berbasis sains untuk solusi permasalahan global.',
+    'Menghasilkan lulusan yang adaptif, kreatif, dan bertanggung jawab sosial.'
   ],
   graduateAttributes: [
     {

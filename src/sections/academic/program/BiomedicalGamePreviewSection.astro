@@ -6,99 +6,18 @@ import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 
 <section
   id="biomedical-game-preview"
-  class="apu-section-shell py-24 md:py-32"
+  class="apu-section-shell"
 >
   <BackgroundBlobs seed="BiomedicalGamePreviewSection" />
-  <div class="pointer-events-none absolute inset-0 overflow-hidden">
-    <div class="absolute -left-24 top-16 h-72 w-72 rounded-full bg-[rgb(var(--color-program-biomedical-science)_/_0.10)] blur-3xl"></div>
-    <div class="absolute -right-24 bottom-8 h-80 w-80 rounded-full bg-[rgb(var(--color-apu-accent)_/_0.12)] blur-3xl"></div>
-  </div>
-
-  <div class="content-max relative z-10">
+  <div class=" z-10">
     <ScrollReveal>
-      <SectionHeader
-        kicker="Interactive Learning"
-        title="What is Biomedical Science?"
-        description="Jelajahi dunia mikroskopis biomedical science secara interaktif."
-        class="text-center mb-16"
-        titleClass="text-h2 text-apu-navy mb-4"
-        descriptionClass="text-body text-brand-text-muted max-w-xl mx-auto leading-relaxed"
-        dividerClass="apu-gradient-line mx-auto mt-4 w-56"
-      />
-    </ScrollReveal>
-
-    <ScrollReveal delay={150}>
-      <a
-        href="/academic/biomedical/game"
-        class="apu-glass-card apu-interactive-card block max-w-4xl mx-auto no-underline"
-      >
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 md:p-10 items-center">
-          <div class="preview-visual relative aspect-square flex items-center justify-center rounded-2xl bg-[rgb(var(--color-program-biomedical-science)_/_0.06)]">
-            <svg
-              class="petri-dish w-48 h-48 md:w-56 md:h-56"
-              viewBox="0 0 200 200"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
-            >
-              <circle cx="100" cy="100" r="96" stroke-width="2" style="stroke: rgb(var(--biomed) / 0.25); fill: rgb(var(--biomed) / 0.04);" />
-              <circle cx="100" cy="100" r="86" stroke-width="1" style="stroke: rgb(var(--biomed) / 0.12); fill: rgb(var(--biomed) / 0.03);" />
-
-              <g class="cell cell-biomed cell-1">
-                <circle cx="70" cy="75" r="14" />
-                <circle cx="66" cy="71" r="4" style="fill: rgb(255 255 255 / 0.35)" />
-              </g>
-              <g class="cell cell-accent cell-2">
-                <circle cx="130" cy="65" r="10" />
-                <circle cx="127" cy="62" r="3" style="fill: rgb(255 255 255 / 0.4)" />
-              </g>
-              <g class="cell cell-biomed cell-3">
-                <circle cx="120" cy="130" r="16" />
-                <circle cx="115" cy="125" r="5" style="fill: rgb(255 255 255 / 0.3)" />
-              </g>
-              <g class="cell cell-accent cell-4">
-                <circle cx="65" cy="135" r="9" />
-                <circle cx="62" cy="132" r="3" style="fill: rgb(255 255 255 / 0.35)" />
-              </g>
-
-              <circle cx="95" cy="100" r="3" style="fill: rgb(var(--biomed) / 0.25);">
-                <animate attributeName="cy" values="100;105;100" dur="4s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="150" cy="105" r="2" style="fill: rgb(var(--biomed) / 0.2);">
-                <animate attributeName="cx" values="150;147;150" dur="5s" repeatCount="indefinite" />
-              </circle>
-              <circle cx="50" cy="100" r="2.5" style="fill: rgb(var(--accent) / 0.35);">
-                <animate attributeName="cy" values="100;96;100" dur="4.5s" repeatCount="indefinite" />
-              </circle>
-            </svg>
-          </div>
-
-          <div class="flex flex-col gap-5">
-            <h3 class="text-h3 text-apu-navy">Masuk ke Dunia Mikroskopis</h3>
-            <p class="text-body-s text-brand-text-muted leading-relaxed">
-              Kendalikan sel, serap nutrisi, dan hindari predator dalam petualangan interaktif yang mengenalkan dasar-dasar biomedical science secara menyenangkan.
-            </p>
-            <span class="apu-btn apu-btn--primary w-fit">
-              Mulai Petualangan
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="ml-1"
-              >
-                <path d="M5 12h14" />
-                <path d="m12 5 7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
+        <iframe
+          src="/game/index.html"
+          title="Biomedical Science Interactive Game"
+          class="apu-game-iframe block w-screen h-screen border-0"
+          allow="fullscreen"
+          loading="lazy"
+        ></iframe>
     </ScrollReveal>
   </div>
 </section>
