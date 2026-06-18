@@ -1,6 +1,7 @@
 ---
 import ScrollReveal from "@components/ScrollReveal.astro";
 import SectionHeader from "@components/SectionHeader.astro";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 import { programs } from "@data/programs";
 
 type ProgramTone = {
@@ -28,8 +29,9 @@ const toneVars = (tone: ProgramTone) => `--program-accent: ${tone.accent};`;
 
 <section
     id="program"
-    class="bungkus-prodi apu-section-shell motion-aurora-shell motion-aurora-shell--programs relative overflow-hidden bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface pt-8 pb-20"
+    class="bungkus-prodi apu-section-shell relative overflow-hidden bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface pt-8 pb-20"
 >
+    <BackgroundBlobs seed="ProgramsSectionAPU" />
     <style>
         .desktop-only {
             display: block;

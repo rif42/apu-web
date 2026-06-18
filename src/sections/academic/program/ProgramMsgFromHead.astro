@@ -1,6 +1,7 @@
 ---
 import ScrollReveal from "@components/ScrollReveal.astro";
 import CtaButton from "@components/CtaButton.astro";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 import { leadershipMessage } from "@data/academic-programs";
 
 interface Props {
@@ -18,14 +19,13 @@ const { kicker, title, quote, leaderName, leaderTitle, leaderImage, cta } =
   class:list={[
     "leadership-section",
     "apu-section-shell",
-    "motion-aurora-shell",
-    "motion-aurora-shell--leadership",
     "relative",
     "isolate",
     "overflow-hidden",
     { "leadership-section--light": variant === "light" },
   ]}
 >
+  <BackgroundBlobs seed="ProgramMsgFromHead" />
   {/* Ambient decorative elements */}
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     {/* Large glow orb behind portrait area */}
@@ -235,14 +235,6 @@ const { kicker, title, quote, leaderName, leaderTitle, leaderImage, cta } =
     background-color: rgb(var(--leadership-bg));
   }
 
-  .leadership-section--light .motion-aurora-shell--leadership::before {
-    opacity: 0.5;
-  }
-
-  .leadership-section--light .motion-aurora-shell--leadership::after {
-    opacity: 0.25;
-  }
-
   .leadership-quote {
     position: relative;
   }
@@ -263,32 +255,6 @@ const { kicker, title, quote, leaderName, leaderTitle, leaderImage, cta } =
     filter: contrast(1.05) saturate(0.95);
   }
 
-  /* Custom aurora shell variant for leadership */
-  .motion-aurora-shell--leadership {
-    --motion-aurora-opacity: 0.85;
-    --motion-aurora-speed: 30s;
-    --motion-grid-opacity: 0.35;
-    --motion-grid-speed: 42s;
-  }
-
-  .motion-aurora-shell--leadership::before {
-    background:
-      radial-gradient(
-        circle at 75% 40%,
-        rgb(var(--color-brand-aurora) / 0.22),
-        transparent 40%
-      ),
-      radial-gradient(
-        circle at 25% 70%,
-        rgb(var(--color-brand-primary) / 0.15),
-        transparent 35%
-      ),
-      radial-gradient(
-        circle at 80% 80%,
-        rgb(var(--color-brand-accent) / 0.12),
-        transparent 38%
-      );
-  }
 </style>
 
 <script>

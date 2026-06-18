@@ -2,6 +2,7 @@
 import { contact } from "@data/contact";
 import ScrollReveal from "@components/ScrollReveal.astro";
 import SectionHeader from "@components/SectionHeader.astro";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 
 const contactItems = [
   {
@@ -60,9 +61,10 @@ const socials = [
 
 <section
   id="kontak"
-  class="apu-section-shell motion-aurora-shell motion-aurora-shell--contact relative isolate overflow-hidden"
+  class="apu-section-shell relative isolate overflow-hidden"
   style="padding-top: var(--apu-section-spacing-y); padding-bottom: var(--apu-section-spacing-y);"
 >
+  <BackgroundBlobs seed="AdmissionsContact" />
   <div class="content-max">
     <!-- Section Header -->
     <ScrollReveal>

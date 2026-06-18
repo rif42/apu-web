@@ -16,6 +16,7 @@ import kareninaImg from "@mapsection/images/karenina.jpg";
 import dermaninaImg from "@mapsection/images/dermanina.jpeg";
 import farmImg from "@mapsection/images/farm.jpg";
 import restoImg from "@mapsection/images/resto.jpg";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 
 const pinMap: Record<string, string> = {
   "APU Main Campus": apuPin.src,
@@ -52,8 +53,9 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
 
 <section
   id="lokasi-kampus"
-  class="apu-section-shell motion-aurora-shell motion-aurora-shell--locations relative isolate overflow-hidden"
+  class="apu-section-shell relative isolate overflow-hidden"
 >
+  <BackgroundBlobs seed="EcosystemSection" />
   <div class="w-full relative z-[1]">
     <ScrollReveal>
       <!-- Fullscreen map frame -->

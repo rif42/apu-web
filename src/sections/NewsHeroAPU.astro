@@ -1,12 +1,14 @@
 ---
 import CtaButton from "@components/CtaButton.astro";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 ---
 
 <section
   id="hero"
-  class="apu-section-shell motion-aurora-shell motion-aurora-shell--news relative isolate flex min-h-[92svh] flex-col items-center justify-center overflow-hidden py-24 md:py-32"
+  class="apu-section-shell relative isolate flex min-h-[92svh] flex-col items-center justify-center overflow-hidden py-24 md:py-32"
   style="--apu-hero-title: 'Cerita Nyata dari Ekosistem APU';"
 >
+  <BackgroundBlobs seed="NewsHeroAPU" />
   <!-- Ambient Background -->
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <div
@@ -167,13 +169,6 @@ import CtaButton from "@components/CtaButton.astro";
 </script>
 
 <style>
-  /* Aurora shell variant for news */
-  .motion-aurora-shell--news {
-    --motion-aurora-color-1: rgb(var(--color-apu-accent) / 0.15);
-    --motion-aurora-color-2: rgb(var(--color-brand-primary) / 0.1);
-    --motion-aurora-color-3: rgb(var(--color-apu-navy) / 0.08);
-  }
-
   /* Entrance animations */
   .news-hero-kicker,
   .news-hero-headline,

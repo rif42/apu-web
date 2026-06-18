@@ -1,12 +1,14 @@
 ---
 import ScrollReveal from "@components/ScrollReveal.astro";
 import SectionHeader from "@components/SectionHeader.astro";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 ---
 
 <section
   id="biomedical-game-preview"
-  class="apu-section-shell motion-aurora-shell py-24 md:py-32"
+  class="apu-section-shell py-24 md:py-32"
 >
+  <BackgroundBlobs seed="BiomedicalGamePreviewSection" />
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <div class="absolute -left-24 top-16 h-72 w-72 rounded-full bg-[rgb(var(--color-program-biomedical-science)_/_0.10)] blur-3xl"></div>
     <div class="absolute -right-24 bottom-8 h-80 w-80 rounded-full bg-[rgb(var(--color-apu-accent)_/_0.12)] blur-3xl"></div>

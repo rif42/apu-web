@@ -1,6 +1,7 @@
 ---
 import ScrollReveal from "@components/ScrollReveal.astro";
 import SectionHeader from "@components/SectionHeader.astro";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 
 const iconMap: Record<string, string> = {
   dna: '<path d="M2 15c6.667-6 13.333 0 20-6"/><path d="M9 22c1.5-2.5 3.5-2.5 5 0"/><path d="M15 2c-1.5 2.5-3.5 2.5-5 0"/><path d="M22 9c-6.667 6-13.333 0-20 6"/>',
@@ -35,9 +36,10 @@ const featured = [
 
 <section
   id="keunggulan-bento"
-  class="apu-section-shell motion-aurora-shell py-24 md:py-32 bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface-soft"
+  class="apu-section-shell py-24 md:py-32 bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface-soft"
   data-bento-section
 >
+  <BackgroundBlobs seed="ProgramStrengthsBentoSection" />
   <div class="content-max relative z-10">
     <ScrollReveal>
       <SectionHeader

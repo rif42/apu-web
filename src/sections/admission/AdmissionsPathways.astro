@@ -2,6 +2,7 @@
 import ScrollReveal from '@components/ScrollReveal.astro';
 import SectionHeader from '@components/SectionHeader.astro';
 import CtaButton from '@components/CtaButton.astro';
+import BackgroundBlobs from '@components/BackgroundBlobs.astro';
 import { pathways } from '@data/pathways';
 import { scholarships as scholarshipDetails } from '@data/scholarships';
 
@@ -17,7 +18,8 @@ const getBadgeClasses = (type: string) => {
 };
 ---
 
-<section id="jalur-masuk" class="apu-section-shell motion-aurora-shell motion-aurora-shell--pathways relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface-alt via-[rgb(var(--color-apu-navy)_/_0.04)] to-brand-surface-soft after:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-[rgb(var(--color-apu-accent)_/_0.65)] after:to-transparent">
+<section id="jalur-masuk" class="apu-section-shell relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface-alt via-[rgb(var(--color-apu-navy)_/_0.04)] to-brand-surface-soft after:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-[rgb(var(--color-apu-accent)_/_0.65)] after:to-transparent">
+  <BackgroundBlobs seed="AdmissionsPathways" />
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <div class="absolute -left-24 top-16 h-72 w-72 rounded-full bg-[rgb(var(--color-apu-accent)_/_0.18)] blur-3xl"></div>
     <div class="absolute -right-24 bottom-8 h-80 w-80 rounded-full bg-[rgb(var(--color-apu-navy)_/_0.14)] blur-3xl"></div>

@@ -1,6 +1,7 @@
 ---
 import ScrollReveal from '@components/ScrollReveal.astro';
 import SectionHeader from '@components/SectionHeader.astro';
+import BackgroundBlobs from '@components/BackgroundBlobs.astro';
 
 interface CalendarEvent {
   dateRange: string;
@@ -143,7 +144,8 @@ const typeConfig = {
 };
 ---
 
-<section id="kalender-akademik" class="apu-section-shell motion-aurora-shell motion-aurora-shell--ecosystem relative isolate overflow-hidden bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface py-24 md:py-32">
+<section id="kalender-akademik" class="apu-section-shell relative isolate overflow-hidden bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface py-24 md:py-32">
+  <BackgroundBlobs seed="AcademicCalendarSection" />
   <style>
     .calendar-tabs {
       display: flex;

@@ -1,6 +1,7 @@
 ---
 import ScrollReveal from "@components/ScrollReveal.astro";
 import SectionHeader from "@components/SectionHeader.astro";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 import { biotechnologyProgram as program } from "@data/program-details";
 
 const gradientClasses = [
@@ -14,7 +15,8 @@ const gradientClasses = [
 ];
 ---
 
-<section id="graduate-attributes" class="apu-section-shell motion-aurora-shell relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface-soft via-brand-surface-alt to-brand-surface">
+<section id="graduate-attributes" class="apu-section-shell relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface-soft via-brand-surface-alt to-brand-surface">
+  <BackgroundBlobs seed="ProgramValuesSection" />
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[600px] w-[600px] rounded-full bg-[rgb(var(--color-apu-accent)_/_0.06)] blur-3xl"></div>
   </div>

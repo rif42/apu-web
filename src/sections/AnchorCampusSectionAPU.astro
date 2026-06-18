@@ -2,6 +2,7 @@
 import ScrollReveal from "@components/ScrollReveal.astro";
 import CtaButton from "@components/CtaButton.astro";
 import LeafletMap from "@components/LeafletMap.astro";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 import apuPin from "@mapsection/apu-pin.webp";
 
 const admissionsWhatsApp =
@@ -12,9 +13,10 @@ const APU_CENTER: [number, number] = [-7.071300, 110.362306];
 
 <section
   id="ekosistem"
-  class="apu-anchor-campus apu-section-shell motion-aurora-shell relative isolate overflow-hidden bg-white"
+  class="apu-anchor-campus apu-section-shell relative isolate overflow-hidden bg-white"
   aria-label="Agung Putra University campus ecosystem"
 >
+  <BackgroundBlobs seed="AnchorCampusSectionAPU" />
   <div class="w-full relative z-[1]">
     <ScrollReveal>
       <div class="apu-anchor-campus__frame relative isolate w-full overflow-hidden bg-white shadow-[0_30px_72px_rgb(var(--color-brand-primary-deeper)/0.16)] lg:aspect-video">

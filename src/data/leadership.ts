@@ -22,7 +22,7 @@ export const leadershipMessage: LeadershipMessage = {
   ],
   leaderName: "Prof. Dr. dr. Agung Putra, M.Si.Med.",
   leaderTitle: "Founder and Commissioner PT. SCCR",
-  leaderImage: assetUrl('/images/leadership-portrait.webp'),
+leaderImage: assetUrl('/images/leadership-portrait.webp'),
   cta: {
     href: "/about-apu",
     label: "Discover the Campus Vision",

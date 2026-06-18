@@ -1,6 +1,7 @@
 ---
 import ScrollReveal from "@components/ScrollReveal.astro";
 import SectionHeader from "@components/SectionHeader.astro";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 import { biotechnologyProgram as program } from "@data/program-details";
 
 const iconMap: Record<string, string> = {
@@ -14,7 +15,8 @@ const iconMap: Record<string, string> = {
 };
 ---
 
-<section id="keunggulan" class="apu-section-shell motion-aurora-shell relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface-soft">
+<section id="keunggulan" class="apu-section-shell relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface-soft">
+  <BackgroundBlobs seed="ProgramStrengthsSection" />
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <div class="absolute -left-24 top-16 h-72 w-72 rounded-full bg-[rgb(var(--color-apu-accent)_/_0.12)] blur-3xl"></div>
     <div class="absolute -right-24 bottom-8 h-80 w-80 rounded-full bg-[rgb(var(--color-apu-navy)_/_0.10)] blur-3xl"></div>

@@ -2,6 +2,7 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import NavigationAPU from "@components/NavigationAPU.astro";
 import Footer from "@components/Footer.astro";
+import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 ---
 
 <MainLayout
@@ -10,7 +11,8 @@ import Footer from "@components/Footer.astro";
 >
   <NavigationAPU />
 
-  <main class="apu-section-shell motion-aurora-shell motion-aurora-shell--game min-h-[calc(100vh-80px)]">
+  <main class="apu-section-shell min-h-[calc(100vh-80px)]">
+    <BackgroundBlobs seed="game" />
     <div class="content-max relative z-10 py-16 md:py-24">
       <header class="mb-8 md:mb-12">
         <span class="apu-section-kicker mb-5 inline-flex">Interactive Learning</span>
@@ -46,13 +48,6 @@ import Footer from "@components/Footer.astro";
 </MainLayout>
 
 <style>
-  .motion-aurora-shell--game {
-    --motion-aurora-opacity: 0.7;
-    --motion-aurora-speed: 36s;
-    --motion-grid-opacity: 0.25;
-    --motion-grid-speed: 48s;
-  }
-
   .apu-game-frame-wrapper {
     /* ensure iframe sits cleanly inside rounded container */
     -webkit-mask-image: -webkit-radial-gradient(white, black);

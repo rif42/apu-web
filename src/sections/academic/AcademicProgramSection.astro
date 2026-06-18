@@ -1,6 +1,7 @@
 ---
 import ScrollReveal from '@components/ScrollReveal.astro';
 import SectionHeader from '@components/SectionHeader.astro';
+import BackgroundBlobs from '@components/BackgroundBlobs.astro';
 
 const pillars = [
   {
@@ -50,8 +51,9 @@ const iconSvgs: Record<string, string> = {
 
 <section
   id="program"
-  class="apu-section-shell  motion-aurora-shell motion-aurora-shell--program relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface-soft after:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-[rgb(var(--color-apu-accent)_/_0.65)] after:to-transparent"
+  class="apu-section-shell relative isolate overflow-hidden py-24 md:py-32 bg-gradient-to-b from-brand-surface via-brand-surface-alt to-brand-surface-soft after:content-[''] after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-px after:bg-gradient-to-r after:from-transparent after:via-[rgb(var(--color-apu-accent)_/_0.65)] after:to-transparent"
 >
+  <BackgroundBlobs seed="AcademicProgramSection" />
   <!-- Ambient orbs -->
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <div class="absolute -left-20 top-20 h-80 w-80 rounded-full bg-[rgb(var(--color-apu-accent)_/_0.15)] blur-3xl"></div>
