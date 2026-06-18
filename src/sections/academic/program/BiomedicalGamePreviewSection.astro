@@ -1,10 +1,11 @@
 ---
 import ScrollReveal from "@components/ScrollReveal.astro";
+import SectionHeader from "@components/SectionHeader.astro";
 ---
 
 <section
   id="biomedical-game-preview"
-  class="apu-section-shell motion-aurora-shell relative isolate overflow-hidden py-24 md:py-32"
+  class="apu-section-shell motion-aurora-shell py-24 md:py-32"
 >
   <div class="pointer-events-none absolute inset-0 overflow-hidden">
     <div class="absolute -left-24 top-16 h-72 w-72 rounded-full bg-[rgb(var(--color-program-biomedical-science)_/_0.10)] blur-3xl"></div>
@@ -13,23 +14,21 @@ import ScrollReveal from "@components/ScrollReveal.astro";
 
   <div class="content-max relative z-10">
     <ScrollReveal>
-      <header class="text-center mb-16">
-        <span class="apu-section-kicker mb-5 inline-flex">Interactive Learning</span>
-        <h2 class="text-h2 text-[rgb(var(--apu-navy))] mb-4">
-          What is Biomedical Science?
-          <span class="apu-gradient-line mx-auto mt-4 w-56"></span>
-        </h2>
-        <p class="text-body text-brand-text-muted max-w-xl mx-auto leading-relaxed">
-          Jelajahi dunia mikroskopis biomedical science secara interaktif.
-        </p>
-      </header>
+      <SectionHeader
+        kicker="Interactive Learning"
+        title="What is Biomedical Science?"
+        description="Jelajahi dunia mikroskopis biomedical science secara interaktif."
+        class="text-center mb-16"
+        titleClass="text-h2 text-apu-navy mb-4"
+        descriptionClass="text-body text-brand-text-muted max-w-xl mx-auto leading-relaxed"
+        dividerClass="apu-gradient-line mx-auto mt-4 w-56"
+      />
     </ScrollReveal>
 
     <ScrollReveal delay={150}>
       <a
         href="/academic/biomedical/game"
         class="apu-glass-card apu-interactive-card block max-w-4xl mx-auto no-underline"
-        aria-label="Mulai petualangan biomedical science"
       >
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 md:p-10 items-center">
           <div class="preview-visual relative aspect-square flex items-center justify-center rounded-2xl bg-[rgb(var(--color-program-biomedical-science)_/_0.06)]">
@@ -40,40 +39,40 @@ import ScrollReveal from "@components/ScrollReveal.astro";
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
             >
-              <circle cx="100" cy="100" r="96" stroke="rgba(11,75,140,0.25)" stroke-width="2" fill="rgba(11,75,140,0.04)" />
-              <circle cx="100" cy="100" r="86" stroke="rgba(11,75,140,0.12)" stroke-width="1" fill="rgba(11,75,140,0.03)" />
+              <circle cx="100" cy="100" r="96" stroke-width="2" style="stroke: rgb(var(--biomed) / 0.25); fill: rgb(var(--biomed) / 0.04);" />
+              <circle cx="100" cy="100" r="86" stroke-width="1" style="stroke: rgb(var(--biomed) / 0.12); fill: rgb(var(--biomed) / 0.03);" />
 
-              <g class="cell cell-1">
-                <circle cx="70" cy="75" r="14" fill="rgba(11,75,140,0.85)" />
-                <circle cx="66" cy="71" r="4" fill="rgba(255,255,255,0.35)" />
+              <g class="cell cell-biomed cell-1">
+                <circle cx="70" cy="75" r="14" />
+                <circle cx="66" cy="71" r="4" style="fill: rgb(255 255 255 / 0.35)" />
               </g>
-              <g class="cell cell-2">
-                <circle cx="130" cy="65" r="10" fill="rgba(252,188,85,0.9)" />
-                <circle cx="127" cy="62" r="3" fill="rgba(255,255,255,0.4)" />
+              <g class="cell cell-accent cell-2">
+                <circle cx="130" cy="65" r="10" />
+                <circle cx="127" cy="62" r="3" style="fill: rgb(255 255 255 / 0.4)" />
               </g>
-              <g class="cell cell-3">
-                <circle cx="120" cy="130" r="16" fill="rgba(11,75,140,0.8)" />
-                <circle cx="115" cy="125" r="5" fill="rgba(255,255,255,0.3)" />
+              <g class="cell cell-biomed cell-3">
+                <circle cx="120" cy="130" r="16" />
+                <circle cx="115" cy="125" r="5" style="fill: rgb(255 255 255 / 0.3)" />
               </g>
-              <g class="cell cell-4">
-                <circle cx="65" cy="135" r="9" fill="rgba(252,188,85,0.85)" />
-                <circle cx="62" cy="132" r="3" fill="rgba(255,255,255,0.35)" />
+              <g class="cell cell-accent cell-4">
+                <circle cx="65" cy="135" r="9" />
+                <circle cx="62" cy="132" r="3" style="fill: rgb(255 255 255 / 0.35)" />
               </g>
 
-              <circle cx="95" cy="100" r="3" fill="rgba(11,75,140,0.25)">
+              <circle cx="95" cy="100" r="3" style="fill: rgb(var(--biomed) / 0.25);">
                 <animate attributeName="cy" values="100;105;100" dur="4s" repeatCount="indefinite" />
               </circle>
-              <circle cx="150" cy="105" r="2" fill="rgba(11,75,140,0.2)">
+              <circle cx="150" cy="105" r="2" style="fill: rgb(var(--biomed) / 0.2);">
                 <animate attributeName="cx" values="150;147;150" dur="5s" repeatCount="indefinite" />
               </circle>
-              <circle cx="50" cy="100" r="2.5" fill="rgba(252,188,85,0.35)">
+              <circle cx="50" cy="100" r="2.5" style="fill: rgb(var(--accent) / 0.35);">
                 <animate attributeName="cy" values="100;96;100" dur="4.5s" repeatCount="indefinite" />
               </circle>
             </svg>
           </div>
 
           <div class="flex flex-col gap-5">
-            <h3 class="text-h3 text-[rgb(var(--apu-navy))]">Masuk ke Dunia Mikroskopis</h3>
+            <h3 class="text-h3 text-apu-navy">Masuk ke Dunia Mikroskopis</h3>
             <p class="text-body-s text-brand-text-muted leading-relaxed">
               Kendalikan sel, serap nutrisi, dan hindari predator dalam petualangan interaktif yang mengenalkan dasar-dasar biomedical science secara menyenangkan.
             </p>
@@ -103,10 +102,19 @@ import ScrollReveal from "@components/ScrollReveal.astro";
 </section>
 
 <style>
+  .preview-visual {
+    --biomed: var(--color-program-biomedical-science);
+    --accent: var(--color-apu-accent);
+  }
+
   .cell {
     animation: float 6s ease-in-out infinite;
     transform-origin: center;
   }
+  .cell-biomed { fill: rgb(var(--biomed) / 0.85); }
+  .cell-3.cell-biomed { fill: rgb(var(--biomed) / 0.8); }
+  .cell-accent { fill: rgb(var(--accent) / 0.9); }
+  .cell-4.cell-accent { fill: rgb(var(--accent) / 0.85); }
   .cell-1 { animation-delay: 0s; }
   .cell-2 { animation-delay: -1.5s; }
   .cell-3 { animation-delay: -3s; }
