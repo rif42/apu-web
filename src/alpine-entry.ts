@@ -9,23 +9,36 @@ export default (Alpine: Alpine) => {
       number: string;
       expandTo: 'left' | 'right';
     }>,
-    activeIndex: 0,
+    activeIndex: null as number | null,
 
     get activeItem() {
-      return this.activeIndex !== null ? this.items[this.activeIndex] : null;
+      if (
+        this.activeIndex === null ||
+        this.activeIndex < 0 ||
+        this.activeIndex >= this.items.length
+      ) {
+        return null;
+      }
+      return this.items[this.activeIndex];
     },
 
     get activePanel() {
-      if (this.activeIndex === null) return null;
-      return this.items[this.activeIndex].expandTo;
+      return this.activeItem?.expandTo ?? null;
     },
 
     init() {
-      this.items = JSON.parse(this.$el.dataset.items || '[]');
-      this.activeIndex = 0;
+      let parsed: unknown = [];
+      try {
+        parsed = JSON.parse(this.$el.dataset.items || '[]');
+      } catch {
+        parsed = [];
+      }
+      this.items = Array.isArray(parsed) ? parsed : [];
+      this.activeIndex = this.items.length > 0 ? 0 : null;
     },
 
     expand(index: number) {
+      if (index < 0 || index >= this.items.length) return;
       if (this.activeIndex === index) return;
       this.activeIndex = index;
     },
