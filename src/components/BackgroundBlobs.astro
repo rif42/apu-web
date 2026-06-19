@@ -1,85 +1,70 @@
 ---
 export interface Props {
-    /** Per-section seed so each instance randomizes differently. */
     seed?: string;
-    /** Number of blobs rendered. Default 8. */
     blobCount?: number;
-    /** Backdrop blur amount in px. Default 40. */
     blur?: number;
-    /** Base blob layer opacity. Default 0.5. */
     opacity?: number;
-    /** Theme variant. Code-level only, not a user-facing toggle. */
     theme?: "light" | "dark" | "auto";
+    class?: string;
 }
 
-const {
-    seed = "default",
-    blobCount = 6,
-    blur = 80,
-    opacity = 0.2,
-    theme = "light",
-} = Astro.props;
+const { class: className = "" } = Astro.props;
+
+import bgImage from "@/assets/images/bg-apu-main.webp";
 ---
 
-<div
-    class="apu-blobs"
-    data-seed={seed}
-    data-count={blobCount}
-    data-blur={blur}
-    data-opacity={opacity}
-    data-theme={theme}
-    aria-hidden="true"
->
-    <div class="apu-blobs-backdrop"></div>
-    <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-        {
-            Array.from({ length: blobCount }).map(() => (
-                <circle class="apu-blob" cx="50" cy="50" r="15" />
-            ))
-        }
-    </svg>
+<div class:list={["apu-bg-image", className]} aria-hidden="true">
+    <img
+        src={bgImage.src}
+        alt=""
+        loading="lazy"
+        decoding="async"
+    />
 </div>
 
 <script is:inline>
     (function () {
-        function hashString(str) {
-            let h = 0;
-            for (let i = 0; i < str.length; i++) {
-                h = (h << 5) - h + str.charCodeAt(i);
-                h |= 0;
-            }
-            return Math.abs(h);
+        function pick(arr) {
+            return arr[Math.floor(Math.random() * arr.length)];
         }
 
-        function randomGenerator(seed) {
-            let state = (hashString(seed) + Math.floor(Math.random() * 1e9)) % 2147483647;
-            return function () {
-                state = (state * 16807) % 2147483647;
-                return state / 2147483647;
-            };
-        }
+        document
+            .querySelectorAll(".apu-bg-image:not([data-apu-bg-randomized])")
+            .forEach(function (el) {
+                const img = el.querySelector("img");
+                if (!img) return;
 
-        document.querySelectorAll(".apu-blobs").forEach((wrapper) => {
-            const seed = wrapper.dataset.seed || "default";
-            const count = parseInt(wrapper.dataset.count || "8", 10);
-            const rand = randomGenerator(seed);
-            const blobs = wrapper.querySelectorAll(".apu-blob");
-
-            blobs.forEach((blob, i) => {
-                if (i >= count) return;
-                const cx = rand() * 100;
-                const cy = rand() * 100;
-                const r = 5 + rand() * 15;
-                const isNavy = i % 2 === 0;
-                blob.setAttribute("cx", cx.toFixed(2));
-                blob.setAttribute("cy", cy.toFixed(2));
-                blob.setAttribute("r", r.toFixed(2));
-                blob.setAttribute(
-                    "fill",
-                    isNavy ? "var(--apu-blob-navy)" : "var(--apu-blob-accent)",
+                img.style.setProperty(
+                    "--apu-bg-rotate",
+                    pick(["0deg", "180deg"]),
                 );
-                blob.style.opacity = String(0.1 + rand() * 0.3);
+                img.style.setProperty(
+                    "--apu-bg-scale-x",
+                    pick(["1", "-1"]),
+                );
+                img.style.setProperty(
+                    "--apu-bg-scale-y",
+                    pick(["1", "-1"]),
+                );
+                el.setAttribute("data-apu-bg-randomized", "");
             });
-        });
     })();
 </script>
+
+<style>
+    .apu-bg-image {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .apu-bg-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: rotate(var(--apu-bg-rotate, 0deg))
+            scaleX(var(--apu-bg-scale-x, 1)) scaleY(var(--apu-bg-scale-y, 1));
+    }
+</style>

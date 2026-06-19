@@ -255,44 +255,6 @@
         z-index: 0;
     }
 
-    .apu-blobs {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        pointer-events: none;
-        overflow: hidden;
-        filter: blur(var(--apu-blobs-blur, 40px));
-    }
-
-    .apu-blobs-backdrop {
-        position: absolute;
-        inset: 0;
-        z-index: 0;
-        background: transparent;
-    }
-
-    .apu-blobs[data-theme="dark"] .apu-blobs-backdrop {
-        background: rgb(var(--color-apu-navy));
-    }
-
-    .apu-blobs svg {
-        position: relative;
-        z-index: 1;
-        width: 100%;
-        height: 100%;
-        opacity: var(--apu-blobs-opacity, 0.55);
-    }
-
-    .apu-blob {
-        --apu-blob-navy: rgb(var(--color-apu-navy));
-        --apu-blob-accent: rgb(var(--color-apu-accent));
-    }
-
-    .apu-blobs[data-theme="dark"] .apu-blob {
-        --apu-blob-navy: rgb(30 58 95);
-        --apu-blob-accent: rgb(var(--color-apu-accent));
-    }
-
     .apu-glass-card {
         border: 1px solid var(--apu-card-border, rgb(var(--apu-border) / 0.16));
         background: var(--apu-card-bg, rgb(255 255 255 / 0.6));
