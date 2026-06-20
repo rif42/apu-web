@@ -133,36 +133,55 @@ const featured = [
 </section>
 
 <style>
-
 .bento-clone h3,
 .bento-clone .apu-icon-chip,
 .bento-clone .apu-icon-chip svg,
 .bento-clone [class*="text-mono"] {
-  transition: font-size 500ms linear,
-              width 500ms linear,
-              height 500ms linear;
+  transition: font-size 500ms cubic-bezier(0.4, 0, 0.2, 1),
+  width 500ms cubic-bezier(0.4, 0, 0.2, 1),
+  height 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .bento-clone {
-    transition: 1000ms ;
+    transition: 500ms ;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 .bento-clone h3 {
-    font-size: 3.5rem !important;
-    line-height: 1.2;
+    font-size: 1.5rem ;
 }
+
+.bento-clone.is-expanded h3 {
+  font-size: 3rem ;
+}
+
 .bento-clone .apu-icon-chip {
-  width: 8rem;
-  height: 8rem;
+  width: 3.5rem;
+  height: 3.5rem;
 }
+
+.bento-clone.is-expanded .apu-icon-chip {
+  width: 8rem ;
+  height: 8rem ;
+}
+
 .bento-clone .apu-icon-chip svg {
   width: 80%;
   height: 80%;
 }
+
+.bento-clone.is-expanded .apu-icon-chip svg {
+  width: 80% ;
+  height: 80% ;
+}
+
 .bento-clone [class*="text-mono"] {
   font-size: 1rem;
+}
+.bento-clone.is-expanded [class*="text-mono"] {
+  font-size: 2rem ;
 }
 
 </style>
@@ -371,46 +390,3 @@ const featured = [
     }
   })();
 </script>
-
-<style>
-  .bento-clone h3,
-  .bento-clone .apu-icon-chip,
-  .bento-clone .apu-icon-chip svg,
-  .bento-clone [class*="text-mono"] {
-    transition: font-size 500ms linear,
-                width 500ms linear,
-                height 500ms linear;
-  }
-
-  .bento-clone.is-expanded h3 {
-    font-size: 3rem !important;
-  }
-  .bento-clone.is-expanded .apu-icon-chip {
-    width: 3.5rem !important;
-    height: 3.5rem !important;
-  }
-  .bento-clone.is-expanded .apu-icon-chip svg {
-    width: 28px !important;
-    height: 28px !important;
-  }
-  .bento-clone.is-expanded [class*="text-mono"] {
-    font-size: 1rem !important;
-  }
-
-  @media (max-width: 767px) {
-    .bento-clone.is-expanded h3 {
-      font-size: 1.5rem !important;
-    }
-    .bento-clone.is-expanded .apu-icon-chip {
-      width: 3rem !important;
-      height: 3rem !important;
-    }
-    .bento-clone.is-expanded .apu-icon-chip svg {
-      width: 20px !important;
-      height: 20px !important;
-    }
-    .bento-clone.is-expanded [class*="text-mono"] {
-      font-size: 0.875rem !important;
-    }
-  }
-</style>
