@@ -58,14 +58,15 @@ import { people } from "@data/diaspora";
                   >
                     {person.name}
                   </a>
+
+                  <p class="text-xs text-center px-4 text-gray-600 sm:text-sm">{person.univ}</p>
                   <img
                     src={person.flag}
                     alt={`Flag of ${person.country}`}
-                    class="mx-auto mt-1 block h-5 w-auto rounded-sm object-contain shadow-sm"
+                    class="mx-auto mt-2 block h-5 w-auto rounded-sm object-contain shadow-sm"
                     loading="lazy"
                     decoding="async"
                   />
-                  <p class="text-xs text-center px-4 text-gray-600 sm:text-sm">{person.univ}</p>
                 </article>
               );
             })
