@@ -55,7 +55,7 @@ export const pathways: Pathway[] = [
     id: "jalur-beasiswa",
     name: "Scholarship Pathway",
     description:
-      "Scholarship program for students with academic, non-academic, and content creator achievements. Fee reduction up to 100%.",
+      "Scholarship program for students with academic, non-academic, and content creator achievements. Fee reduction up to 50%.",
     icon: "award",
     scholarships: [
       {
