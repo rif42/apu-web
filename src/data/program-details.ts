@@ -182,27 +182,42 @@ Lulusan Biotechnology APU siap menghadapi tantangan global di bidang medis, digi
   ],
   facultyMembers: [
     {
-      name: 'Fauziah Novita Putri Rifai, S.Si, M.Biotech',
+      name: 'Nadya Audina NS. S.Si., M.Biomed',
       title: 'Head of Study Program',
       nidn: '-',
     },
     {
-      name: 'Iffan Alif, M.Biotech',
+      name: 'Mohammad Ariq Nazar, S.Si, M.Biomed',
       title: 'Lecturer',
       nidn: '-',
     },
     {
-      name: 'Nurul Hidayah, S.Si, M.Biotech',
+      name: 'Dian Respati Ayu, S.Si., M.Biomed',
       title: 'Lecturer',
       nidn: '-',
     },
     {
-      name: 'Salindri Prawitasari, S.Si, M.Si',
+      name: 'Risky Chandra Satria Irawan S.Si, M.Biomed',
       title: 'Lecturer',
       nidn: '-',
     },
     {
-      name: 'Dini Cahyani, S.Si, M.Biotech',
+      name: 'Dendi Krisna Nugraha, M.Sc., Ph.D.',
+      title: 'Lecturer',
+      nidn: '-',
+    },
+    {
+      name: 'Faheem Ahmed Khan, BSc, MS, PhD',
+      title: 'Lecturer',
+      nidn: '-',
+    },
+    {
+      name: 'Naufal Sebastian Anggoro, S.Si., M.Si',
+      title: 'Lecturer',
+      nidn: '-',
+    },
+    {
+      name: 'Endah Agustina Lestari, S.Si, M.Mol.Biol.',
       title: 'Lecturer',
       nidn: '-',
     },
