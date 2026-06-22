@@ -174,7 +174,12 @@ Lulusan Biotechnology APU siap menghadapi tantangan global di bidang medis, digi
     },
   ],
   facultyMembers: [
+
     {
+       name: 'dr. Erwin, S.H., M.H',
+      title: 'lecturer',
+      nidn: '6965892',
+    },    {
        name: 'Zain Arfin Utama S.H.,M.H.',
       title: 'lecturer',
       nidn: '0615119301',

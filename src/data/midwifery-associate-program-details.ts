@@ -171,6 +171,11 @@ Lulusan Biotechnology APU siap menghadapi tantangan global di bidang medis, digi
   ],
   facultyMembers: [
     {
+       name: 'Bdn, Titik Kurniawati, S.SiT., M.Kes., M.Keb',
+      title: 'lecturer',
+      nidn: '0622058101',
+    },
+    {
        name: 'Dewi Elliana, SKM., S.Tr.Keb., M.Kes',
       title: 'lecturer',
       nidn: '0611027703',
