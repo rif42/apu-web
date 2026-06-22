@@ -220,7 +220,7 @@ const featured = [
 /* ── Mobile responsive sizing ── */
 @media (max-width: 1023px) {
   .bento-stage {
-    min-height: 180px;
+    min-height: 200px;
   }
   .bento-panels {
     flex: none;
@@ -229,9 +229,25 @@ const featured = [
   .bento-panels > .opacity-0 {
     display: none;
   }
+  .bento-panel-left:not(.opacity-0),
+  .bento-panel-right:not(.opacity-0) {
+    display: flex;
+    animation: bentoFadeIn 300ms ease-out;
+  }
   .bento-panel-left,
   .bento-panel-right {
     padding: 1rem;
+  }
+}
+
+@keyframes bentoFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -347,7 +363,6 @@ const featured = [
       const stageRect = stage.getBoundingClientRect();
 
       if (isMobile) {
-        // mobile: no clone animation, just restore
         removeClone();
         trigger.classList.remove('opacity-0', 'pointer-events-none');
         trigger.setAttribute('aria-expanded', 'false');
@@ -383,7 +398,6 @@ const featured = [
       if (activeIndex === index) return;
 
       if (isMobile) {
-        // mobile: direct panel toggle, no clone animation
         activeIndex = index;
         triggers.forEach(function (t) {
           t.setAttribute('aria-expanded', 'false');
