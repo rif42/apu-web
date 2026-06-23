@@ -2,16 +2,16 @@
 import ScrollReveal from "@components/ScrollReveal.astro";
 import CtaButton from "@components/CtaButton.astro";
 import BackgroundBlobs from "@components/BackgroundBlobs.astro";
-import { leadershipMessage } from "@data/academic-programs";
+import { leadershipMessage, type LeadershipMessage } from "@data/academic-programs";
 
 interface Props {
   variant?: "dark" | "light";
+  data?: LeadershipMessage;
 }
 
-const { variant = "dark" } = Astro.props;
+const { variant = "dark", data = leadershipMessage } = Astro.props;
 
-const { kicker, title, quote, leaderName, leaderTitle, leaderImage, cta } =
-  leadershipMessage;
+const { kicker, title, quote, leaderName, leaderTitle, leaderImage, cta } = data;
 ---
 
 <section
