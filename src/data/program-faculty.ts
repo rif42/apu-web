@@ -1,6 +1,7 @@
 import { assetUrl } from "@lib/assets";
 export interface FacultyMember {
   name: string;
+  id: string;
   title: string;
   photo?: string;
   nidn: string;
@@ -22,6 +23,7 @@ export const biomedicalFaculty: ProgramFacultyData = {
     "Internationally qualified faculty guiding students in research and innovation",
   facultyMembers: [
     {
+      id: "nadya-audina-ns",
       name: "Nadya Audina NS. S.Si., M.Biomed",
       title: "Head of Biomedical Science Study Program",
       specialization: "Herbal Immunomodulation",
@@ -32,6 +34,7 @@ export const biomedicalFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com.my/citations?user=7bIu0yoAAAAJ&hl=en&oi=ao",
     },
     {
+      id: "mohammad-ariq-nazar",
       name: "Mohammad Ariq Nazar, S.Si, M.Biomed",
       title: "Vice Rector I",
       specialization: "Bioengineering",
@@ -42,6 +45,7 @@ export const biomedicalFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com/citations?user=YaYgh0AAAAAJ&hl=id",
     },
     {
+      id: "dian-respati-ayu",
       name: "Dian Respati Ayu, S.Si., M.Biomed",
       title: "Lecturer",
       specialization: "Secretome and Exosome",
@@ -52,6 +56,7 @@ export const biomedicalFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com.my/citations?user=DwjZbLMAAAAJ&hl=en&oi=ao",
     },
     {
+      id: "risky-chandra-satria-irawan",
       name: "Risky Chandra Satria Irawan S.Si, M.Biomed",
       title: "Lecturer",
       specialization: "Stem Cell",
@@ -62,6 +67,7 @@ export const biomedicalFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com.my/citations?user=TAjcHpYAAAAJ&hl=en&oi=ao",
     },
     {
+      id: "dendi-krisna-nugraha",
       name: "Dendi Krisna Nugraha, M.Sc., Ph.D.",
       title: "Lecturer",
       specialization: "Genetic Engineering",
@@ -72,16 +78,19 @@ export const biomedicalFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com.my/citations?user=1uphszUAAAAJ",
     },
     {
+      id: "faheem-ahmed-khan",
       name: "Faheem Ahmed Khan, BSc, MS, PhD",
       title: "Lecturer",
       nidn: "-",
     },
     {
+      id: "naufal-sebastian-anggoro",
       name: "Naufal Sebastian Anggoro, S.Si., M.Si",
       title: "Lecturer",
       nidn: "1149776677130313",
     },
     {
+      id: "endah-agustina-lestari",
       name: "Endah Agustina Lestari, S.Si, M.Mol.Biol.",
       title: "Lecturer",
       nidn: "7134765666230333",
@@ -94,37 +103,44 @@ export const biotechnologyFaculty: ProgramFacultyData = {
     "Internationally qualified faculty guiding students in research and innovation",
   facultyMembers: [
     {
+      id: "fauziah-novita-putri-rifai",
       name: "Fauziah Novita Putri Rifai, S.Si, M.Biotech",
       title: "Head of Biotechnology Study Program",
       nidn: "5438774675230243",
     },
     {
+      id: "waheni-rizki-aprilia",
       name: "Waheni Rizki Aprilia, S.Si., Ph.D.",
       title: "Vice Rector II",
       nidn: "8734771672230402",
     },
     {
+      id: "iffan-alif",
       name: "Iffan Alif, S.Si, M.Biotech",
       title: "Lecturer",
       nidn: "5454772673130273",
     },
     {
+      id: "nurul-hidayah",
       name: "Nurul Hidayah S.Si, M.Biotech",
       title: "Lecturer",
       nidn: "6960774675230252",
     },
     {
+      id: "salindri-prawitasari",
       name: "Salindri Prawitasari, S.Si, M.Si.",
       title: "Lecturer",
       nidn: "9659774675230242",
     },
     {
+      id: "dini-cahyani",
       name: "Dini Cahyani, S.Si, M.Biotech",
       title: "Lecturer",
       specialization: "Immunology",
       nidn: "8237775676230193",
     },
     {
+      id: "fikriya-novita-sari",
       name: "Fikriya Novita Sari, M.Si",
       title: "Lecturer",
       nidn: "1459777678230243",
@@ -137,6 +153,7 @@ export const communicationFaculty: ProgramFacultyData = {
     "Internationally qualified faculty guiding students in communication science",
   facultyMembers: [
     {
+      id: "muhamad-agung",
       name: "Muhamad Agung S, S.Sos., M.Sos",
       title: "Head of Communication Study Program",
       specialization: "Social Communication",
@@ -147,6 +164,7 @@ export const communicationFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com/citations?user=be-n4nUAAAAJ&hl=id",
     },
     {
+      id: "sutinnarto",
       name: "Sutinnarto, S.I.Kom., M.I.Kom",
       title: "Lecturer",
       specialization: "Public Speaking",
@@ -157,6 +175,7 @@ export const communicationFaculty: ProgramFacultyData = {
       ),
     },
     {
+      id: "lakna-tulasun",
       name: "Lakna Tulas'un, S.Sos, M.I.Kom",
       title: "Lecturer",
       specialization: "Journalism",
@@ -167,6 +186,7 @@ export const communicationFaculty: ProgramFacultyData = {
       ),
     },
     {
+      id: "rifatul-himmah",
       name: "Rif'atul Himmah, S.Sos. M.I.Kom.",
       title: "Lecturer",
       specialization: "Media and Gender",
@@ -177,6 +197,7 @@ export const communicationFaculty: ProgramFacultyData = {
       ),
     },
     {
+      id: "bondan-eko-suratno",
       name: "Bondan Eko Suratno, M.Hum",
       title: "Lecturer",
       nidn: "610108603",
@@ -188,11 +209,13 @@ export const lawFaculty: ProgramFacultyData = {
   description: "Internationally qualified faculty guiding students in law",
   facultyMembers: [
     {
+      id: "erwin",
       name: "Dr. Erwin, SH., MH., MKn.",
       title: "Head of Law Study Program",
       nidn: "9990637233",
     },
     {
+      id: "zain-arfin-utama",
       name: "Zain Arfin Utama, S.H., M.H.",
       title: "Lecturer",
       specialization: "Criminal Law Reform",
@@ -200,6 +223,7 @@ export const lawFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com/citations?user=uUEzUqAAAAAJ&hl=id",
     },
     {
+      id: "naufal-sebastian",
       name: "Naufal Sebastian, S.H.,M.H.",
       title: "Lecturer",
       nidn: "7435775676130282",
@@ -212,23 +236,27 @@ export const managementFaculty: ProgramFacultyData = {
     "Internationally qualified faculty guiding students in research and innovation",
   facultyMembers: [
     {
+      id: "agus-abdillah",
       name: "Dr. Ir. Agus F. Abdillah, MBA, ERMAP",
       title: "Lecturer",
       nidn: "6137744645130133",
       scopus_id: "59912689000",
     },
     {
+      id: "suharto-abdul-majid",
       name: "Dr. Suharto Abdul Majid, AMTrU, S.Sos, M.M.",
       title: "Lecturer",
       nidn: "315037102",
     },
     {
+      id: "mohammad-annas",
       name: "Dr. Mohammad Annas, S. Tr.Par, M.M.",
       title: "Lecturer",
       nidn: "312087404",
       scopus_id: "57886387600",
     },
     {
+      id: "reni-nur-arifah",
       name: "Reni Nur Arifah, S.E., M.M.",
       title: "Head of Management Study Program",
       specialization: "Financial Management",
@@ -238,6 +266,7 @@ export const managementFaculty: ProgramFacultyData = {
       ),
     },
     {
+      id: "yetty-yuliany",
       name: "Yetty Yuliany K, S.E., M.M",
       title: "Lecturer",
       specialization: "Human Resource Management",
@@ -248,6 +277,7 @@ export const managementFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com/citations?user=86pLtjMAAAAJ&hl=id&oi=sra",
     },
     {
+      id: "putri-aryo-jelang-fitri-khothimah",
       name: "Putri Aryo Jelang Fitri Khothimah, S.E., M.M.",
       title: "Lecturer",
       specialization: "Financial Management",
@@ -258,6 +288,7 @@ export const managementFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com/citations?user=aZglriAAAAAJ&hl=id",
     },
     {
+      id: "randika-shafly-fawwaz",
       name: "Randika Shafly Fawwaz, S.M., M.M",
       title: "Lecturer",
       specialization: "Human Resources",
@@ -267,6 +298,7 @@ export const managementFaculty: ProgramFacultyData = {
       ),
     },
     {
+      id: "eva-fachria",
       name: "Eva Fachria, S.E., M.S.M",
       title: "Lecturer",
       nidn: "9053772673230383",
@@ -279,6 +311,7 @@ export const midwiferyAssociateFaculty: ProgramFacultyData = {
     "Internationally qualified faculty guiding students in midwifery",
   facultyMembers: [
     {
+      id: "rizqitha",
       name: "Rizqitha, S.Tr.Keb., M.Tr.Keb",
       title: "Head of Bachelor Midwifery Program ",
       specialization:
@@ -287,6 +320,7 @@ export const midwiferyAssociateFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com/citations?user=dHKOQMYAAAAJ&hl=en&oi=ao",
     },
     {
+      id: "diah-widyatun",
       name: "Diah Widyatun, S.S.T., M.Tr.Keb",
       title: "Lecturer",
       specialization:
@@ -299,6 +333,7 @@ export const midwiferyAssociateFaculty: ProgramFacultyData = {
     },
 
     {
+      id: "sri-mularsih",
       name: "Bdn. Sri Mularsih, S.SiT, M.Kes",
       title: "Lecturer",
       specialization: "Reproductive Health",
@@ -306,6 +341,7 @@ export const midwiferyAssociateFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com/citations?user=8OnkCmsAAAAJ&hl=id",
     },
     {
+      id: "dewi-elliana",
       name: "Dewi Elliana, SKM, S.Tr.Keb, M.Kes",
       title: "Lecturer",
       specialization: "Reproductive Health",
@@ -316,6 +352,7 @@ export const midwiferyAssociateFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com/citations?user=Tw4V_ykAAAAJ&hl=id",
     },
     {
+      id: "rita-agustina",
       name: "dr. Rita Agustina, M.Biomed",
       title: "Lecturer",
       nidn: "4133752653230133",
@@ -325,6 +362,7 @@ export const midwiferyAssociateFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com.my/citations?user=2gvPGvYAAAAJ&hl=en&oi=ao",
     },
     {
+      id: "erna-setyaningsih",
       name: "Erna Setyaningsih, S.S.T.,M.Tr.Keb",
       title: "Lecturer",
       specialization: "Postpartum and Infant Care",
@@ -341,6 +379,7 @@ export const midwiferyBachelorFaculty: ProgramFacultyData = {
     "Internationally qualified faculty guiding students in midwifery",
   facultyMembers: [
     {
+      id: "mariza-mustika",
       name: "Bd. Mariza Mustika D, S.Tr.Keb., M.Tr.Keb",
       title: "Lecturer",
       specialization: "Nifas and Breastfeeding Midwifery",
@@ -348,6 +387,7 @@ export const midwiferyBachelorFaculty: ProgramFacultyData = {
       link: "https://scholar.google.com/citations?user=sMzeApYAAAAJ&hl=id&oi=ao",
     },
     {
+      id: "titik-kurniawati",
       name: "Bdn. Titik Kurniawati, S.SiT, M.Kes, M.Keb",
       title: "Lecturer",
       specialization: "Obstetrics",

@@ -128,7 +128,7 @@ export const people: DiasporaPerson[] = [
     },
   },
   {
-    id: "faheem",
+    id: "faheem-ahmed-khan",
     name: "Dr. Faheem Ahmed Khan, B.Sc, M.S, Ph.D",
     role: "TBD",
     univ: "M.I.T. USA",
@@ -172,7 +172,7 @@ export const people: DiasporaPerson[] = [
     },
   },
   {
-    id: "waheni",
+    id:"waheni-rizki-aprilia",
     name: "Waheni Rizki Aprilia, S.Si., Ph.D.",
     role: "TBD",
     univ: "Suranaree University of Technology, Thailand",
@@ -217,7 +217,7 @@ export const people: DiasporaPerson[] = [
     },
   },
   {
-    id: "dendi",
+    id: "dendi-krisna-nugraha",
     name: "Dendi Krisna Nugraha, M.Sc., Ph.D.",
     role: "TBD",
     univ: "Research Institute of Microbial Diseases, Osaka Japan",
@@ -240,7 +240,7 @@ export const people: DiasporaPerson[] = [
     },
   },
   {
-    id: "agus",
+    id:"agus-abdillah",
     name: "Dr. Ir. Agus F. Abdillah, MBA",
     role: "TBD",
     univ: "University of Birmingham, UK",
@@ -262,7 +262,7 @@ export const people: DiasporaPerson[] = [
     },
   },
   {
-    id: "endah",
+    id: "endah-agustina-lestari",
     name: "Endah Agustina Lestari BSc,MSc.",
     role: "TBD",
     univ: "University of Queensland, Australia",
