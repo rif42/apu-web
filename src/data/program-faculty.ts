@@ -4,6 +4,11 @@ export interface FacultyMember {
   photo?: string;
   nidn: string;
   link?: string;
+  scopus_id?: string;
+  scopus_index?: string;
+  sinta_id?: string;
+  sinta_index?: string;
+  specialization?: string;
 }
 
 export interface ProgramFacultyData {
@@ -17,8 +22,18 @@ export const biomedicalFaculty: ProgramFacultyData = {
   facultyMembers: [
     {
       name: "Nadya Audina NS. S.Si., M.Biomed",
-      title: "Head of Study Program",
-      nidn: "-",
+      title: "Head of Biomedical Study Program",
+      nidn: "5960775676230172",
+    },
+    {
+      name: "Mohammad Ariq Nazar, S.Si, M.Biomed",
+      title: "Head of Biomedical Study Program",
+      nidn: "0614029302",
+    },
+    {
+      name: "Nadya Audina NS. S.Si., M.Biomed",
+      title: "Head of Biomedical Study Program",
+      nidn: "5960775676230172",
     },
   ],
 };
@@ -29,33 +44,34 @@ export const biotechnologyFaculty: ProgramFacultyData = {
   facultyMembers: [
     {
       name: "Fauziah Novita Putri Rifai, S.Si, M.Biotech",
-      title: "Head of Study Program",
-      nidn: "-",
+      title: "Head of Biotechnology Study Program",
+      nidn: "5438774675230243",
+
     },
     {
       name: "Nurul Hidayah S.Si, M.Biotech",
       title: "Lecturer",
-      nidn: "-",
+      nidn: "6960774675230252",
     },
     {
       name: "Salindri Prawitasari, S.Si, M.Si.",
       title: "Lecturer",
-      nidn: "-",
+      nidn: "9659774675230242",
     },
     {
       name: "Dini Cahyani, S.Si, M.Biotech",
       title: "Lecturer",
-      nidn: "-",
+      nidn: "8237775676230193",
     },
     {
       name: "Iffan Alif, S.Si, M.Biotech",
       title: "Lecturer",
-      nidn: "-",
+      nidn: "5454772673130273",
     },
     {
       name: "Waheni Rizki Aprilia, S.Si., Ph.D.",
       title: "Lecturer",
-      nidn: "-",
+      nidn: "8734771672230402",
     },
     {
       name: "Adzani Gaisani Arda M.Sc",
@@ -65,7 +81,7 @@ export const biotechnologyFaculty: ProgramFacultyData = {
     {
       name: "Fikriya Novita Sari, S.Si., M.Si",
       title: "Lecturer",
-      nidn: "-",
+      nidn: "1459777678230243",
     },
   ],
 };
@@ -90,14 +106,14 @@ export const communicationFaculty: ProgramFacultyData = {
       nidn: "0614028102",
     },
     {
-      name: "Najmi Rizki Khairani, S.Sos., M.I.Kom",
-      title: "Lecturer",
-      nidn: "0610048605",
-    },
-    {
       name: "Rif'atul Himmah, S.Sos., M.I.Kom",
       title: "Lecturer",
       nidn: "2461772673230292",
+    },
+    {
+      name: "Bondan Eko Suratno, M.Hum",
+      title: "Lecturer",
+      nidn: "610108603",
     },
   ],
 };
@@ -116,19 +132,9 @@ export const lawFaculty: ProgramFacultyData = {
       nidn: "0615119301",
     },
     {
-      name: "Muhamad Chabib F.S.HI.,M.H.",
-      title: "Lecturer",
-      nidn: "0613059402",
-    },
-    {
-      name: "Pandam Bayu Seto Aji, M.H.",
-      title: "Lecturer",
-      nidn: "2734775676130202",
-    },
-    {
-      name: "Eko Setiyo Ary Wibowo S.H.I, M.H.",
-      title: "Lecturer",
-      nidn: "0608119001",
+      name: "Naufal Sebastian, S.H.,M.H.",
+      title: "lecturer",
+      nidn: "7435775676130282",
     },
   ],
 };
@@ -138,45 +144,49 @@ export const managementFaculty: ProgramFacultyData = {
     "Internationally qualified faculty guiding students in research and innovation",
   facultyMembers: [
     {
+      name: "Dr. Ir. Agus F. Abdillah, MBA, ERMAP",
+      title: "Lecturer",
+      nidn: "6137744645130133",
+      scopus_id: " 59912689000",
+    },
+    {
+      name: "Dr. Suharto Abdul Majid, M.M",
+      title: "Lecturer",
+      nidn: "315037102",
+    },
+    {
+      name: "Dr. Mohammad Annas, S. Tr.Par, M.M. ",
+      title: "Lecturer",
+      nidn: "312087404",
+      scopus_id: "57886387600",
+    },
+    {
       name: "Reni Nur Arifah, S.E., M.M.",
-      title: "Head of Study Program",
-      nidn: "-",
+      title: "Head of Management Study Program",
+      nidn: "0625069301",
     },
     {
       name: "Yetty Yuliany K, S.E., M.M",
       title: "Lecturer",
-      nidn: "-",
+      nidn: "0605077402",
     },
     {
       name: "Putri Aryo Jelang Fitri Khothimah, S.E., M.M.",
       title: "Lecturer",
-      nidn: "-",
+      nidn: "0601039501",
     },
     {
       name: "Randika Shafly Fawwaz, S.M., M.M",
       title: "Lecturer",
-      nidn: "-",
-    },
-    {
-      name: "Anindya Putri Utami, S.M., M.M.",
-      title: "Lecturer",
-      nidn: "-",
+      nidn: "2433775676130432",
     },
     {
       name: "Eva Fachria, S.E., M.S.M",
       title: "Lecturer",
-      nidn: "-",
+      nidn: "9053772673230383",
     },
-    {
-      name: "Dr. Ir. Agus F. Abdillah, MBA, ERMAP",
-      title: "Lecturer",
-      nidn: "-",
-    },
-    {
-      name: "dr. Suharto Abdul Majid, M.M",
-      title: "Lecturer",
-      nidn: "-",
-    },
+
+
     {
       name: "Dr. Mohammad Annas, S. Tr.Par, M.M.",
       title: "Lecturer",
@@ -190,9 +200,9 @@ export const midwiferyAssociateFaculty: ProgramFacultyData = {
     "Internationally qualified faculty guiding students in midwifery",
   facultyMembers: [
     {
-      name: "Bdn, Titik Kurniawati, S.SiT., M.Kes., M.Keb",
-      title: "lecturer",
-      nidn: "0622058101",
+      name: "Bdn, Titik Kurniawati, S.ST., M.Kes., M.Keb",
+      title: "Head of Midwifery Associate Study Program",
+      nidn: "0622068101",
     },
     {
       name: "Dewi Elliana, SKM., S.Tr.Keb., M.Kes",
@@ -202,7 +212,7 @@ export const midwiferyAssociateFaculty: ProgramFacultyData = {
     {
       name: "dr. Rita Agustina, M.Biomed",
       title: "Lecturer",
-      nidn: "NUPK 4133752653230133",
+      nidn: "4133752653230133",
     },
     {
       name: "Diah Widiyatun, S.ST., M.Tr.Keb",
@@ -210,9 +220,9 @@ export const midwiferyAssociateFaculty: ProgramFacultyData = {
       nidn: "0617069002",
     },
     {
-      name: "Erna Setyaningsih, SST., M.Tr.Keb",
+      name: "Erna Setyaningsih, S.ST., M.Tr.Keb",
       title: "Lecturer",
-      nidn: "-",
+      nidn: "356771672230323",
     },
   ],
 };
@@ -223,18 +233,8 @@ export const midwiferyBachelorFaculty: ProgramFacultyData = {
   facultyMembers: [
     {
       name: "Bd. Rizqitha, S.Tr.Keb., M.Tr.Keb",
-      title: "lecturer",
+      title: "Head of Midwifery Bachelor Study Program",
       nidn: "0608049401",
-    },
-    {
-      name: "Rizki Muji Lestari, S.SiT., M.Kes",
-      title: "lecturer",
-      nidn: "1124088901",
-    },
-    {
-      name: "Rizqi Dian Pratiwi, S.Tr.Keb., M.Tr.Keb",
-      title: "Lecturer",
-      nidn: "0616089605",
     },
     {
       name: "Bd. Mariza Mustika Dewi, S.Tr.Keb., M.Tr.Keb",
