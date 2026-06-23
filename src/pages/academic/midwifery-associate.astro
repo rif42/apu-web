@@ -3,14 +3,16 @@ import MainLayout from "@layouts/MainLayout.astro";
 import NavigationAPU from "@components/NavigationAPU.astro";
 import MidwiferyAssociateProgramHeroSection from "@sections/academic/program/MidwiferyAssociateProgramHeroSection.astro";
 import ProgramStrengthsSection from "@sections/academic/program/ProgramStrengthsSection.astro";
-import MidwiferyAssociateProgramVisionMissionSection from "@sections/academic/program/MidwiferyAssociateProgramVisionMissionSection.astro";
 import ProgramValuesSection from "@sections/academic/program/ProgramValuesSection.astro";
 import MidwiferyAssociateProgramCareersSection from "@sections/academic/program/MidwiferyAssociateProgramCareersSection.astro";
 import MidwiferyAssociateProgramFacultySection from "@sections/academic/program/MidwiferyAssociateProgramFacultySection.astro";
 import ContactSection from "@sections/ContactSection.astro";
 import Footer from "@components/Footer.astro";
 import ProgramMsgFromHead from "@sections/academic/program/ProgramMsgFromHead.astro";
-import MidwiferyAssociateProgramStrengthsBentoSection from "@sections/academic/program/MidwiferyAssociateProgramStrengthsBentoSection.astro";
+import ProgramStrengthsBentoSection from "@sections/academic/program/ProgramStrengthsBentoSection.astro";
+import ProgramVisionMissionSection from "@sections/academic/program/ProgramVisionMissionSection.astro";
+import { midwiferyAssociateStrengthsBento } from "@data/program-strengths-bento";
+import { midwiferyAssociateProgram } from "@data/program-details";
 import { midwiferyAssociateLeadershipMessage as leadershipMessage } from "@data/academic-programs";
 import BiomedicalGamePreviewSection from "@sections/academic/program/BiomedicalGamePreviewSection.astro";
 
@@ -26,8 +28,8 @@ import BiomedicalGamePreviewSection from "@sections/academic/program/BiomedicalG
   <ProgramMsgFromHead variant="light" data={leadershipMessage} />
   <!-- <BiomedicalGamePreviewSection /> -->
   <!-- <ProgramStrengthsSection /> -->
-  <MidwiferyAssociateProgramStrengthsBentoSection />
-  <MidwiferyAssociateProgramVisionMissionSection />
+  <ProgramStrengthsBentoSection data={midwiferyAssociateStrengthsBento} />
+  <ProgramVisionMissionSection data={midwiferyAssociateProgram} variant="communication" />
   <!-- <ProgramValuesSection /> -->
   <MidwiferyAssociateProgramCareersSection />
   <MidwiferyAssociateProgramFacultySection />

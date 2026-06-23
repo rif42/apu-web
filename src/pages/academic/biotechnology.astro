@@ -2,14 +2,16 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import NavigationAPU from "@components/NavigationAPU.astro";
 import ProgramStrengthsSection from "@sections/academic/program/ProgramStrengthsSection.astro";
-import BiotechnologyProgramVisionMissionSection from "@sections/academic/program/BiotechnologyProgramVisionMissionSection.astro";
 import ProgramValuesSection from "@sections/academic/program/ProgramValuesSection.astro";
 import BiotechnologyProgramCareersSection from "@sections/academic/program/BiotechnologyProgramCareersSection.astro";
 import BiotechnologyProgramFacultySection from "@sections/academic/program/BiotechnologyProgramFacultySection.astro";
 import ContactSection from "@sections/ContactSection.astro";
 import Footer from "@components/Footer.astro";
 import ProgramMsgFromHead from "@sections/academic/program/ProgramMsgFromHead.astro";
-import BiotechnologyProgramStrengthsBentoSection from "@sections/academic/program/BiotechnologyProgramStrengthsBentoSection.astro";
+import ProgramStrengthsBentoSection from "@sections/academic/program/ProgramStrengthsBentoSection.astro";
+import ProgramVisionMissionSection from "@sections/academic/program/ProgramVisionMissionSection.astro";
+import { biotechnologyStrengthsBento } from "@data/program-strengths-bento";
+import { biotechnologyProgram } from "@data/program-details";
 import { biotechnologyLeadershipMessage as leadershipMessage } from "@data/academic-programs";
 import BiomedicalGamePreviewSection from "@sections/academic/program/BiomedicalGamePreviewSection.astro";
 import BiotechnologyProgramHeroSection from "@/sections/academic/program/BiotechnologyProgramHeroSection.astro";
@@ -26,8 +28,8 @@ import BiotechnologyProgramHeroSection from "@/sections/academic/program/Biotech
   <ProgramMsgFromHead variant="light" data={leadershipMessage} />
   <!-- <BiomedicalGamePreviewSection /> -->
   <!-- <ProgramStrengthsSection /> -->
-  <BiotechnologyProgramStrengthsBentoSection />
-  <BiotechnologyProgramVisionMissionSection />
+  <ProgramStrengthsBentoSection data={biotechnologyStrengthsBento} />
+  <ProgramVisionMissionSection data={biotechnologyProgram} variant="biotechnology" />
   <!-- <ProgramValuesSection /> -->
   <!-- <BiotechnologyProgramCareersSection /> -->
   <BiotechnologyProgramFacultySection />

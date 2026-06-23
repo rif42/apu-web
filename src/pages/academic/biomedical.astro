@@ -12,6 +12,8 @@ import Footer from "@components/Footer.astro";
 import ProgramMsgFromHead from "@sections/academic/program/ProgramMsgFromHead.astro";
 import ProgramStrengthsBentoSection from "@sections/academic/program/ProgramStrengthsBentoSection.astro";
 import BiomedicalGamePreviewSection from "@sections/academic/program/BiomedicalGamePreviewSection.astro";
+import { biomedicalStrengthsBento } from "@data/program-strengths-bento";
+import { biomedicalProgram } from "@data/program-details";
 
 ---
 
@@ -25,8 +27,8 @@ import BiomedicalGamePreviewSection from "@sections/academic/program/BiomedicalG
   <ProgramMsgFromHead variant="light" />
   <BiomedicalGamePreviewSection />
   <!-- <ProgramStrengthsSection /> -->
-  <ProgramStrengthsBentoSection />
-  <ProgramVisionMissionSection />
+  <ProgramStrengthsBentoSection data={biomedicalStrengthsBento} />
+  <ProgramVisionMissionSection data={biomedicalProgram} />
   <!-- <ProgramValuesSection /> -->
   <ProgramCareersSection />
   <ProgramFacultySection />
