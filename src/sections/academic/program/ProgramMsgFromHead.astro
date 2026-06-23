@@ -2,7 +2,7 @@
 import ScrollReveal from "@components/ScrollReveal.astro";
 import CtaButton from "@components/CtaButton.astro";
 import BackgroundBlobs from "@components/BackgroundBlobs.astro";
-import { leadershipMessage } from "@data/academic-programs";
+import { biomedicalLeadershipMessage } from "@data/academic-programs";
 import type { LeadershipMessage } from "@data/leadership";
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   data?: LeadershipMessage;
 }
 
-const { variant = "dark", data = leadershipMessage } = Astro.props;
+const { variant = "dark", data = biomedicalLeadershipMessage } = Astro.props;
 
 const { kicker, title, quote, leaderName, leaderTitle, leaderTitle2, leaderImage, cta } = data;
 ---
