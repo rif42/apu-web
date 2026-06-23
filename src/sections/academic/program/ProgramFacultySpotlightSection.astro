@@ -1,0 +1,421 @@
+---
+import ScrollReveal from "@components/ScrollReveal.astro";
+import SectionHeader from "@components/SectionHeader.astro";
+import type { ProgramFacultyData } from "@data/program-faculty";
+
+interface Props {
+  data: ProgramFacultyData;
+}
+
+const { data } = Astro.props;
+const members = data.facultyMembers;
+const featured = members[0];
+
+const facultyAvatarGradients = [
+  "from-blue-500 to-indigo-600",
+  "from-emerald-500 to-teal-600",
+  "from-amber-500 to-orange-600",
+  "from-rose-500 to-pink-600",
+  "from-violet-500 to-purple-600",
+  "from-cyan-500 to-blue-600",
+];
+
+function gradientFor(index: number): string {
+  return facultyAvatarGradients[index % facultyAvatarGradients.length];
+}
+
+function getInitials(name: string): string {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .filter((c) => c === c.toUpperCase())
+    .slice(0, 2)
+    .join("");
+}
+
+const featuredVisual = featured?.photo
+  ? `<img src="${featured.photo}" alt="Portrait of ${featured.name}" class="h-full w-full object-cover border-0" loading="eager" data-featured-image />`
+  : `<div class="w-full h-full bg-gradient-to-br ${gradientFor(0)} flex items-center justify-center" data-featured-initials><span class="text-white text-4xl md:text-5xl font-bold">${getInitials(featured?.name ?? "")}</span></div>`;
+---
+
+<section
+  id="dosen-spotlight"
+  class="apu-section-shell relative overflow-hidden"
+  aria-label="Faculty spotlight"
+  data-members={JSON.stringify(members)}
+>
+  <div class="content-max">
+    <ScrollReveal>
+      <SectionHeader
+        kicker="LECTURER SPOTLIGHT"
+        title="Meet Our Experts"
+        description={data.description}
+        class="text-center mb-16"
+        titleClass="text-h2 text-brand-primary-deep mb-4"
+      />
+    </ScrollReveal>
+
+    <!-- Featured lecturer -->
+    <ScrollReveal>
+      <div
+        class="apu-glass-card rounded-none lecturers-featured-card mb-10 overflow-hidden flex justify-center py-6 md:py-10 relative"
+      >
+        <div
+          class="relative z-10 flex flex-col justify-center w-full md:flex-row"
+        >
+          <div
+            class="order-2 w-full flex flex-col justify-center px-4 md:order-1 md:w-1/2 md:px-0 md:pl-10"
+          >
+            <h2
+              class="text-h2 mb-3 text-white"
+              data-featured-name
+            >
+              {featured?.name}
+            </h2>
+            <p
+              class="text-body mb-3 text-apu-accent"
+              data-featured-title
+            >
+              {featured?.title}
+            </p>
+
+            <p
+              class:list={[
+                "text-body-s text-white/80 mb-3",
+                { hidden: !featured?.specialization },
+              ]}
+              data-featured-specialization
+            >
+              {featured?.specialization || ""}
+            </p>
+
+            <p
+              class:list={[
+                "text-caption text-white/60 mb-6",
+                { hidden: !featured?.nidn || featured?.nidn === "-" },
+              ]}
+              data-featured-nidn
+            >
+              {featured?.nidn && featured.nidn !== "-"
+                ? `NIDN ${featured.nidn}`
+                : ""}
+            </p>
+
+            <div data-featured-link-wrapper class="flex flex-wrap items-center gap-4">
+              <a
+                href={featured?.link || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="apu-btn apu-btn--primary inline-flex items-center gap-2"
+                data-featured-link
+              >
+                View Profile
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14"></path>
+                  <path d="m12 5 7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div
+            class="relative order-1 w-full mb-4 md:mb-0 md:order-2 md:w-96"
+          >
+            <div
+              class="relative h-80 md:h-96 w-full overflow-hidden rounded-2xl flex items-center justify-center"
+              data-featured-visual
+            >
+              <Fragment set:html={featuredVisual} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </ScrollReveal>
+
+    <!-- Carousel header -->
+    <div class="mb-6 flex items-end justify-between gap-6">
+      <ScrollReveal class="flex-1">
+        <h2
+          class="font-epilogue font-semibold text-2xl text-apu-navy md:text-4xl"
+        >
+          Other Lecturers
+        </h2>
+      </ScrollReveal>
+
+      <div
+        class="hidden items-center gap-2 md:flex"
+        data-lecturers-controls
+      >
+        <button
+          type="button"
+          data-lecturers-prev
+          aria-label="Previous lecturers"
+          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-border bg-white/80 text-brand-primary-deep shadow-sm transition hover:bg-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-apu-accent))]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m15 18-6-6 6-6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          data-lecturers-next
+          aria-label="Next lecturers"
+          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-border bg-white/80 text-brand-primary-deep shadow-sm transition hover:bg-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-apu-accent))]"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="m9 18 6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Carousel -->
+    <ScrollReveal delay={150}>
+      <div data-lecturers-carousel>
+        <div
+          data-lecturers-track
+          class="lecturers-track flex snap-x snap-mandatory gap-4 overflow-x-auto pb-6"
+          tabindex="0"
+          aria-label="Faculty spotlight carousel"
+        >
+          {
+            members.map((member, index) => (
+              <article
+                class="group apu-glass-card apu-interactive-card w-[82%] flex-shrink-0 snap-start cursor-pointer p-4 sm:p-5 sm:w-[47%] md:w-[31%] lg:w-[23%] xl:w-[18%]"
+                data-member-id={member.id}
+                data-gradient={gradientFor(index)}
+                data-initials={getInitials(member.name)}
+                tabindex="0"
+                role="button"
+              >
+                <div class="mb-5 h-64 md:h-72 w-full overflow-hidden rounded-xl flex items-center justify-center">
+                  {member.photo ? (
+                    <img
+                      draggable="false"
+                      src={member.photo}
+                      alt={`Portrait of ${member.name}`}
+                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div
+                      draggable="false"
+                      class={`h-full w-full bg-gradient-to-br ${gradientFor(index)} flex items-center justify-center`}
+                    >
+                      <span class="text-white text-2xl md:text-3xl font-bold">
+                        {getInitials(member.name)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <h3
+                  draggable="false"
+                  class="text-lg font-semibold text-brand-text mb-1"
+                >
+                  {member.name}
+                </h3>
+                <p class="text-caption text-brand-text-muted">{member.title}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </ScrollReveal>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    const section = document.querySelector("#dosen-spotlight");
+    const members = JSON.parse(section?.getAttribute("data-members") || "[]");
+
+    const featuredName = section?.querySelector("[data-featured-name]");
+    const featuredTitle = section?.querySelector("[data-featured-title]");
+    const featuredSpecialization = section?.querySelector("[data-featured-specialization]");
+    const featuredNidn = section?.querySelector("[data-featured-nidn]");
+    const featuredLink = section?.querySelector("[data-featured-link]");
+    const featuredLinkWrapper = section?.querySelector("[data-featured-link-wrapper]");
+    const featuredVisual = section?.querySelector("[data-featured-visual]");
+
+    const updateFeatured = (id) => {
+      const member = members.find((m) => m.id === id);
+      const index = members.findIndex((m) => m.id === id);
+      if (!member || !section) return;
+
+      const card = section.querySelector(`[data-member-id="${id}"]`);
+      const gradient = card?.getAttribute("data-gradient") || "from-blue-500 to-indigo-600";
+      const initials = card?.getAttribute("data-initials") || "";
+
+      if (featuredName) featuredName.textContent = member.name;
+      if (featuredTitle) featuredTitle.textContent = member.title;
+
+      if (featuredSpecialization) {
+        featuredSpecialization.textContent = member.specialization || "";
+        featuredSpecialization.style.display = member.specialization ? "" : "none";
+      }
+
+      if (featuredNidn) {
+        if (member.nidn && member.nidn !== "-") {
+          featuredNidn.textContent = `NIDN ${member.nidn}`;
+          featuredNidn.style.display = "";
+        } else {
+          featuredNidn.style.display = "none";
+        }
+      }
+
+      if (featuredLink) {
+        featuredLink.href = member.link || "#";
+      }
+      if (featuredLinkWrapper) {
+        featuredLinkWrapper.style.display = member.link ? "flex" : "none";
+      }
+
+      if (featuredVisual) {
+        if (member.photo) {
+          featuredVisual.innerHTML = `<img src="${member.photo}" alt="Portrait of ${member.name}" class="h-full w-full object-cover border-0" loading="eager" data-featured-image />`;
+        } else {
+          featuredVisual.innerHTML = `<div class="w-full h-full bg-gradient-to-br ${gradient} flex items-center justify-center" data-featured-initials><span class="text-white text-4xl md:text-5xl font-bold">${initials}</span></div>`;
+        }
+      }
+    };
+
+    section?.querySelectorAll("[data-member-id]").forEach((card) => {
+      card.addEventListener("click", (event) => {
+        event.preventDefault();
+        const id = card.getAttribute("data-member-id");
+        if (id) {
+          updateFeatured(id);
+          history.replaceState(null, "", `#dosen-spotlight-${id}`);
+        }
+      });
+      card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          const id = card.getAttribute("data-member-id");
+          if (id) {
+            updateFeatured(id);
+            history.replaceState(null, "", `#dosen-spotlight-${id}`);
+          }
+        }
+      });
+    });
+
+    const hashMatch = location.hash.match(/^#dosen-spotlight-(.+)/);
+    if (hashMatch) updateFeatured(hashMatch[1]);
+
+    const carousels = document.querySelectorAll("[data-lecturers-carousel]");
+    carousels.forEach((root) => {
+      const track = root.querySelector("[data-lecturers-track]");
+      const controls = root.closest("section")?.querySelector("[data-lecturers-controls]");
+      const prev = controls?.querySelector("[data-lecturers-prev]");
+      const next = controls?.querySelector("[data-lecturers-next]");
+
+      if (!track) return;
+
+      const getGap = () => {
+        const style = window.getComputedStyle(track);
+        return parseInt(style.gap || "0", 10) || 0;
+      };
+
+      const getCardWidth = () => {
+        const card = track.querySelector(":scope > article");
+        return card?.offsetWidth || track.clientWidth;
+      };
+
+      const scrollStep = () => getCardWidth() + getGap();
+
+      const updateButtons = () => {
+        if (!prev || !next) return;
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        prev.disabled = track.scrollLeft <= 0;
+        next.disabled = track.scrollLeft >= maxScroll - 1;
+        prev.style.opacity = prev.disabled ? "0.4" : "";
+        next.style.opacity = next.disabled ? "0.4" : "";
+      };
+
+      const scrollBy = (direction) => {
+        track.scrollBy({ left: direction * scrollStep(), behavior: "smooth" });
+      };
+
+      prev?.addEventListener("click", () => scrollBy(-1));
+      next?.addEventListener("click", () => scrollBy(1));
+
+      track.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          scrollBy(-1);
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          scrollBy(1);
+        }
+      });
+
+      track.addEventListener("scroll", updateButtons, { passive: true });
+      window.addEventListener("resize", updateButtons, { passive: true });
+      updateButtons();
+    });
+  })();
+</script>
+
+<style>
+  .lecturers-featured-card {
+    --apu-card-bg: rgb(var(--color-apu-navy));
+    --apu-card-border: rgb(var(--color-apu-accent) / 0.22);
+    --apu-card-shadow: 0 28px 80px rgb(var(--color-apu-navy) / 0.35);
+    --apu-btn-primary-bg: rgb(var(--color-apu-accent));
+    --apu-btn-primary-color: rgb(var(--color-apu-navy));
+    --apu-btn-primary-hover-bg: rgb(var(--color-base-surface));
+    --apu-btn-primary-hover-color: rgb(var(--color-apu-navy));
+  }
+
+  @media (max-width: 767px) {
+    [data-featured-image] {
+      max-height: 80vh;
+    }
+  }
+
+  .lecturers-track {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    cursor: grab;
+    touch-action: pan-x;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .lecturers-track::-webkit-scrollbar {
+    display: none;
+  }
+</style>
