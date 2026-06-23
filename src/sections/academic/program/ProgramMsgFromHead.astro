@@ -12,7 +12,7 @@ interface Props {
 
 const { variant = "dark", data = leadershipMessage } = Astro.props;
 
-const { kicker, title, quote, leaderName, leaderTitle, leaderImage, cta } = data;
+const { kicker, title, quote, leaderName, leaderTitle, leaderTitle2, leaderImage, cta } = data;
 ---
 
 <section
@@ -162,6 +162,11 @@ const { kicker, title, quote, leaderName, leaderTitle, leaderImage, cta } = data
             <p class="text-caption text-[rgb(var(--leadership-text-muted))] mt-1 tracking-wider">
               {leaderTitle}
             </p>
+            {leaderTitle2 && (
+              <p class="text-caption text-[rgb(var(--leadership-text-muted))] mt-1 tracking-wider">
+                {leaderTitle2}
+              </p>
+            )}
             <div
               class="mt-3 h-0.5 w-24 rounded-full bg-gradient-to-r from-[rgb(var(--color-apu-accent))] to-transparent"
             >
