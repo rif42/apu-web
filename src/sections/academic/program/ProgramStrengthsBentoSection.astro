@@ -235,7 +235,7 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
 
 </style>
 
-<script is:inline>
+<script is:inline data-astro-rerun>
   (function () {
     const section = document.querySelector('[data-bento-section]');
     if (!section) return;
@@ -454,23 +454,26 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
       });
     });
 
-    document.addEventListener('click', function (e) {
-      if (activeIndex === null || isAnimating) return;
-      const target = e.target;
-      const isTrigger = target.closest('[data-bento-trigger]');
-      const isClone = target.closest('.bento-clone');
-      if (!isTrigger && !isClone) {
-        closeExpanded();
-      }
-    });
+    if (!window.__apuBentoGlobalBound) {
+      window.__apuBentoGlobalBound = true;
+      document.addEventListener('click', function (e) {
+        if (activeIndex === null || isAnimating) return;
+        const target = e.target;
+        const isTrigger = target.closest('[data-bento-trigger]');
+        const isClone = target.closest('.bento-clone');
+        if (!isTrigger && !isClone) {
+          closeExpanded();
+        }
+      });
 
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && activeIndex !== null && !isAnimating) {
-        closeExpanded();
-      }
-    });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && activeIndex !== null && !isAnimating) {
+          closeExpanded();
+        }
+      });
+    }
 
-    if (!isMobile && triggers.length > 0) {
+    if (triggers.length > 0) {
       expand(triggers[0]);
     }
   })();

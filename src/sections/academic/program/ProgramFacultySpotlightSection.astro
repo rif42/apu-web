@@ -34,7 +34,7 @@ function getInitials(name: string): string {
 }
 
 const featuredVisual = featured?.photo
-  ? `<img src="${featured.photo}" alt="Portrait of ${featured.name}" class="h-full w-full object-cover border-0" loading="eager" data-featured-image />`
+  ? `<img src="${featured.photo}" alt="Portrait of ${featured.name}" class="h-full w-full object-contain border-0" loading="eager" data-featured-image />`
   : `<div class="w-full h-full bg-gradient-to-br ${gradientFor(0)} flex items-center justify-center" data-featured-initials><span class="text-white text-4xl md:text-5xl font-bold">${getInitials(featured?.name ?? "")}</span></div>`;
 ---
 
@@ -226,7 +226,7 @@ const featuredVisual = featured?.photo
                       draggable="false"
                       src={member.photo}
                       alt={`Portrait of ${member.name}`}
-                      class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      class="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
                   ) : (
@@ -310,7 +310,7 @@ const featuredVisual = featured?.photo
 
       if (featuredVisual) {
         if (member.photo) {
-          featuredVisual.innerHTML = `<img src="${member.photo}" alt="Portrait of ${member.name}" class="h-full w-full object-cover border-0" loading="eager" data-featured-image />`;
+          featuredVisual.innerHTML = `<img src="${member.photo}" alt="Portrait of ${member.name}" class="h-full w-full object-contain border-0" loading="eager" data-featured-image />`;
         } else {
           featuredVisual.innerHTML = `<div class="w-full h-full bg-gradient-to-br ${gradient} flex items-center justify-center" data-featured-initials><span class="text-white text-4xl md:text-5xl font-bold">${initials}</span></div>`;
         }
