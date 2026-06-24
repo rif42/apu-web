@@ -318,22 +318,22 @@ const featuredVisual = featured?.photo
     };
 
     section?.querySelectorAll("[data-member-id]").forEach((card) => {
+      // Prevent default focus scroll on mouse click while still allowing click/update.
+      card.addEventListener("mousedown", (event) => {
+        event.preventDefault();
+      }, { signal });
+
       card.addEventListener("click", (event) => {
         event.preventDefault();
         const id = card.getAttribute("data-member-id");
-        if (id) {
-          updateFeatured(id);
-          history.replaceState(null, "", `#dosen-spotlight-${id}`);
-        }
+        if (id) updateFeatured(id);
       }, { signal });
+
       card.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           const id = card.getAttribute("data-member-id");
-          if (id) {
-            updateFeatured(id);
-            history.replaceState(null, "", `#dosen-spotlight-${id}`);
-          }
+          if (id) updateFeatured(id);
         }
       }, { signal });
     });
