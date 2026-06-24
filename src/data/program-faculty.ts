@@ -406,5 +406,12 @@ export const midwiferyBachelorFaculty: ProgramFacultyData = {
         "/images/academic/lecturer_images/bachelor_midwifery/Sri_Mularsih.webp"
       )
     },
+    {
+      id: "lia-ayu",
+      name: "Bdn. Lia Ayu Kusumawardani, S.ST., M.Tr.Keb",
+      title: "Lecturer",
+      specialization: "",
+      nidn: "",
+    },
   ],
 };
