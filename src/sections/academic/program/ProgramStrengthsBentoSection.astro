@@ -443,7 +443,7 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
       isAnimating = true;
       collapseActive(function () {
         showHint();
-        if (trigger) trigger.focus();
+        if (trigger) trigger.focus({ preventScroll: true });
         isAnimating = false;
       });
     }
