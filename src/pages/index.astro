@@ -31,14 +31,17 @@ import EcosystemSection from "@sections/EcosystemSection.astro";
         <!-- <RequirementsSection /> -->
         <ContactSection />
     </main>
-    <script is:inline>
+    <script is:inline data-astro-rerun>
     (function() {
-        var isTransitioning = false;
         var anchorPanel = document.getElementById('ecosystem-anchor');
         var locationsPanel = document.getElementById('ecosystem-locations');
         var trigger = anchorPanel && anchorPanel.querySelector('.ecosystem-trigger');
 
         if (!trigger || !anchorPanel || !locationsPanel) return;
+        if (trigger.dataset.apuEcosystemBound) return;
+        trigger.dataset.apuEcosystemBound = 'true';
+
+        var isTransitioning = false;
 
         trigger.addEventListener('click', function(event) {
             event.preventDefault();

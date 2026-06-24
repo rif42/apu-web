@@ -319,10 +319,15 @@ const {
     });
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initAllMaps);
-  } else {
+  function readyInit() {
     initAllMaps();
+  }
+
+  document.addEventListener("astro:page-load", readyInit);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", readyInit);
+  } else {
+    readyInit();
   }
 </script>
 

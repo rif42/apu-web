@@ -232,164 +232,183 @@ const {
 
 <script>
   (function () {
-    // Particle system
-    const particleContainer = document.getElementById("akademik-hero-particles");
-    if (particleContainer) {
-      for (let i = 0; i < 24; i++) {
-        const particle = document.createElement("div");
-        const size = Math.random() * 2.5 + 1;
-        particle.className = "absolute rounded-full";
-        particle.style.cssText = `
-          width: ${size}px;
-          height: ${size}px;
-          left: ${Math.random() * 100}%;
-          top: ${Math.random() * 100}%;
-          background: rgba(252, 188, 85, ${Math.random() * 0.25 + 0.1});
-          animation: akademikFloat ${Math.random() * 5 + 5}s ease-in-out infinite;
-          animation-delay: ${Math.random() * 4}s;
+    let abortController = null;
+    let rafId = null;
+
+    function cleanup() {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      if (abortController) {
+        abortController.abort();
+        abortController = null;
+      }
+    }
+
+    function initHero() {
+      cleanup();
+      abortController = new AbortController();
+      const signal = abortController.signal;
+
+      const particleContainer = document.getElementById("akademik-hero-particles");
+      if (particleContainer) {
+        for (let i = 0; i < 24; i++) {
+          const particle = document.createElement("div");
+          const size = Math.random() * 2.5 + 1;
+          particle.className = "absolute rounded-full";
+          particle.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            background: rgba(252, 188, 85, ${Math.random() * 0.25 + 0.1});
+            animation: akademikFloat ${Math.random() * 5 + 5}s ease-in-out infinite;
+            animation-delay: ${Math.random() * 4}s;
+          `;
+          particleContainer.appendChild(particle);
+        }
+      }
+
+      if (!document.getElementById("akademik-hero-animations")) {
+        const style = document.createElement("style");
+        style.id = "akademik-hero-animations";
+        style.textContent = `
+          @keyframes akademikFloat {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.15; }
+            25% { transform: translateY(-18px) translateX(8px); opacity: 0.4; }
+            50% { transform: translateY(-32px) translateX(-4px); opacity: 0.25; }
+            75% { transform: translateY(-14px) translateX(12px); opacity: 0.35; }
+          }
         `;
-        particleContainer.appendChild(particle);
+        document.head.appendChild(style);
       }
+
+      const bg = document.getElementById("akademik-hero-bg");
+      const kicker = document.getElementById("akademik-hero-kicker");
+      const headline = document.getElementById("akademik-hero-headline");
+      const desc = document.getElementById("akademik-hero-desc");
+      const cta = document.getElementById("akademik-hero-cta");
+      const scrollIndicator = document.getElementById("akademik-hero-scroll");
+      const bgImg = document.getElementById("akademik-hero-img");
+
+      document.fonts.ready.then(() => {
+        if (bg) {
+          bg.style.transition = "opacity 2s cubic-bezier(0.16, 1, 0.3, 1), transform 2.4s cubic-bezier(0.16, 1, 0.3, 1)";
+          bg.style.opacity = "1";
+          bg.style.transform = "scale(1)";
+        }
+
+        setTimeout(() => {
+          if (kicker) {
+            kicker.style.transition = "opacity 0.7s ease-out, transform 0.7s ease-out";
+            kicker.style.opacity = "1";
+            kicker.style.transform = "translateY(0)";
+          }
+        }, 400);
+
+        setTimeout(() => {
+          if (headline) {
+            headline.style.transition = "opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1)";
+            headline.style.opacity = "1";
+            headline.style.transform = "translateY(0)";
+          }
+        }, 700);
+
+        setTimeout(() => {
+          if (desc) {
+            desc.style.transition = "opacity 0.8s ease-out, transform 0.8s ease-out";
+            desc.style.opacity = "1";
+            desc.style.transform = "translateY(0)";
+          }
+        }, 1050);
+
+        setTimeout(() => {
+          if (cta) {
+            cta.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+            cta.style.opacity = "1";
+            cta.style.transform = "translateY(0)";
+          }
+        }, 1400);
+
+        setTimeout(() => {
+          if (scrollIndicator) {
+            scrollIndicator.style.transition = "opacity 0.6s ease-out";
+            scrollIndicator.style.opacity = "1";
+          }
+        }, 1900);
+      });
+
+      let mouseX = 0;
+      let mouseY = 0;
+      let currentX = 0;
+      let currentY = 0;
+
+      document.addEventListener("mousemove", (e) => {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 16;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 16;
+      }, { signal });
+
+      function animateParallax() {
+        currentX += (mouseX - currentX) * 0.06;
+        currentY += (mouseY - currentY) * 0.06;
+        if (bgImg) {
+          bgImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(1.04)`;
+        }
+        rafId = requestAnimationFrame(animateParallax);
+      }
+      animateParallax();
+
+      let ticking = false;
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              const scrollY = window.scrollY;
+              const hero = document.getElementById("akademik-hero");
+              const heroHeight = hero?.clientHeight || window.innerHeight;
+              const progress = Math.min(scrollY / heroHeight, 1);
+
+              if (headline) {
+                const yOffset = -progress * 18;
+                const opacity = 1 - progress * 0.9;
+                headline.style.transform = `translateY(${yOffset}%)`;
+                headline.style.opacity = String(Math.max(opacity, 0));
+              }
+
+              if (kicker) {
+                kicker.style.opacity = String(Math.max(1 - progress * 1.5, 0));
+                kicker.style.transform = `translateY(${-progress * 20}%)`;
+              }
+
+              if (desc) {
+                desc.style.opacity = String(Math.max(1 - progress * 1.2, 0));
+              }
+
+              if (cta) {
+                cta.style.opacity = String(Math.max(1 - progress * 1.4, 0));
+              }
+
+              if (scrollIndicator) {
+                scrollIndicator.style.opacity = String(Math.max(1 - progress * 4, 0));
+              }
+
+              ticking = false;
+            });
+            ticking = true;
+          }
+        },
+        { passive: true, signal },
+      );
     }
 
-    // Inject keyframes
-    const style = document.createElement("style");
-    style.textContent = `
-      @keyframes akademikFloat {
-        0%, 100% { transform: translateY(0) translateX(0); opacity: 0.15; }
-        25% { transform: translateY(-18px) translateX(8px); opacity: 0.4; }
-        50% { transform: translateY(-32px) translateX(-4px); opacity: 0.25; }
-        75% { transform: translateY(-14px) translateX(12px); opacity: 0.35; }
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Elements
-    const bg = document.getElementById("akademik-hero-bg");
-    const kicker = document.getElementById("akademik-hero-kicker");
-    const headline = document.getElementById("akademik-hero-headline");
-    const desc = document.getElementById("akademik-hero-desc");
-    const cta = document.getElementById("akademik-hero-cta");
-    const scrollIndicator = document.getElementById("akademik-hero-scroll");
-    const bgImg = document.getElementById("akademik-hero-img");
-
-    // Entrance animations
-    document.fonts.ready.then(() => {
-      // Background fade + scale
-      if (bg) {
-        bg.style.transition = "opacity 2s cubic-bezier(0.16, 1, 0.3, 1), transform 2.4s cubic-bezier(0.16, 1, 0.3, 1)";
-        bg.style.opacity = "1";
-        bg.style.transform = "scale(1)";
-      }
-
-      // Kicker
-      setTimeout(() => {
-        if (kicker) {
-          kicker.style.transition = "opacity 0.7s ease-out, transform 0.7s ease-out";
-          kicker.style.opacity = "1";
-          kicker.style.transform = "translateY(0)";
-        }
-      }, 400);
-
-      // Headline
-      setTimeout(() => {
-        if (headline) {
-          headline.style.transition = "opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1)";
-          headline.style.opacity = "1";
-          headline.style.transform = "translateY(0)";
-        }
-      }, 700);
-
-      // Description
-      setTimeout(() => {
-        if (desc) {
-          desc.style.transition = "opacity 0.8s ease-out, transform 0.8s ease-out";
-          desc.style.opacity = "1";
-          desc.style.transform = "translateY(0)";
-        }
-      }, 1050);
-
-      // CTA
-      setTimeout(() => {
-        if (cta) {
-          cta.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
-          cta.style.opacity = "1";
-          cta.style.transform = "translateY(0)";
-        }
-      }, 1400);
-
-      // Scroll indicator
-      setTimeout(() => {
-        if (scrollIndicator) {
-          scrollIndicator.style.transition = "opacity 0.6s ease-out";
-          scrollIndicator.style.opacity = "1";
-        }
-      }, 1900);
-    });
-
-    // Mouse parallax
-    let mouseX = 0;
-    let mouseY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    document.addEventListener("mousemove", (e) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 16;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 16;
-    });
-
-    function animateParallax() {
-      currentX += (mouseX - currentX) * 0.06;
-      currentY += (mouseY - currentY) * 0.06;
-      if (bgImg) {
-        bgImg.style.transform = `translate(${currentX}px, ${currentY}px) scale(1.04)`;
-      }
-      requestAnimationFrame(animateParallax);
+    document.addEventListener("astro:page-load", initHero);
+    document.addEventListener("astro:before-swap", cleanup);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initHero);
+    } else {
+      initHero();
     }
-    animateParallax();
-
-    // Scroll-driven fade
-    let ticking = false;
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          requestAnimationFrame(() => {
-            const scrollY = window.scrollY;
-            const hero = document.getElementById("akademik-hero");
-            const heroHeight = hero?.clientHeight || window.innerHeight;
-            const progress = Math.min(scrollY / heroHeight, 1);
-
-            if (headline) {
-              const yOffset = -progress * 18;
-              const opacity = 1 - progress * 0.9;
-              headline.style.transform = `translateY(${yOffset}%)`;
-              headline.style.opacity = String(Math.max(opacity, 0));
-            }
-
-            if (kicker) {
-              kicker.style.opacity = String(Math.max(1 - progress * 1.5, 0));
-              kicker.style.transform = `translateY(${-progress * 20}%)`;
-            }
-
-            if (desc) {
-              desc.style.opacity = String(Math.max(1 - progress * 1.2, 0));
-            }
-
-            if (cta) {
-              cta.style.opacity = String(Math.max(1 - progress * 1.4, 0));
-            }
-
-            if (scrollIndicator) {
-              scrollIndicator.style.opacity = String(Math.max(1 - progress * 4, 0));
-            }
-
-            ticking = false;
-          });
-          ticking = true;
-        }
-      },
-      { passive: true },
-    );
   })();
 </script>

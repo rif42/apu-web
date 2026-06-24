@@ -107,27 +107,50 @@ import ScrollReveal from "@components/ScrollReveal.astro";
 
 <script>
   (function () {
-    const btn = document.getElementById("chairman-toggle");
-    const msg = document.getElementById("chairman-full-message");
-    const icon = document.getElementById("chairman-toggle-icon");
-    if (!btn || !msg || !icon) return;
+    let abortController: AbortController | null = null;
 
-    const label = btn.querySelector("span");
-    if (!label) return;
-
-    btn.addEventListener("click", () => {
-      const isOpen = msg.style.maxHeight !== "0px" && msg.style.maxHeight !== "";
-      if (isOpen) {
-        msg.style.maxHeight = "0px";
-        btn.setAttribute("aria-expanded", "false");
-        label.textContent = "Baca Pesan Lengkap";
-        icon.style.transform = "rotate(0deg)";
-      } else {
-        msg.style.maxHeight = msg.scrollHeight + "px";
-        btn.setAttribute("aria-expanded", "true");
-        label.textContent = "Tutup Pesan";
-        icon.style.transform = "rotate(180deg)";
+    function cleanup() {
+      if (abortController) {
+        abortController.abort();
+        abortController = null;
       }
-    });
+    }
+
+    function initChairmanMessage() {
+      cleanup();
+      abortController = new AbortController();
+      const signal = abortController.signal;
+
+      const btn = document.getElementById("chairman-toggle");
+      const msg = document.getElementById("chairman-full-message");
+      const icon = document.getElementById("chairman-toggle-icon");
+      if (!btn || !msg || !icon) return;
+
+      const label = btn.querySelector("span");
+      if (!label) return;
+
+      btn.addEventListener("click", () => {
+        const isOpen = msg.style.maxHeight !== "0px" && msg.style.maxHeight !== "";
+        if (isOpen) {
+          msg.style.maxHeight = "0px";
+          btn.setAttribute("aria-expanded", "false");
+          label.textContent = "Baca Pesan Lengkap";
+          icon.style.transform = "rotate(0deg)";
+        } else {
+          msg.style.maxHeight = msg.scrollHeight + "px";
+          btn.setAttribute("aria-expanded", "true");
+          label.textContent = "Tutup Pesan";
+          icon.style.transform = "rotate(180deg)";
+        }
+      }, { signal });
+    }
+
+    document.addEventListener('astro:page-load', initChairmanMessage);
+    document.addEventListener('astro:before-swap', cleanup);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initChairmanMessage);
+    } else {
+      initChairmanMessage();
+    }
   })();
 </script>

@@ -223,84 +223,103 @@ const milestones: Milestone[] = [
 
 <script>
   (function () {
-    const track = document.getElementById("history-timeline");
-    const dots = document.querySelectorAll(".timeline-dot");
-    const cards = document.querySelectorAll(".timeline-card");
+    let abortController: AbortController | null = null;
+    let observer: IntersectionObserver | null = null;
 
-    if (!track || cards.length === 0) return;
+    function cleanup() {
+      if (observer) {
+        observer.disconnect();
+        observer = null;
+      }
+      if (abortController) {
+        abortController.abort();
+        abortController = null;
+      }
+    }
 
-    // Initialize first dot as active
-    if (dots[0]) dots[0].classList.add("active");
+    function initTimeline() {
+      cleanup();
+      abortController = new AbortController();
+      const signal = abortController.signal;
 
-    // Use IntersectionObserver to detect active card
-    const observerOptions = {
-      root: track,
-      threshold: 0.5,
-    };
+      const track = document.getElementById("history-timeline");
+      const dots = document.querySelectorAll(".timeline-dot");
+      const cards = document.querySelectorAll(".timeline-card");
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+      if (!track || cards.length === 0) return;
+
+      if (dots[0]) dots[0].classList.add("active");
+
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(
+              (entry.target as HTMLElement).dataset.index || "0",
+              10
+            );
+
+            dots.forEach((dot, i) => {
+              if (i === index) {
+                dot.classList.add("active");
+              } else {
+                dot.classList.remove("active");
+              }
+            });
+          }
+        });
+      }, { root: track, threshold: 0.5 });
+
+      cards.forEach((card) => observer?.observe(card));
+
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
           const index = parseInt(
-            (entry.target as HTMLElement).dataset.index || "0",
+            (dot as HTMLElement).dataset.index || "0",
             10
           );
-
-          dots.forEach((dot, i) => {
-            if (i === index) {
-              dot.classList.add("active");
-            } else {
-              dot.classList.remove("active");
-            }
-          });
-        }
+          const targetCard = cards[index];
+          if (targetCard) {
+            targetCard.scrollIntoView({ behavior: "smooth", inline: "start" });
+          }
+        }, { signal });
       });
-    }, observerOptions);
 
-    cards.forEach((card) => observer.observe(card));
+      let isDown = false;
+      let startX = 0;
+      let scrollLeft = 0;
 
-    // Dot click navigation
-    dots.forEach((dot) => {
-      dot.addEventListener("click", () => {
-        const index = parseInt(
-          (dot as HTMLElement).dataset.index || "0",
-          10
-        );
-        const targetCard = cards[index];
-        if (targetCard) {
-          targetCard.scrollIntoView({ behavior: "smooth", inline: "start" });
-        }
-      });
-    });
+      track.addEventListener("mousedown", (e) => {
+        isDown = true;
+        track.classList.add("is-dragging");
+        startX = e.pageX - track.offsetLeft;
+        scrollLeft = track.scrollLeft;
+      }, { signal });
 
-    // Mouse drag support
-    let isDown = false;
-    let startX = 0;
-    let scrollLeft = 0;
+      track.addEventListener("mouseleave", () => {
+        isDown = false;
+        track.classList.remove("is-dragging");
+      }, { signal });
 
-    track.addEventListener("mousedown", (e) => {
-      isDown = true;
-      track.classList.add("is-dragging");
-      startX = e.pageX - track.offsetLeft;
-      scrollLeft = track.scrollLeft;
-    });
+      track.addEventListener("mouseup", () => {
+        isDown = false;
+        track.classList.remove("is-dragging");
+      }, { signal });
 
-    track.addEventListener("mouseleave", () => {
-      isDown = false;
-      track.classList.remove("is-dragging");
-    });
+      track.addEventListener("mousemove", (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - track.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        track.scrollLeft = scrollLeft - walk;
+      }, { signal });
+    }
 
-    track.addEventListener("mouseup", () => {
-      isDown = false;
-      track.classList.remove("is-dragging");
-    });
-
-    track.addEventListener("mousemove", (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - track.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      track.scrollLeft = scrollLeft - walk;
-    });
+    document.addEventListener('astro:page-load', initTimeline);
+    document.addEventListener('astro:before-swap', cleanup);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTimeline);
+    } else {
+      initTimeline();
+    }
   })();
 </script>

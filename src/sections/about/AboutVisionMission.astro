@@ -172,11 +172,13 @@ import SectionHeader from "@components/SectionHeader.astro";
     }
   </style>
 
-  <script is:inline>
+  <script is:inline data-astro-rerun>
     (function() {
       const section = document.getElementById('visi-misi');
       const logo = document.getElementById('vm-logo-3d');
       if (!section || !logo) return;
+      if (section.dataset.apuVmInitialized) return;
+      section.dataset.apuVmInitialized = 'true';
 
       const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 

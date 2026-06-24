@@ -102,69 +102,85 @@ function escapeHtml(text: string): string {
 
 <script>
   (function() {
-    const section = document.querySelector('#struktur-organisasi');
-    if (!section) return;
+    let abortController: AbortController | null = null;
 
-    const tree = section.querySelector('.org-tree');
-    if (!tree) return;
+    function cleanup() {
+      if (abortController) {
+        abortController.abort();
+        abortController = null;
+      }
+    }
 
-    // --- Filter logic ---
-    section.addEventListener('tabchange', (e: Event) => {
-      const customEvent = e as CustomEvent;
-      const filter = customEvent.detail?.tabId;
-      if (!filter || !tree) return;
+    function initOrgStructure() {
+      cleanup();
+      abortController = new AbortController();
+      const signal = abortController.signal;
 
-      tree.setAttribute('data-filter', filter);
+      const section = document.querySelector('#struktur-organisasi');
+      if (!section) return;
 
-      // When filtering, ensure ancestors of matching nodes are visible
-      // by marking them with data-filter-match
-      const allWrappers = tree.querySelectorAll('.org-node-wrapper');
-      allWrappers.forEach(wrapper => {
-        wrapper.removeAttribute('data-filter-match');
-      });
+      const tree = section.querySelector('.org-tree');
+      if (!tree) return;
 
-      if (filter === 'semua') return;
+      section.addEventListener('tabchange', (e: Event) => {
+        const customEvent = e as CustomEvent;
+        const filter = customEvent.detail?.tabId;
+        if (!filter || !tree) return;
 
-      // Find all wrappers that match the filter
-      const matching = tree.querySelectorAll(`.org-node-wrapper[data-category="${filter}"]`);
-      matching.forEach(wrapper => {
-        // Mark this node and all ancestors
-        let current: HTMLElement | null = wrapper as HTMLElement;
-        while (current) {
-          current.setAttribute('data-filter-match', 'true');
-          current = current.parentElement?.closest('.org-node-wrapper') as HTMLElement | null;
-        }
-      });
-    });
+        tree.setAttribute('data-filter', filter);
 
-    // --- Expand/collapse logic ---
-    section.querySelectorAll('.org-node-toggle').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const wrapper = btn.closest('.org-node-wrapper');
-        if (!wrapper) return;
+        const allWrappers = tree.querySelectorAll('.org-node-wrapper');
+        allWrappers.forEach(wrapper => {
+          wrapper.removeAttribute('data-filter-match');
+        });
 
-        const children = wrapper.querySelector('.org-node-children');
-        if (!children) return;
+        if (filter === 'semua') return;
 
-        const isExpanded = children.classList.toggle('is-expanded');
-        btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-      });
-    });
+        const matching = tree.querySelectorAll(`.org-node-wrapper[data-category="${filter}"]`);
+        matching.forEach(wrapper => {
+          let current: HTMLElement | null = wrapper as HTMLElement;
+          while (current) {
+            current.setAttribute('data-filter-match', 'true');
+            current = current.parentElement?.closest('.org-node-wrapper') as HTMLElement | null;
+          }
+        });
+      }, { signal });
 
-    // Keyboard: Enter/Space on node header toggles
-    section.querySelectorAll('.org-node').forEach(node => {
-      node.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          const wrapper = (node as HTMLElement).closest('.org-node-wrapper');
+      section.querySelectorAll('.org-node-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const wrapper = btn.closest('.org-node-wrapper');
           if (!wrapper) return;
 
-          const toggle = wrapper.querySelector('.org-node-toggle');
-          if (toggle) {
-            (toggle as HTMLElement).click();
-          }
-        }
+          const children = wrapper.querySelector('.org-node-children');
+          if (!children) return;
+
+          const isExpanded = children.classList.toggle('is-expanded');
+          btn.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        }, { signal });
       });
-    });
+
+      section.querySelectorAll('.org-node').forEach(node => {
+        node.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const wrapper = (node as HTMLElement).closest('.org-node-wrapper');
+            if (!wrapper) return;
+
+            const toggle = wrapper.querySelector('.org-node-toggle');
+            if (toggle) {
+              (toggle as HTMLElement).click();
+            }
+          }
+        }, { signal });
+      });
+    }
+
+    document.addEventListener('astro:page-load', initOrgStructure);
+    document.addEventListener('astro:before-swap', cleanup);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initOrgStructure);
+    } else {
+      initOrgStructure();
+    }
   })();
 </script>

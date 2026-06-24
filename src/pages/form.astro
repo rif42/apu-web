@@ -25,21 +25,46 @@ import Layout from '@layouts/Layout.astro';
 </Layout>
 
 <script>
-  const form = document.getElementById('submissionForm') as HTMLFormElement;
-  const status = document.getElementById('status') as HTMLParagraphElement;
+  (function () {
+    let abortController: AbortController | null = null;
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = Object.fromEntries(new FormData(form));
+    function cleanup() {
+      if (abortController) {
+        abortController.abort();
+        abortController = null;
+      }
+    }
 
-    const res = await fetch('/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
+    function initForm() {
+      cleanup();
+      abortController = new AbortController();
+      const signal = abortController.signal;
 
-    const result = await res.json();
-    status!.textContent = result.success ? 'Saved to PostgreSQL!' : `Error: ${result.error}`;
-    if (result.success) form.reset();
-  });
+      const form = document.getElementById('submissionForm') as HTMLFormElement | null;
+      const status = document.getElementById('status') as HTMLParagraphElement | null;
+
+      form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form));
+
+        const res = await fetch('/api/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+        if (status) status.textContent = result.success ? 'Saved to PostgreSQL!' : `Error: ${result.error}`;
+        if (result.success) form.reset();
+      }, { signal });
+    }
+
+    document.addEventListener('astro:page-load', initForm);
+    document.addEventListener('astro:before-swap', cleanup);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initForm);
+    } else {
+      initForm();
+    }
+  })();
 </script>

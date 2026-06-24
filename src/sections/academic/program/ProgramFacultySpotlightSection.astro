@@ -40,7 +40,7 @@ const featuredVisual = featured?.photo
 
 <section
   id="dosen-spotlight"
-  class="apu-section-shell relative overflow-hidden"
+  class="apu-section-shell relative overflow-hidden py-12"
   aria-label="Faculty spotlight"
   data-members={JSON.stringify(members)}
 >
@@ -48,7 +48,7 @@ const featuredVisual = featured?.photo
     <ScrollReveal>
       <SectionHeader
         kicker="LECTURER SPOTLIGHT"
-        title="Meet Our Experts"
+        title="Meet Our Expert Lecturers"
         description={data.description}
         class="text-center mb-16"
         titleClass="text-h2 text-brand-primary-deep mb-4"
@@ -256,8 +256,14 @@ const featuredVisual = featured?.photo
   </div>
 </section>
 
-<script is:inline>
+<script is:inline data-astro-rerun>
   (function () {
+    var abortController = window.__apuFacultySpotlightAbort;
+    if (abortController) abortController.abort();
+    abortController = new AbortController();
+    window.__apuFacultySpotlightAbort = abortController;
+    var signal = abortController.signal;
+
     const section = document.querySelector("#dosen-spotlight");
     const members = JSON.parse(section?.getAttribute("data-members") || "[]");
 
@@ -319,7 +325,7 @@ const featuredVisual = featured?.photo
           updateFeatured(id);
           history.replaceState(null, "", `#dosen-spotlight-${id}`);
         }
-      });
+      }, { signal });
       card.addEventListener("keydown", (event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
@@ -329,7 +335,7 @@ const featuredVisual = featured?.photo
             history.replaceState(null, "", `#dosen-spotlight-${id}`);
           }
         }
-      });
+      }, { signal });
     });
 
     const hashMatch = location.hash.match(/^#dosen-spotlight-(.+)/);
@@ -369,8 +375,8 @@ const featuredVisual = featured?.photo
         track.scrollBy({ left: direction * scrollStep(), behavior: "smooth" });
       };
 
-      prev?.addEventListener("click", () => scrollBy(-1));
-      next?.addEventListener("click", () => scrollBy(1));
+      prev?.addEventListener("click", () => scrollBy(-1), { signal });
+      next?.addEventListener("click", () => scrollBy(1), { signal });
 
       track.addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft") {
@@ -380,10 +386,10 @@ const featuredVisual = featured?.photo
           event.preventDefault();
           scrollBy(1);
         }
-      });
+      }, { signal });
 
-      track.addEventListener("scroll", updateButtons, { passive: true });
-      window.addEventListener("resize", updateButtons, { passive: true });
+      track.addEventListener("scroll", updateButtons, { passive: true, signal });
+      window.addEventListener("resize", updateButtons, { passive: true, signal });
       updateButtons();
     });
   })();

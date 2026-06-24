@@ -183,58 +183,81 @@ import canada from "@/assets/images/academic/canada-bg.jpg";
 
 <script>
   (function () {
-    const carousels = document.querySelectorAll("[data-lecturers-carousel]");
+    let abortController: AbortController | null = null;
 
-    carousels.forEach((root) => {
-      const track = root.querySelector("[data-lecturers-track]") as HTMLElement | null;
-      const controls = root.closest("section")?.querySelector("[data-lecturers-controls]") as HTMLElement | null | undefined;
-      const prev = controls?.querySelector("[data-lecturers-prev]") as HTMLButtonElement | null;
-      const next = controls?.querySelector("[data-lecturers-next]") as HTMLButtonElement | null;
+    function cleanup() {
+      if (abortController) {
+        abortController.abort();
+        abortController = null;
+      }
+    }
 
-      if (!track) return;
+    function initLecturers() {
+      cleanup();
+      abortController = new AbortController();
+      const signal = abortController.signal;
 
-      const getGap = () => {
-        const style = window.getComputedStyle(track);
-        return parseInt(style.gap || "0", 10) || 0;
-      };
+      const carousels = document.querySelectorAll("[data-lecturers-carousel]");
 
-      const getCardWidth = () => {
-        const card = track.querySelector(":scope > article") as HTMLElement | null;
-        return card?.offsetWidth || track.clientWidth;
-      };
+      carousels.forEach((root) => {
+        const track = root.querySelector("[data-lecturers-track]") as HTMLElement | null;
+        const controls = root.closest("section")?.querySelector("[data-lecturers-controls]") as HTMLElement | null | undefined;
+        const prev = controls?.querySelector("[data-lecturers-prev]") as HTMLButtonElement | null;
+        const next = controls?.querySelector("[data-lecturers-next]") as HTMLButtonElement | null;
 
-      const scrollStep = () => getCardWidth() + getGap();
+        if (!track) return;
 
-      const updateButtons = () => {
-        if (!prev || !next) return;
-        const maxScroll = track.scrollWidth - track.clientWidth;
-        prev.disabled = track.scrollLeft <= 0;
-        next.disabled = track.scrollLeft >= maxScroll - 1;
-        prev.style.opacity = prev.disabled ? "0.4" : "";
-        next.style.opacity = next.disabled ? "0.4" : "";
-      };
+        const getGap = () => {
+          const style = window.getComputedStyle(track);
+          return parseInt(style.gap || "0", 10) || 0;
+        };
 
-      const scrollBy = (direction: number) => {
-        track.scrollBy({ left: direction * scrollStep(), behavior: "smooth" });
-      };
+        const getCardWidth = () => {
+          const card = track.querySelector(":scope > article") as HTMLElement | null;
+          return card?.offsetWidth || track.clientWidth;
+        };
 
-      prev?.addEventListener("click", () => scrollBy(-1));
-      next?.addEventListener("click", () => scrollBy(1));
+        const scrollStep = () => getCardWidth() + getGap();
 
-      track.addEventListener("keydown", (event: KeyboardEvent) => {
-        if (event.key === "ArrowLeft") {
-          event.preventDefault();
-          scrollBy(-1);
-        } else if (event.key === "ArrowRight") {
-          event.preventDefault();
-          scrollBy(1);
-        }
+        const updateButtons = () => {
+          if (!prev || !next) return;
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          prev.disabled = track.scrollLeft <= 0;
+          next.disabled = track.scrollLeft >= maxScroll - 1;
+          prev.style.opacity = prev.disabled ? "0.4" : "";
+          next.style.opacity = next.disabled ? "0.4" : "";
+        };
+
+        const scrollBy = (direction: number) => {
+          track.scrollBy({ left: direction * scrollStep(), behavior: "smooth" });
+        };
+
+        prev?.addEventListener("click", () => scrollBy(-1), { signal });
+        next?.addEventListener("click", () => scrollBy(1), { signal });
+
+        track.addEventListener("keydown", (event: KeyboardEvent) => {
+          if (event.key === "ArrowLeft") {
+            event.preventDefault();
+            scrollBy(-1);
+          } else if (event.key === "ArrowRight") {
+            event.preventDefault();
+            scrollBy(1);
+          }
+        }, { signal });
+
+        track.addEventListener("scroll", updateButtons, { passive: true, signal });
+        window.addEventListener("resize", updateButtons, { passive: true, signal });
+        updateButtons();
       });
+    }
 
-      track.addEventListener("scroll", updateButtons, { passive: true });
-      window.addEventListener("resize", updateButtons, { passive: true });
-      updateButtons();
-    });
+    document.addEventListener('astro:page-load', initLecturers);
+    document.addEventListener('astro:before-swap', cleanup);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initLecturers);
+    } else {
+      initLecturers();
+    }
   })();
 </script>
 

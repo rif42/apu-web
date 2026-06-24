@@ -443,8 +443,14 @@ const typeConfig = {
     </ScrollReveal>
   </div>
 
-  <script is:inline>
+  <script is:inline data-astro-rerun>
     (function() {
+      var abortController = window.__apuCalendarAbort;
+      if (abortController) abortController.abort();
+      abortController = new AbortController();
+      window.__apuCalendarAbort = abortController;
+      var signal = abortController.signal;
+
       var tabs = document.querySelectorAll('[data-tab]');
       var panels = document.querySelectorAll('[data-panel]');
 
@@ -465,7 +471,7 @@ const typeConfig = {
         tab.addEventListener('click', function() {
           var targetId = tab.getAttribute('data-tab');
           if (targetId) switchTab(targetId);
-        });
+        }, { signal });
 
         tab.addEventListener('keydown', function(e) {
           var currentIndex = Array.from(tabs).indexOf(tab);
@@ -484,7 +490,7 @@ const typeConfig = {
           if (nextTab && nextTab.focus) nextTab.focus();
           var targetId = nextTab.getAttribute('data-tab');
           if (targetId) switchTab(targetId);
-        });
+        }, { signal });
       });
     })();
   </script>

@@ -2,10 +2,8 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import NavigationAPU from "@components/NavigationAPU.astro";
 import ProgramHeroSection from "@sections/academic/program/ProgramHeroSection.astro";
-import ProgramStrengthsSection from "@sections/academic/program/ProgramStrengthsSection.astro";
 import ProgramValuesSection from "@sections/academic/program/ProgramValuesSection.astro";
 import ProgramCareersSection from "@sections/academic/program/ProgramCareersSection.astro";
-import ProgramFacultySection from "@sections/academic/program/ProgramFacultySection.astro";
 import ProgramFacultySpotlightSection from "@sections/academic/program/ProgramFacultySpotlightSection.astro";
 import ContactSection from "@sections/ContactSection.astro";
 import Footer from "@components/Footer.astro";
@@ -32,12 +30,10 @@ import BiomedicalGamePreviewSection from "@sections/academic/program/BiomedicalG
   <ProgramHeroSection data={lawHero} />
   <ProgramMsgFromHead variant="light" data={leadershipMessage} />
   <!-- <BiomedicalGamePreviewSection /> -->
-  <!-- <ProgramStrengthsSection /> -->
   <ProgramStrengthsBentoSection data={lawStrengthsBento} />
   <ProgramVisionMissionSection data={lawProgram} />
   <!-- <ProgramValuesSection data={lawValues} /> -->
   <!-- <ProgramCareersSection data={lawCareers} /> -->
-  <ProgramFacultySection data={lawFaculty} />
   <ProgramFacultySpotlightSection data={lawFaculty} />
   <ContactSection />
   <Footer />

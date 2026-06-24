@@ -87,42 +87,63 @@ import ScrollReveal from "@/components/ScrollReveal.astro";
 
 <script>
   (function () {
-    const track = document.querySelector(".diaspora-track");
-    const center = document.querySelector("[data-diaspora-center]");
-    if (!track || !center) return;
+    let abortController = null;
 
-    const centerIt = () => {
-      const target =
-        (center as HTMLElement).offsetLeft -
-        track.clientWidth / 2 +
-        (center as HTMLElement).offsetWidth / 2;
-      track.scrollTo({ left: target });
-    };
+    function cleanup() {
+      if (abortController) {
+        abortController.abort();
+        abortController = null;
+      }
+    }
 
-    centerIt();
-    window.addEventListener("resize", centerIt, { passive: true });
-  })();
+    function initDiaspora() {
+      cleanup();
+      abortController = new AbortController();
+      const signal = abortController.signal;
 
-  (function () {
-    const section = document.querySelector("#diaspora-carousel");
-    const articles = section?.querySelectorAll("[data-person-id]") || [];
-    const target = document.querySelector("#lecturers");
+      const track = document.querySelector(".diaspora-track");
+      const center = document.querySelector("[data-diaspora-center]");
+      if (track && center) {
+        const centerIt = () => {
+          const target =
+            center.offsetLeft -
+            track.clientWidth / 2 +
+            center.offsetWidth / 2;
+          track.scrollTo({ left: target });
+        };
 
-    articles.forEach((article) => {
-      article.addEventListener("click", (event) => {
-        const targetEl = event.target as HTMLElement;
-        if (targetEl.closest("a")) event.preventDefault();
+        centerIt();
+        window.addEventListener("resize", centerIt, { passive: true, signal });
+      }
 
-        const id = article.getAttribute("data-person-id");
-        if (!id) return;
+      const section = document.querySelector("#diaspora-carousel");
+      const articles = section?.querySelectorAll("[data-person-id]") || [];
+      const target = document.querySelector("#lecturers");
 
-        document.dispatchEvent(
-          new CustomEvent("diaspora:select", { detail: { id } })
-        );
-        target?.scrollIntoView({ behavior: "smooth" });
-        history.replaceState(null, "", `#lecturers-${id}`);
+      articles.forEach((article) => {
+        article.addEventListener("click", (event) => {
+          const targetEl = event.target;
+          if (targetEl.closest("a")) event.preventDefault();
+
+          const id = article.getAttribute("data-person-id");
+          if (!id) return;
+
+          document.dispatchEvent(
+            new CustomEvent("diaspora:select", { detail: { id } })
+          );
+          target?.scrollIntoView({ behavior: "smooth" });
+          history.replaceState(null, "", `#lecturers-${id}`);
+        }, { signal });
       });
-    });
+    }
+
+    document.addEventListener("astro:page-load", initDiaspora);
+    document.addEventListener("astro:before-swap", cleanup);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initDiaspora);
+    } else {
+      initDiaspora();
+    }
   })();
 </script>
 

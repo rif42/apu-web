@@ -142,24 +142,47 @@ const getBadgeClasses = (type: string) => {
 </section>
 
 <script>
-  // Handle mobile tap/click on scholarship items
-  const items = document.querySelectorAll('.scholarship-item');
+  (function () {
+    let abortController = null;
 
-  items.forEach(item => {
-    item.addEventListener('click', (e) => {
-      e.stopPropagation();
-
-      const isActive = item.classList.contains('is-active');
-
-      items.forEach(other => other.classList.remove('is-active'));
-
-      if (!isActive) {
-        item.classList.add('is-active');
+    function cleanup() {
+      if (abortController) {
+        abortController.abort();
+        abortController = null;
       }
-    });
-  });
+    }
 
-  document.addEventListener('click', () => {
-    items.forEach(item => item.classList.remove('is-active'));
-  });
+    function initPathways() {
+      cleanup();
+      abortController = new AbortController();
+      const signal = abortController.signal;
+
+      const items = document.querySelectorAll('.scholarship-item');
+
+      items.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+
+          const isActive = item.classList.contains('is-active');
+          items.forEach(other => other.classList.remove('is-active'));
+
+          if (!isActive) {
+            item.classList.add('is-active');
+          }
+        }, { signal });
+      });
+
+      document.addEventListener('click', () => {
+        items.forEach(item => item.classList.remove('is-active'));
+      }, { signal });
+    }
+
+    document.addEventListener('astro:page-load', initPathways);
+    document.addEventListener('astro:before-swap', cleanup);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initPathways);
+    } else {
+      initPathways();
+    }
+  })();
 </script>

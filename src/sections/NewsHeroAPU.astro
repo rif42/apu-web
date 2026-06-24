@@ -118,53 +118,72 @@ import BackgroundBlobs from "@components/BackgroundBlobs.astro";
 <script>
   // Parallax and entrance animations
   (function () {
-    const hero = document.getElementById('hero');
-    if (!hero) return;
+    let abortController = null;
 
-    const kicker = hero.querySelector('.news-hero-kicker');
-    const headline = hero.querySelector('.news-hero-headline');
-    const subheadline = hero.querySelector('.news-hero-subheadline');
-    const ctas = hero.querySelector('.news-hero-ctas');
-    const scroll = hero.querySelector('.news-hero-scroll');
-
-    // Entrance animations
-    const elements = [kicker, headline, subheadline, ctas, scroll];
-    elements.forEach((el, i) => {
-      if (el) {
-        setTimeout(() => {
-          el.classList.add('animate-in');
-        }, 200 + i * 150);
+    function cleanup() {
+      if (abortController) {
+        abortController.abort();
+        abortController = null;
       }
-    });
+    }
 
-    // Parallax on scroll
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          const heroHeight = hero.offsetHeight;
-          const progress = Math.min(scrollY / heroHeight, 1);
+    function initHero() {
+      cleanup();
+      abortController = new AbortController();
+      const signal = abortController.signal;
 
-          // Fade out content
-          const content = hero.querySelector('.content-max');
-          if (content) {
-            content.style.opacity = String(1 - progress * 0.8);
-            content.style.transform = `translateY(${progress * -30}px)`;
-          }
+      const hero = document.getElementById('hero');
+      if (!hero) return;
 
-          // Parallax particles
-          const particles = hero.querySelectorAll('.news-hero-particle');
-          particles.forEach((particle, i) => {
-            const speed = 0.1 + (i % 3) * 0.05;
-            (particle as HTMLElement).style.transform = `translateY(${scrollY * speed}px)`;
+      const kicker = hero.querySelector('.news-hero-kicker');
+      const headline = hero.querySelector('.news-hero-headline');
+      const subheadline = hero.querySelector('.news-hero-subheadline');
+      const ctas = hero.querySelector('.news-hero-ctas');
+      const scroll = hero.querySelector('.news-hero-scroll');
+
+      const elements = [kicker, headline, subheadline, ctas, scroll];
+      elements.forEach((el, i) => {
+        if (el) {
+          setTimeout(() => {
+            el.classList.add('animate-in');
+          }, 200 + i * 150);
+        }
+      });
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            const heroHeight = hero.offsetHeight;
+            const progress = Math.min(scrollY / heroHeight, 1);
+
+            const content = hero.querySelector('.content-max');
+            if (content) {
+              content.style.opacity = String(1 - progress * 0.8);
+              content.style.transform = `translateY(${progress * -30}px)`;
+            }
+
+            const particles = hero.querySelectorAll('.news-hero-particle');
+            particles.forEach((particle, i) => {
+              const speed = 0.1 + (i % 3) * 0.05;
+              particle.style.transform = `translateY(${scrollY * speed}px)`;
+            });
+
+            ticking = false;
           });
+          ticking = true;
+        }
+      }, { signal });
+    }
 
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
+    document.addEventListener('astro:page-load', initHero);
+    document.addEventListener('astro:before-swap', cleanup);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHero);
+    } else {
+      initHero();
+    }
   })();
 </script>
 

@@ -582,9 +582,20 @@ const toneVars = (tone: ProgramTone) => `--program-accent: ${tone.accent};`;
         src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
     ></script>
 
-    <script is:inline define:vars={{ count: programs.length }}>
+    <script is:inline data-astro-rerun define:vars={{ count: programs.length }}>
         /* ================= DESKTOP fallback: set CSS vars on pointer enter/leave ================= */
         (function () {
+            var abortController = window.__apuProgramsAbort;
+            if (abortController) abortController.abort();
+            abortController = new AbortController();
+            window.__apuProgramsAbort = abortController;
+            var signal = abortController.signal;
+
+            if (window.__apuProgramsSwiper) {
+                try { window.__apuProgramsSwiper.destroy(true, true); } catch (e) {}
+                window.__apuProgramsSwiper = null;
+            }
+
             const GRID_MIN_DESKTOP = 900;
             const grid = document.querySelector(
                 ".desktop-only .dsk-progdi-grid",
@@ -608,30 +619,30 @@ const toneVars = (tone: ProgramTone) => `--program-accent: ${tone.accent};`;
             slides.forEach((s, i) => {
                 s.addEventListener("pointerenter", () => {
                     if (window.innerWidth >= GRID_MIN_DESKTOP) setVarsFor(i);
-                });
+                }, { signal });
                 s.addEventListener(
                     "focus",
                     () => {
                         if (window.innerWidth >= GRID_MIN_DESKTOP)
                             setVarsFor(i);
                     },
-                    true,
+                    { capture: true, signal },
                 );
             });
             grid.addEventListener("pointerleave", () => {
                 if (window.innerWidth >= GRID_MIN_DESKTOP) resetVars();
-            });
+            }, { signal });
             grid.addEventListener(
                 "blur",
                 () => {
                     if (window.innerWidth >= GRID_MIN_DESKTOP) resetVars();
                 },
-                true,
+                { capture: true, signal },
             );
 
             window.addEventListener("resize", () => {
                 if (window.innerWidth < GRID_MIN_DESKTOP) resetVars();
-            });
+            }, { signal });
         })();
 
         /* ================= MOBILE: Swiper init ================= */
@@ -689,24 +700,26 @@ const toneVars = (tone: ProgramTone) => `--program-accent: ${tone.accent};`;
                     observeParents: true,
                     observeSlideChildren: true,
                 });
+
+                window.__apuProgramsSwiper = swiper;
             }
 
             if (document.readyState === "loading") {
-                window.addEventListener("DOMContentLoaded", initSwiper);
+                window.addEventListener("DOMContentLoaded", initSwiper, { signal });
             } else {
                 initSwiper();
             }
 
             window.addEventListener("orientationchange", () => {
                 setTimeout(() => {
-                    swiper?.update?.();
+                    window.__apuProgramsSwiper?.update?.();
                 }, 250);
-            });
+            }, { signal });
             window.addEventListener("resize", () => {
                 setTimeout(() => {
-                    swiper?.update?.();
+                    window.__apuProgramsSwiper?.update?.();
                 }, 200);
-            });
+            }, { signal });
         })();
     </script>
 </section>

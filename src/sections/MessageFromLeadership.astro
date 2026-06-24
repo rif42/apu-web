@@ -258,39 +258,46 @@ const { kicker, title, quote, leaderName, leaderTitle,leaderTitle2, leaderImage,
 
 <script>
   (function () {
-    // Floating particles
-    const particleContainer = document.getElementById("leadership-particles");
-    if (particleContainer) {
-      for (let i = 0; i < 20; i++) {
-        const particle = document.createElement("div");
-        const size = Math.random() * 2.5 + 1;
-        particle.className = "absolute rounded-full";
-        particle.style.cssText = `
-          width: ${size}px;
-          height: ${size}px;
-          left: ${Math.random() * 100}%;
-          top: ${Math.random() * 100}%;
-          background: rgba(252, 188, 85, ${Math.random() * 0.25 + 0.1});
-          animation: leadershipFloat ${Math.random() * 7 + 5}s ease-in-out infinite;
-          animation-delay: ${Math.random() * 6}s;
+    function initLeadership() {
+      const particleContainer = document.getElementById("leadership-particles");
+      if (particleContainer) {
+        for (let i = 0; i < 20; i++) {
+          const particle = document.createElement("div");
+          const size = Math.random() * 2.5 + 1;
+          particle.className = "absolute rounded-full";
+          particle.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${Math.random() * 100}%;
+            top: ${Math.random() * 100}%;
+            background: rgba(252, 188, 85, ${Math.random() * 0.25 + 0.1});
+            animation: leadershipFloat ${Math.random() * 7 + 5}s ease-in-out infinite;
+            animation-delay: ${Math.random() * 6}s;
+          `;
+          particleContainer.appendChild(particle);
+        }
+      }
+
+      if (!document.getElementById("leadership-animations")) {
+        const style = document.createElement("style");
+        style.id = "leadership-animations";
+        style.textContent = `
+          @keyframes leadershipFloat {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.15; }
+            25% { transform: translateY(-18px) translateX(8px); opacity: 0.35; }
+            50% { transform: translateY(-35px) translateX(-4px); opacity: 0.22; }
+            75% { transform: translateY(-15px) translateX(12px); opacity: 0.3; }
+          }
         `;
-        particleContainer.appendChild(particle);
+        document.head.appendChild(style);
       }
     }
 
-    // Add keyframes if not already present
-    if (!document.getElementById("leadership-animations")) {
-      const style = document.createElement("style");
-      style.id = "leadership-animations";
-      style.textContent = `
-        @keyframes leadershipFloat {
-          0%, 100% { transform: translateY(0) translateX(0); opacity: 0.15; }
-          25% { transform: translateY(-18px) translateX(8px); opacity: 0.35; }
-          50% { transform: translateY(-35px) translateX(-4px); opacity: 0.22; }
-          75% { transform: translateY(-15px) translateX(12px); opacity: 0.3; }
-        }
-      `;
-      document.head.appendChild(style);
+    document.addEventListener('astro:page-load', initLeadership);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initLeadership);
+    } else {
+      initLeadership();
     }
   })();
 </script>

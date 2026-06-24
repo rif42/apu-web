@@ -220,11 +220,19 @@ const galleryKicker = "KENALI TIM PENGAJAR";
 
 <script>
   (function() {
-    // Duplicate gallery items for seamless infinite scroll
-    const track = document.getElementById('lecturerGalleryTrack');
-    if (track) {
+    function initGallery() {
+      const track = document.getElementById('lecturerGalleryTrack');
+      if (!track || track.dataset.galleryDuplicated === 'true') return;
+      track.dataset.galleryDuplicated = 'true';
       const cards = track.innerHTML;
       track.innerHTML = cards + cards;
+    }
+
+    document.addEventListener('astro:page-load', initGallery);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initGallery);
+    } else {
+      initGallery();
     }
   })();
 </script>

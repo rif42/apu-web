@@ -50,8 +50,11 @@ import BackgroundBlobs from "@components/BackgroundBlobs.astro";
   }
 </style>
 
-<script is:inline>
+<script is:inline data-astro-rerun>
   (function () {
+    if (window.__apuGamePreviewBound) return;
+    window.__apuGamePreviewBound = true;
+
     const nav = document.getElementById('apu-nav');
 
     function resetNav() {

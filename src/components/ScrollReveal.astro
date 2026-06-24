@@ -35,33 +35,44 @@ const getFinalTransform = () => {
 
 <script>
   (function() {
-    const reveals = document.querySelectorAll('.scroll-reveal:not([data-scroll-reveal-bound])');
-    const isNarrow = window.matchMedia('(max-width: 640px)').matches;
-    
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            el.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-            el.style.opacity = '1';
-            el.style.transform = el.dataset.scrollRevealFinal || 'translateY(0) translateX(0)';
-            observer.unobserve(el);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    
-    reveals.forEach((rawEl) => {
-      const el = rawEl as HTMLElement;
-      el.setAttribute('data-scroll-reveal-bound', 'true');
-      if (isNarrow) {
-        const dir = el.dataset.scrollRevealDirection;
-        if (dir === 'left') el.style.transform = 'translateX(-16px)';
-        if (dir === 'right') el.style.transform = 'translateX(16px)';
-      }
-      observer.observe(el);
-    });
+    function initScrollReveal() {
+      const reveals = document.querySelectorAll('.scroll-reveal:not([data-scroll-reveal-bound])');
+      if (reveals.length === 0) return;
+
+      const isNarrow = window.matchMedia('(max-width: 640px)').matches;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              el.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+              el.style.opacity = '1';
+              el.style.transform = el.dataset.scrollRevealFinal || 'translateY(0) translateX(0)';
+              observer.unobserve(el);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      reveals.forEach((rawEl) => {
+        const el = rawEl;
+        el.setAttribute('data-scroll-reveal-bound', 'true');
+        if (isNarrow) {
+          const dir = el.dataset.scrollRevealDirection;
+          if (dir === 'left') el.style.transform = 'translateX(-16px)';
+          if (dir === 'right') el.style.transform = 'translateX(16px)';
+        }
+        observer.observe(el);
+      });
+    }
+
+    document.addEventListener('astro:page-load', initScrollReveal);
+    if (document.readyState !== 'loading') {
+      initScrollReveal();
+    } else {
+      document.addEventListener('DOMContentLoaded', initScrollReveal);
+    }
   })();
 </script>
