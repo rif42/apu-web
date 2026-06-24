@@ -1,7 +1,9 @@
 ---
 import ScrollReveal from "@components/ScrollReveal.astro";
 import SectionHeader from "@components/SectionHeader.astro";
+import DiasporaFeaturedCard from "@components/DiasporaFeaturedCard.astro";
 import type { ProgramFacultyData } from "@data/program-faculty";
+import { people as diasporaPeople } from "@data/diaspora";
 
 interface Props {
   data: ProgramFacultyData;
@@ -10,6 +12,12 @@ interface Props {
 const { data } = Astro.props;
 const members = data.facultyMembers;
 const featured = members[0];
+
+const diasporaIds = new Set(diasporaPeople.map((p) => p.id));
+const isFeaturedDiaspora = featured ? diasporaIds.has(featured.id) : false;
+const initialDiasporaPerson = isFeaturedDiaspora
+  ? diasporaPeople.find((p) => p.id === featured!.id) ?? diasporaPeople[0]
+  : diasporaPeople[0];
 
 const facultyAvatarGradients = [
   "from-blue-500 to-indigo-600",
@@ -43,6 +51,7 @@ const featuredVisual = featured?.photo
   class="apu-section-shell relative overflow-hidden py-12"
   aria-label="Faculty spotlight"
   data-members={JSON.stringify(members)}
+  data-diaspora-people={JSON.stringify(diasporaPeople)}
 >
   <div class="content-max">
     <ScrollReveal>
@@ -61,7 +70,11 @@ const featuredVisual = featured?.photo
         class="apu-glass-card rounded-none lecturers-featured-card mb-10 overflow-hidden flex justify-center py-6 md:py-10 relative"
       >
         <div
-          class="relative z-10 flex flex-col justify-center w-full md:flex-row"
+          data-standard-featured
+          class:list={[
+            "relative z-10 flex flex-col justify-center w-full md:flex-row",
+            { hidden: isFeaturedDiaspora },
+          ]}
         >
           <div
             class="order-2 w-full flex flex-col justify-center px-4 md:order-1 md:w-1/2 md:px-0 md:pl-10"
@@ -138,6 +151,16 @@ const featuredVisual = featured?.photo
               <Fragment set:html={featuredVisual} />
             </div>
           </div>
+        </div>
+
+        <div
+          data-diaspora-featured
+          class:list={[
+            "w-full",
+            { hidden: !isFeaturedDiaspora },
+          ]}
+        >
+          <DiasporaFeaturedCard person={initialDiasporaPerson} />
         </div>
       </div>
     </ScrollReveal>
