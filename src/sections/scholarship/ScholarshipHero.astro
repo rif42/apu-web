@@ -1,13 +1,8 @@
 ---
 import { Image } from "astro:assets";
+import loby1 from "@/assets/images/loby1.webp";
 import CtaButton from "@components/CtaButton.astro";
-import type { ScholarshipPageData } from "@/types/scholarship-page";
-
-interface Props {
-  data: ScholarshipPageData["hero"];
-}
-
-const { data } = Astro.props;
+import { contact } from "@data/contact";
 ---
 
 <section
@@ -20,7 +15,7 @@ const { data } = Astro.props;
     class="absolute inset-0 z-[1] will-change-transform opacity-0 scale-[1.04]"
   >
     <Image
-      src={data.bgImage}
+      src={loby1}
       alt="Agung Putra University Campus"
       class="w-full h-full object-cover"
       loading="eager"
@@ -42,16 +37,18 @@ const { data } = Astro.props;
     <div class="px-6 md:px-16 lg:px-28 flex flex-col items-start gap-10">
       <div>
         <div id="scholarship-hero-kicker" class="mb-6 opacity-0 translate-y-2">
-          <span class="scholarship-hero-kicker-text">{data.kicker}</span>
+          <span class="scholarship-hero-kicker-text"
+            >ACADEMIC SCHOLARSHIP 2026/2027</span
+          >
         </div>
 
         <h1
           id="scholarship-hero-headline"
           class="text-h1 mb-6 max-w-4xl opacity-0 translate-y-3 scholarship-hero-headline"
         >
-          <span class="block">{data.title}</span>
+          <span class="block">Academic Scholarship</span>
           <span class="block"
-            ><span class="text-brand-accent-soft">{data.titleAccent}</span></span
+            ><span class="text-brand-accent-soft">APU</span></span
           >
         </h1>
 
@@ -59,7 +56,8 @@ const { data } = Astro.props;
           id="scholarship-hero-subtitle"
           class="text-body max-w-2xl mb-10 opacity-0 translate-y-2 scholarship-hero-subtitle"
         >
-          {data.subtitle}
+          Get up to 50% Tuition or Development Fee reduction for high-achieving students.
+          Make your academic dreams a reality with APU.
         </p>
 
         <div
@@ -67,16 +65,16 @@ const { data } = Astro.props;
           class="flex flex-wrap gap-4 opacity-0 translate-y-2"
         >
           <CtaButton
-            href={data.ctaPrimary.href}
-            target={data.ctaPrimary.target}
-            rel={data.ctaPrimary.rel}
+            href={contact.scholarshipLink}
+            target="_blank"
+            rel="noopener noreferrer"
             variant="primary"
             withArrow={true}
           >
-            <span>{data.ctaPrimary.label}</span>
+            <span>Apply Now</span>
           </CtaButton>
-          <CtaButton href={data.ctaSecondary.href} variant="secondary">
-            <span>{data.ctaSecondary.label}</span>
+          <CtaButton href="#requirements" variant="secondary">
+            <span>View Requirements</span>
           </CtaButton>
         </div>
       </div>
@@ -174,8 +172,8 @@ const { data } = Astro.props;
 
 <script>
   (function () {
-    let abortController: AbortController | null = null;
-    let rafId: number | null = null;
+    let abortController = null;
+    let rafId = null;
 
     function cleanup() {
       if (rafId) {
