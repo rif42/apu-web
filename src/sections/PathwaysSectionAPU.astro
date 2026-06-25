@@ -87,7 +87,7 @@ const getBadgeClasses = (type: string) => {
                         <div class="h-2.5 w-2.5 rounded-full bg-[rgb(var(--color-apu-accent))] shadow-[0_0_0_4px_rgb(var(--color-apu-accent)_/_0.15)] flex-shrink-0"></div>
                         <span class="text-body-s w-full text-brand-text leading-snug">{scholarship.name}</span>
                         <div class="w-full text-right text-2xl">
-                          <a href={scholarship.link} target="_blank" rel="noopener noreferrer" class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[rgb(var(--color-apu-navy)_/_0.18)] bg-[rgb(var(--color-apu-navy))] text-white shadow-[0_10px_18px_rgb(var(--color-apu-navy)_/_0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[rgb(var(--color-apu-accent))] hover:text-[rgb(var(--color-apu-navy))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-apu-accent))] focus-visible:ring-offset-2 focus-visible:ring-offset-white">&gt;</a>
+                          <a href={scholarship.link} target="_blank" rel="noopener noreferrer" aria-label={`Learn more about ${scholarship.name}`} class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[rgb(var(--color-apu-navy)_/_0.18)] bg-[rgb(var(--color-apu-navy))] text-white shadow-[0_10px_18px_rgb(var(--color-apu-navy)_/_0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[rgb(var(--color-apu-accent))] hover:text-[rgb(var(--color-apu-navy))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--color-apu-accent))] focus-visible:ring-offset-2 focus-visible:ring-offset-white">&gt;</a>
                         </div>
                       </div>
 
