@@ -54,13 +54,23 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
           class="bento-panel-left apu-glass-card opacity-0 pointer-events-none transition-opacity duration-500 p-6 md:p-8 flex flex-col justify-center"
           data-panel="left"
         >
-          <p class="text-body-s text-[1.2cqw] text-brand-text-muted leading-relaxed" data-desc-text></p>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-mono text-[rgb(var(--color-apu-navy))]" data-desc-number></span>
+            <div class="apu-icon-chip h-10 w-10" data-desc-icon></div>
+            <h3 class="text-h3 text-[rgb(var(--color-apu-navy))]" data-desc-title></h3>
+          </div>
+          <p class="text-body-s text-brand-text-muted leading-relaxed" data-desc-text></p>
         </div>
         <div
           class="bento-panel-right apu-glass-card opacity-0 pointer-events-none transition-opacity duration-500 p-6 md:p-8 flex flex-col justify-center"
           data-panel="right"
         >
-          <p class="text-body-s text-[1.2cqw] text-brand-text-muted leading-relaxed" data-desc-text></p>
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-mono text-[rgb(var(--color-apu-navy))]" data-desc-number></span>
+            <div class="apu-icon-chip h-10 w-10" data-desc-icon></div>
+            <h3 class="text-h3 text-[rgb(var(--color-apu-navy))]" data-desc-title></h3>
+          </div>
+          <p class="text-body-s text-brand-text-muted leading-relaxed" data-desc-text></p>
         </div>
       </div>
 
