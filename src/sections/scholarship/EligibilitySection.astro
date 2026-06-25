@@ -53,6 +53,7 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
         <div
           class="bento-panel-left apu-glass-card opacity-0 pointer-events-none transition-opacity duration-500 p-6 md:p-8 flex flex-col justify-center"
           data-panel="left"
+          tabindex="-1"
         >
           <div class="flex items-center gap-3 mb-4">
             <span class="text-mono text-[rgb(var(--color-apu-navy))]" data-desc-number></span>
@@ -76,6 +77,7 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
         <div
           class="bento-panel-right apu-glass-card opacity-0 pointer-events-none transition-opacity duration-500 p-6 md:p-8 flex flex-col justify-center"
           data-panel="right"
+          tabindex="-1"
         >
           <div class="flex items-center gap-3 mb-4">
             <span class="text-mono text-[rgb(var(--color-apu-navy))]" data-desc-number></span>
@@ -286,7 +288,10 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
     let activeIndex = null;
     let clone = null;
     let isAnimating = false;
-    const isMobile = window.innerWidth < 1024;
+
+    function isMobile() {
+      return window.innerWidth < 1024;
+    }
 
     var iconPaths = {};
     try {
@@ -323,6 +328,7 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
       if (titleEl) titleEl.textContent = title || '';
       other.classList.add('opacity-0', 'pointer-events-none');
       panel.classList.remove('opacity-0', 'pointer-events-none');
+      panel.focus({ preventScroll: true });
     }
 
     function createClone(trigger) {
@@ -380,7 +386,7 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
       const sourceRect = trigger.getBoundingClientRect();
       const stageRect = stage.getBoundingClientRect();
 
-      if (isMobile) {
+      if (isMobile()) {
         removeClone();
         trigger.classList.remove('opacity-0', 'pointer-events-none');
         trigger.setAttribute('aria-expanded', 'false');
@@ -413,9 +419,12 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
     function expand(trigger) {
       if (isAnimating) return;
       const index = Number(trigger.dataset.index);
-      if (activeIndex === index) return;
+      if (activeIndex === index) {
+        closeExpanded();
+        return;
+      }
 
-      if (isMobile) {
+      if (isMobile()) {
         activeIndex = index;
         triggers.forEach(function (t) {
           t.setAttribute('aria-expanded', 'false');
@@ -507,10 +516,6 @@ const fallbackIcon = Object.keys(iconMap)[0] ?? "dna";
           closeExpanded();
         }
       });
-    }
-
-    if (triggers.length > 0) {
-      expand(triggers[0]);
     }
   })();
 </script>
