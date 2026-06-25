@@ -1,0 +1,30 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+import NavigationAPU from "@components/NavigationAPU.astro";
+import Footer from "@components/Footer.astro";
+import ScholarshipHero from "@sections/scholarship/ScholarshipHero.astro";
+import ScholarshipAbout from "@sections/scholarship/ScholarshipAbout.astro";
+import EligibilitySection from "@sections/scholarship/EligibilitySection.astro";
+import ScholarshipRequirements from "@sections/scholarship/ScholarshipRequirements.astro";
+import ScholarshipTimeline from "@sections/scholarship/ScholarshipTimeline.astro";
+import ContactSection from "@sections/ContactSection.astro";
+import { nonAcademicScholarshipData } from "@data/non-academic-scholarship";
+---
+
+<MainLayout
+  title={nonAcademicScholarshipData.meta.title}
+  description={nonAcademicScholarshipData.meta.description}
+>
+  <NavigationAPU />
+  <main>
+    <ScholarshipHero data={nonAcademicScholarshipData.hero} />
+    <ScholarshipAbout data={nonAcademicScholarshipData.about} />
+    {nonAcademicScholarshipData.eligibility && (
+      <EligibilitySection data={nonAcademicScholarshipData.eligibility} />
+    )}
+    <ScholarshipRequirements data={nonAcademicScholarshipData.requirements} />
+    <ScholarshipTimeline data={nonAcademicScholarshipData.timeline} />
+    <ContactSection />
+  </main>
+  <Footer />
+</MainLayout>
