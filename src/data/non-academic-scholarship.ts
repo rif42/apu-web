@@ -47,7 +47,7 @@ export const nonAcademicScholarshipData: ScholarshipPageData = {
   about: {
     headline: 'We celebrate talent beyond the classroom',
     description:
-      'The Non-Academic Achievement Scholarship is designed for prospective students who demonstrate outstanding accomplishments beyond academic performance. This scholarship recognizes achievements in sports, arts, non-academic science competitions, technology and innovation, leadership, organizational involvement, and other officially recognized competitions. A special scheme is also available for students with excellence in Tahfidz (Qur’an memorization) as part of character strength and spiritual achievement.',
+      'The Non-Academic Achievement Scholarship is designed for prospective students who demonstrate outstanding accomplishments beyond academic performance',
     benefitTitle: 'SPI Reduction Tiers',
     benefitTiers: [
       'Achievement-based scheme: International 100% SPI, National 75% SPI, Provincial 50% SPI, City/Regency 30% SPI, District/School 10% SPI.',

@@ -64,7 +64,7 @@ export const pathways: Pathway[] = [
       },
       {
         name: "Non-Academic Scholarship",
-        link: "https://scholarship.apu.ac.id/non-academic-achievement-scholarship/",
+        link: "https://scholarship.apu.ac.id/non-academic-scholarship/",
       },
       {
         name: "Content Creator Scholarship",
