@@ -1,8 +1,13 @@
 ---
 import { Image } from "astro:assets";
-import loby1 from "@/assets/images/loby1.webp";
 import CtaButton from "@components/CtaButton.astro";
-import { contact } from "@data/contact";
+import type { ScholarshipPageData } from "@/types/scholarship-page";
+
+interface Props {
+  data: ScholarshipPageData["hero"];
+}
+
+const { data } = Astro.props;
 ---
 
 <section
@@ -15,7 +20,7 @@ import { contact } from "@data/contact";
     class="absolute inset-0 z-[1] will-change-transform opacity-0 scale-[1.04]"
   >
     <Image
-      src={loby1}
+      src={data.bgImage}
       alt="Agung Putra University Campus"
       class="w-full h-full object-cover"
       loading="eager"
@@ -37,18 +42,16 @@ import { contact } from "@data/contact";
     <div class="px-6 md:px-16 lg:px-28 flex flex-col items-start gap-10">
       <div>
         <div id="scholarship-hero-kicker" class="mb-6 opacity-0 translate-y-2">
-          <span class="scholarship-hero-kicker-text"
-            >ACADEMIC SCHOLARSHIP 2026/2027</span
-          >
+          <span class="scholarship-hero-kicker-text">{data.kicker}</span>
         </div>
 
         <h1
           id="scholarship-hero-headline"
           class="text-h1 mb-6 max-w-4xl opacity-0 translate-y-3 scholarship-hero-headline"
         >
-          <span class="block">Academic Scholarship</span>
+          <span class="block">{data.title}</span>
           <span class="block"
-            ><span class="text-brand-accent-soft">APU</span></span
+            ><span class="text-brand-accent-soft">{data.titleAccent}</span></span
           >
         </h1>
 
@@ -56,8 +59,7 @@ import { contact } from "@data/contact";
           id="scholarship-hero-subtitle"
           class="text-body max-w-2xl mb-10 opacity-0 translate-y-2 scholarship-hero-subtitle"
         >
-          Get up to 50% Tuition or Development Fee reduction for high-achieving students.
-          Make your academic dreams a reality with APU.
+          {data.subtitle}
         </p>
 
         <div
@@ -65,16 +67,16 @@ import { contact } from "@data/contact";
           class="flex flex-wrap gap-4 opacity-0 translate-y-2"
         >
           <CtaButton
-            href={contact.scholarshipLink}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={data.ctaPrimary.href}
+            target={data.ctaPrimary.target}
+            rel={data.ctaPrimary.rel}
             variant="primary"
             withArrow={true}
           >
-            <span>Apply Now</span>
+            <span>{data.ctaPrimary.label}</span>
           </CtaButton>
-          <CtaButton href="#requirements" variant="secondary">
-            <span>View Requirements</span>
+          <CtaButton href={data.ctaSecondary.href} variant="secondary">
+            <span>{data.ctaSecondary.label}</span>
           </CtaButton>
         </div>
       </div>
@@ -172,8 +174,8 @@ import { contact } from "@data/contact";
 
 <script>
   (function () {
-    let abortController = null;
-    let rafId = null;
+    let abortController: AbortController | null = null;
+    let rafId: number | null = null;
 
     function cleanup() {
       if (rafId) {
@@ -332,7 +334,7 @@ import { contact } from "@data/contact";
             ticking = true;
           }
         },
-        { passive: true, signal },
+        { passive: true, signal }
       );
     }
 

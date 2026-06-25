@@ -7,6 +7,7 @@ import ScholarshipAbout from "@sections/scholarship/ScholarshipAbout.astro";
 import ScholarshipRequirements from "@sections/scholarship/ScholarshipRequirements.astro";
 import ScholarshipTimeline from "@sections/scholarship/ScholarshipTimeline.astro";
 import ContactSection from "@sections/ContactSection.astro";
+import { academicScholarshipData } from "@data/academic-scholarship";
 ---
 
 <MainLayout
@@ -15,7 +16,7 @@ import ContactSection from "@sections/ContactSection.astro";
 >
   <NavigationAPU />
   <main>
-    <ScholarshipHero />
+    <ScholarshipHero data={academicScholarshipData.hero} />
     <ScholarshipAbout />
     <ScholarshipRequirements />
     <ScholarshipTimeline />
