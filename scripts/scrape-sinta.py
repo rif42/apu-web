@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Look up an author on SINTA (sinta.kemdiktisaintek.go.id) and scrape:
+Look up author(s) on SINTA (sinta.kemdiktisaintek.go.id) and scrape:
 - SINTA link        -> SINTA profile URL
 - Scopus link       -> SINTA Scopus view URL
 - SINTA score       -> V3 Overall "TOTAL ALL SCORE"
@@ -11,8 +11,11 @@ Requires:
 - Python 3
 - agent-browser CLI (npm i -g agent-browser && agent-browser install)
 
-Usage:
+Usage (single):
     python scripts/scrape-sinta.py "Dini Cahyani"
+
+Usage (batch, one browser session):
+    python scripts/scrape-sinta.py --batch "Dini Cahyani~|~Fauziah Novita Putri Rifai"
 """
 
 import re
@@ -20,6 +23,29 @@ import shutil
 import subprocess
 import sys
 import urllib.parse
+
+DELIMITER = "~|~"
+
+# Common academic titles/degrees to strip for cleaner SINTA name matching.
+_TITLE_RE = re.compile(
+    r"\b("
+    r"dr\.?|prof\.?|bdn?\.?|ir\.?|sh\.?|mh\.?|mkn\.?|skm|mbbs|"
+    r"s\.tr\.keb\.?|s\.st\.?|s\.sit\.?|s\.si\.?|s\.sos\.?|s\.e\.?|s\.hum\.?|s\.h\.?|"
+    r"s\.ikom\.?|s\.kom\.?|m\.tr\.keb\.?|m\.kes\.?|m\.keb\.?|m\.biomed\.?|"
+    r"m\.biotech\.?|m\.si\.?|m\.mol\.biol\.?|m\.ikom\.?|m\.msm\.?|m\.hum\.?|m\.h\.?|"
+    r"m\.m\.?|m\.sos\.?|m\.sc\.?|m\.s\.?|mba\.?|ermap\.?|amtru\.?|s\.tr\.par\.?|"
+    r"bsc\.?|b\.sc\.?|bs\.?|msc\.?|ms\.?|ph\.?d\.?|phd\.?"
+    r")\b",
+    re.IGNORECASE,
+)
+
+
+def normalize_name(name: str) -> str:
+    """Remove titles/degrees and extra punctuation for SINTA text matching."""
+    cleaned = _TITLE_RE.sub(" ", name)
+    cleaned = re.sub(r"[,\.]", " ", cleaned)
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    return cleaned
 
 
 def run_shell(script: str) -> str:
@@ -50,7 +76,6 @@ def extract_between(text: str, start_marker: str, end_marker: str) -> str:
 
 def parse_sinta_score(metrics_html: str) -> str | None:
     """Extract V3 OverallSinta total from the metrics table."""
-    # Find the TOTAL ALL SCORE row and grab the first numeric cell after it.
     match = re.search(
         r"TOTAL ALL SCORE.*?<th[^>]*class=\"matriks-score-all text-center\">([\d.]+)</th>",
         metrics_html,
@@ -75,27 +100,19 @@ def parse_summary_hindex(summary_html: str) -> tuple[str | None, str | None]:
     return scopus, gscholar
 
 
-def main() -> int:
-    if len(sys.argv) < 2:
-        print("Usage: python scripts/scrape-sinta.py \"Author Name\"", file=sys.stderr)
-        return 1
-
-    name = sys.argv[1].strip()
-    if not name:
-        print("Error: author name is empty", file=sys.stderr)
-        return 1
-
-    encoded_name = urllib.parse.quote(name)
+def scrape_one(name: str) -> dict:
+    """Scrape a single author."""
+    search_name = normalize_name(name)
+    encoded_name = urllib.parse.quote(search_name)
     search_url = f"https://sinta.kemdiktisaintek.go.id/authors?q={encoded_name}"
-    upper_name = name.upper()
+    upper_name = search_name.upper()
 
-    # Build one shell session so agent-browser commands share the browser.
     shell_script = f"""set -e
 agent-browser open "{search_url}" >/dev/null 2>&1
 agent-browser wait --load networkidle >/dev/null 2>&1
 
 if ! agent-browser find text "{upper_name}" click >/dev/null 2>&1; then
-    echo "ERROR: Author not found in search results" >&2
+    echo "ERROR: Author not found in search results: {name}" >&2
     agent-browser close >/dev/null 2>&1
     exit 1
 fi
@@ -107,12 +124,9 @@ agent-browser find text "Metrics" click >/dev/null 2>&1
 agent-browser wait --load networkidle >/dev/null 2>&1
 METRICS_HTML=$(agent-browser get html "table" 2>/dev/null)
 
-# Return to the profile summary page
 agent-browser open "$PROFILE_URL" >/dev/null 2>&1
 agent-browser wait --load networkidle >/dev/null 2>&1
 SUMMARY_HTML=$(agent-browser get html "table" 2>/dev/null)
-
-agent-browser close >/dev/null 2>&1
 
 echo "PROFILE_URL=$PROFILE_URL"
 echo "---METRICS_START---"
@@ -123,15 +137,9 @@ echo "$SUMMARY_HTML"
 echo "---SUMMARY_END---"
 """
 
-    try:
-        output = run_shell(shell_script)
-    except RuntimeError as exc:
-        print(exc, file=sys.stderr)
-        return 1
-
+    output = run_shell(shell_script)
     if output.strip().startswith("ERROR:"):
-        print(output.strip(), file=sys.stderr)
-        return 1
+        raise RuntimeError(output.strip())
 
     profile_url_match = re.search(r"PROFILE_URL=(.+)", output)
     profile_url = profile_url_match.group(1).strip() if profile_url_match else None
@@ -151,7 +159,7 @@ echo "---SUMMARY_END---"
     sinta_score = parse_sinta_score(metrics_html)
     scopus_score, gscholar_score = parse_summary_hindex(summary_html)
 
-    result = {
+    return {
         "query": name,
         "sinta_id": sinta_id,
         "sinta_link": sinta_link,
@@ -161,7 +169,126 @@ echo "---SUMMARY_END---"
         "google_scholar_score": gscholar_score,
     }
 
-    print(json.dumps(result, indent=2))
+
+def scrape_batch(names: list[str]) -> list[dict]:
+    """Scrape multiple authors in one browser session."""
+    if not names:
+        return []
+
+    # Build one shell session with all names.
+    parts = []
+    parts.append("agent-browser open \"about:blank\" >/dev/null 2>&1")
+
+    for name in names:
+        encoded_name = urllib.parse.quote(name)
+        search_url = f"https://sinta.kemdiktisaintek.go.id/authors?q={encoded_name}"
+        upper_name = normalize_name(name).upper()
+        marker = f"RESULT_{re.sub(r'[^a-zA-Z0-9]', '_', name)}"
+        parts.append(f"""
+agent-browser open "{search_url}" >/dev/null 2>&1
+agent-browser wait --load networkidle >/dev/null 2>&1
+
+if agent-browser find text "{upper_name}" click >/dev/null 2>&1; then
+    agent-browser wait --load networkidle >/dev/null 2>&1
+    PROFILE_URL=$(agent-browser get url 2>/dev/null)
+
+    agent-browser find text "Metrics" click >/dev/null 2>&1
+    agent-browser wait --load networkidle >/dev/null 2>&1
+    METRICS_HTML=$(agent-browser get html "table" 2>/dev/null)
+
+    agent-browser open "$PROFILE_URL" >/dev/null 2>&1
+    agent-browser wait --load networkidle >/dev/null 2>&1
+    SUMMARY_HTML=$(agent-browser get html "table" 2>/dev/null)
+
+    echo "{marker}_PROFILE_URL=$PROFILE_URL"
+    echo "{marker}_METRICS_START"
+    echo "$METRICS_HTML"
+    echo "{marker}_METRICS_END"
+    echo "{marker}_SUMMARY_START"
+    echo "$SUMMARY_HTML"
+    echo "{marker}_SUMMARY_END"
+else
+    echo "{marker}_ERROR=Author not found in search results: {name}"
+fi
+""")
+
+    parts.append("agent-browser close >/dev/null 2>&1")
+    shell_script = "\n".join(parts)
+
+    output = run_shell(shell_script)
+
+    results = []
+    for name in names:
+        marker = f"RESULT_{re.sub(r'[^a-zA-Z0-9]', '_', name)}"
+        error_key = f"{marker}_ERROR="
+        if error_key in output:
+            results.append({
+                "query": name,
+                "sinta_id": None,
+                "sinta_link": None,
+                "scopus_link": None,
+                "sinta_score": None,
+                "scopus_score": None,
+                "google_scholar_score": None,
+                "error": "Author not found in search results",
+            })
+            continue
+
+        profile_url_match = re.search(rf"{marker}_PROFILE_URL=(.+)", output)
+        profile_url = profile_url_match.group(1).strip() if profile_url_match else None
+
+        sinta_id = None
+        sinta_link = None
+        scopus_link = None
+        if profile_url:
+            sinta_id_match = re.search(r"/authors/profile/(\d+)", profile_url)
+            sinta_id = sinta_id_match.group(1) if sinta_id_match else None
+            sinta_link = f"https://sinta.kemdiktisaintek.go.id/authors/profile/{sinta_id}"
+            scopus_link = f"https://sinta.kemdiktisaintek.go.id/authors/profile/{sinta_id}/?view=scopus"
+
+        metrics_html = extract_between(
+            output, f"{marker}_METRICS_START", f"{marker}_METRICS_END"
+        )
+        summary_html = extract_between(
+            output, f"{marker}_SUMMARY_START", f"{marker}_SUMMARY_END"
+        )
+
+        sinta_score = parse_sinta_score(metrics_html)
+        scopus_score, gscholar_score = parse_summary_hindex(summary_html)
+
+        results.append({
+            "query": name,
+            "sinta_id": sinta_id,
+            "sinta_link": sinta_link,
+            "scopus_link": scopus_link,
+            "sinta_score": sinta_score,
+            "scopus_score": scopus_score,
+            "google_scholar_score": gscholar_score,
+        })
+
+    return results
+
+
+def main() -> int:
+    if len(sys.argv) < 2:
+        print("Usage: python scripts/scrape-sinta.py \"Author Name\"", file=sys.stderr)
+        print("       python scripts/scrape-sinta.py --batch \"Name1~|~Name2\"", file=sys.stderr)
+        return 1
+
+    if sys.argv[1] == "--batch":
+        raw = sys.argv[2] if len(sys.argv) > 2 else ""
+        names = [n.strip() for n in raw.split(DELIMITER) if n.strip()]
+        results = scrape_batch(names)
+        for result in results:
+            print(json.dumps(result))
+    else:
+        name = sys.argv[1].strip()
+        if not name:
+            print("Error: author name is empty", file=sys.stderr)
+            return 1
+        result = scrape_one(name)
+        print(json.dumps(result, indent=2))
+
     return 0
 
 

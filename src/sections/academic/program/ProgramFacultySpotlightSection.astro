@@ -108,7 +108,7 @@ function getInitials(name: string): string {
 
             <p
               class:list={[
-                "text-caption text-white/60 mb-6",
+                "text-caption text-white/60 ",
                 { hidden: !featured?.nidn || featured?.nidn === "-" },
               ]}
               data-featured-nidn
@@ -117,6 +117,25 @@ function getInitials(name: string): string {
                 ? `NIDN ${featured.nidn}`
                 : ""}
             </p>
+
+            <a
+              data-featured-google-link
+              href={featured?.google_link || "#"}
+              target="_blank"
+              rel="noopener noreferrer"
+              class:list={[
+                "flex flex-row w-full mt-3 mb-6 text-white",
+                { hidden: !featured?.google_link },
+              ]}
+            >
+              <Image
+                src={googleScholar}
+                alt={`Google Scholar profile of ${featured?.name ?? ""}`}
+                class="w-6 object-contain border-0 mr-1"
+                loading="lazy"
+              />
+              <span data-featured-google-index>{featured?.google_index ?? ""}</span>
+            </a>
 
             <div data-featured-link-wrapper class="flex flex-wrap items-center gap-4">
               <a
@@ -291,18 +310,24 @@ function getInitials(name: string): string {
                   {member.name}
                 </h3>
                 <p class="text-caption text-brand-text-muted">{member.title}</p>
-                <div class="flex flex-row w-full mt-2">
-                    <Image
-                      src={googleScholar}
-                      alt={`Google Scholar profile of ${member.name}`}
-                      class="w-6 object-contain border-0 mr-1"
-                      loading="lazy"
-                    />
-                    7
-
-                </div>
-
-
+                {
+                  member.google_link && (
+                    <a
+                      href={member.google_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex flex-row w-full mt-2"
+                    >
+                      <Image
+                        src={googleScholar}
+                        alt={`Google Scholar profile of ${member.name}`}
+                        class="w-6 object-contain border-0 mr-1"
+                        loading="lazy"
+                      />
+                      {member.google_index}
+                    </a>
+                  )
+                }
               </article>
             ))
           }
@@ -336,6 +361,8 @@ function getInitials(name: string): string {
     const featuredLink = section?.querySelector("[data-featured-link]");
     const featuredLinkWrapper = section?.querySelector("[data-featured-link-wrapper]");
     const featuredVisual = section?.querySelector("[data-featured-visual]");
+    const featuredGoogleLink = section?.querySelector("[data-featured-google-link]");
+    const featuredGoogleIndex = section?.querySelector("[data-featured-google-index]");
 
     const updateFeatured = (id) => {
       const member = members.find((m) => m.id === id);
@@ -367,6 +394,14 @@ function getInitials(name: string): string {
       }
       if (featuredLinkWrapper) {
         featuredLinkWrapper.style.display = member.link ? "flex" : "none";
+      }
+
+      if (featuredGoogleLink) {
+        featuredGoogleLink.href = member.google_link || "#";
+        featuredGoogleLink.classList.toggle("hidden", !member.google_link);
+      }
+      if (featuredGoogleIndex) {
+        featuredGoogleIndex.textContent = member.google_index || "";
       }
 
       if (featuredVisual) {
